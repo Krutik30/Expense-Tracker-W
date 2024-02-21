@@ -1,4 +1,4 @@
-# Project Name
+# Expense Tracker
 
 This project is a web application built with React Vite for the frontend and Express.js for the backend, both written in TypeScript.
 
