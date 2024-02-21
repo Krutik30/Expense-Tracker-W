@@ -46,7 +46,7 @@ This project is a web application built with React Vite for the frontend and Exp
     npm run dev
     ```
 
-3. Access the frontend application in your browser at [http://localhost:3000](http://localhost:5173).
+3. Access the frontend application in your browser at [http://localhost:5173](http://localhost:5173).
 
 ### Backend
 
@@ -68,4 +68,4 @@ This project is a web application built with React Vite for the frontend and Exp
     npm start
     ```
 
-4. The backend server will be running at [http://localhost:8000](http://localhost:3000).
+4. The backend server will be running at [http://localhost:3000](http://localhost:3000).
