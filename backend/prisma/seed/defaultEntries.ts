@@ -24,13 +24,13 @@ async function seed() {
 
         await deleteAllRows()
 
-        await prisma.role_et.create({
+        const role = await prisma.role_et.create({
             data: {
                 RoleName: 'administration',
             },
         });
 
-        await prisma.employee.create({
+        const employee = await prisma.employee.create({
             data: {
                 FirstName: 'Krutik',
                 LastName: 'Aghera',
@@ -46,6 +46,7 @@ async function seed() {
                 Password: await bcrypt.hash("Krutik@30", 10), 
                 RoleId: 1, 
                 EmployeeId: 1, 
+                Email: 'agherakrutik999@gmail.com'
             },
         });
 
