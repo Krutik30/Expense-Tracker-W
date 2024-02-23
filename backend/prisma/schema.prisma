@@ -16,18 +16,18 @@ datasource db {
 
 
 // Define the User model
-model User {
+model user {
   UserID        Int       @id @default(autoincrement())
   Username      String
   Password      String
   RoleId        Int
   EmployeeId    Int
-  Role          Role_ET?     @relation("Role_User", fields: [RoleId], references: [RoleID])
-  Employee      Employee? @relation(fields: [EmployeeId], references: [EmployeeID])
+  Role          role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
+  Employee      employee? @relation(fields: [EmployeeId], references: [EmployeeID])
 }
 
 // Define the Employee model
-model Employee {
+model employee {
   EmployeeID           Int       @id @default(autoincrement())
   FirstName            String
   LastName             String
@@ -35,30 +35,30 @@ model Employee {
   ContactNumber        String
   EmploymentStartDate  DateTime
   DepartmentID         Int
-  Department           Department @relation(fields: [DepartmentID], references: [DepartmentID])
-  Salary               Salary?    @relation("Employee_Salary")
-  Advance              Advance[]  @relation("Employee_Advance")
-  Expense              Expense[]  @relation("Employee_Expense")
-  users                User[]     // Bidirectional relation
+  Department           department @relation(fields: [DepartmentID], references: [DepartmentID])
+  Salary               salary?    @relation("Employee_Salary")
+  Advance              advance[]  @relation("Employee_Advance")
+  Expense              expense[]  @relation("Employee_Expense")
+  users                user[]     // Bidirectional relation
 }
 
 // Define the Role model
-model Role_ET {
+model role_et {
   RoleID   Int      @id @default(autoincrement())
   RoleName String
-  users    User[]   @relation("Role_User")
+  users    user[]   @relation("Role_User")
 }
 
 // Define the Department model
-model Department {
+model department {
   DepartmentID   Int      @id @default(autoincrement())
   DepartmentName String
   Description    String
-  Employee       Employee[]
+  Employee       employee[]
 }
 
 // Define the Salary model
-model Salary {
+model salary {
   SalaryID         Int      @id @default(autoincrement())
   EmployeeID       Int      @unique
   BasicSalary      Float
@@ -67,22 +67,22 @@ model Salary {
   Deductions       Float
   PaymentFrequency String
   PaymentStatus    String
-  Employee         Employee @relation("Employee_Salary",fields: [EmployeeID], references: [EmployeeID])
+  Employee         employee @relation("Employee_Salary",fields: [EmployeeID], references: [EmployeeID])
 }
 
 // Define the Advance model
-model Advance {
+model advance {
   AdvanceID   Int      @id @default(autoincrement())
   EmployeeID  Int
   AdvanceAmount Float
   DateIssued  DateTime
   Reason      String
   Status      String
-  Employee    Employee @relation("Employee_Advance",fields: [EmployeeID], references: [EmployeeID])
+  Employee    employee @relation("Employee_Advance",fields: [EmployeeID], references: [EmployeeID])
 }
 
 // Define the Expense model
-model Expense {
+model expense {
   ExpenseID      Int      @id @default(autoincrement())
   EmployeeID     Int
   Date           DateTime
@@ -90,14 +90,14 @@ model Expense {
   CategoryID     Int
   Purpose        String
   ApprovalStatus String
-  Employee       Employee @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
-  Category       ExpenseCategory @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
+  Employee       employee @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
+  Category       expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
 }
 
 // Define the ExpenseCategory model
-model ExpenseCategory {
+model expense_category {
   CategoryID   Int      @id @default(autoincrement())
   CategoryName String
   Description  String
-  Expense      Expense[] @relation("Expense_Catagory")
+  Expense      expense[] @relation("Expense_Catagory")
 }
