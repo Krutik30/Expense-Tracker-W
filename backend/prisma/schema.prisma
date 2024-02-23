@@ -34,8 +34,6 @@ model employee {
   Email                String
   ContactNumber        String
   EmploymentStartDate  DateTime
-  DepartmentID         Int
-  Department           department @relation(fields: [DepartmentID], references: [DepartmentID])
   Salary               salary?    @relation("Employee_Salary")
   Advance              advance[]  @relation("Employee_Advance")
   Expense              expense[]  @relation("Employee_Expense")
@@ -47,14 +45,6 @@ model role_et {
   RoleID   Int      @id @default(autoincrement())
   RoleName String
   users    user[]   @relation("Role_User")
-}
-
-// Define the Department model
-model department {
-  DepartmentID   Int      @id @default(autoincrement())
-  DepartmentName String
-  Description    String
-  Employee       employee[]
 }
 
 // Define the Salary model
