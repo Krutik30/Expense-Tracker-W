@@ -35,11 +35,8 @@ model Employee {
   ContactNumber        String
   EmploymentStartDate  DateTime
   DepartmentID         Int
-  ManagerID            Int?
   Department           Department @relation(fields: [DepartmentID], references: [DepartmentID])
-  Manager              Employee?  @relation("Manager_Employee", fields: [ManagerID], references: [EmployeeID])
   Salary               Salary?    @relation("Employee_Salary")
-  Subordinates         Employee[] @relation("Manager_Employee")
   Advance              Advance[]  @relation("Employee_Advance")
   Expense              Expense[]  @relation("Employee_Expense")
   users                User[]     // Bidirectional relation
