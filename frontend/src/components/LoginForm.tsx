@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './LoginSignup.css'
 
 interface LoginFormProps {
   onLogin?: () => void;
@@ -42,22 +43,30 @@ const LoginForm: React.FC<LoginFormProps> = ({ }) => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>
-          Username:
-          <input type="text" name="Username" value={formData.Username} onChange={handleChange} required />
-        </label>
+    <div className="container">
+      <div className="text1">Login</div>
+    <form onSubmit={handleLogin}  >
+
+      <div className='text'>
+        <label >
+        Username :
+          
+          <input type="text" name="Username" value={formData.Username} onChange={handleChange} className='box'required />
+          </label>
       </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" name="Password" value={formData.Password} onChange={handleChange} required />
-        </label>
+      <div className='text'>
+        <label >
+        Password :
+        
+          <input type="password" name="Password" value={formData.Password} onChange={handleChange} className='box' required />
+          </label>
       </div>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button type="submit">Login</button>
+      <div className="submit-container">
+      <button type="submit" className='submit'>Login</button>
+      </div>
     </form>
+    </div>
   );
 };
 
