@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function createUser(Username: string, Password: string, RoleId: number, EmployeeId: number): Promise<user> {
-    const saltRounds = 10; // Number of salt rounds for bcrypt hashing
-    const hashedPassword = await bcrypt.hash(Password, saltRounds); // Hash the password with bcrypt
+    const saltRounds = 10; 
+    const hashedPassword = await bcrypt.hash(Password, saltRounds); 
 
     return await prisma.user.create({
         data: {

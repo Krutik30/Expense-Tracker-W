@@ -22,7 +22,7 @@ model user {
   Password      String
   RoleId        Int
   EmployeeId    Int
-  Role          role_et?     @relation("Role_User", fields: [RoleId], references: [RoleID])
+  Role          role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
   Employee      employee? @relation(fields: [EmployeeId], references: [EmployeeID])
 }
 
