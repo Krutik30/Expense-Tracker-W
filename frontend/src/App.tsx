@@ -1,12 +1,13 @@
-
+import react from 'react'
 import './App.css'
+import LoginSignup from './components/LoginSignUp'
+
 
 function App() {
-  
-  return (
-    <>
-      <div>Fortnend</div>
-    </>
+  return(
+    <div>
+    <LoginSignup />
+    </div>
   )
 }
 
