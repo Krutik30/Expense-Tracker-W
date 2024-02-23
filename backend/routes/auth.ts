@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
 router.post('/signup', async (req, res) => {
     console.log({body : req.body});
-    const { Username, Password, RoleId, EmployeeId } = req.body;
+    const { Username, Email, Password, RoleId, EmployeeId } = req.body;
 
     try {
         // Check if the username already exists
@@ -31,6 +31,7 @@ router.post('/signup', async (req, res) => {
         const newUser = await prisma.user.create({
             data: {
                 Username,
+                Email,
                 Password,
                 RoleId,
                 EmployeeId,

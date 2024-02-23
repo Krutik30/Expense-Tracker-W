@@ -1,0 +1,13 @@
+{
+  "name": "expense-tracker-w",
+  "version": "1.0.0",
+  "description": "This project is a web application built with React Vite for the frontend and Express.js for the backend, both written in TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "get": "git checkout master && git pull && git checkout ${npm_config_branch} && git merge master",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
