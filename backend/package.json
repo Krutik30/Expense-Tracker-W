@@ -8,6 +8,7 @@
     "start": "npx ts-node index.ts",
     "seed": "npx ts-node prisma/seed/defaultEntries.ts",
     "db:bana": "npx prisma migrate dev --name db && npx prisma generate && rm -rf prisma/migrations",
+    "get": "git checkout master && git pull && git checkout %npm_config_branch% && git merge master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
