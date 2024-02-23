@@ -1,11 +1,14 @@
 
-import LoginSignup from './components/LoginSignUp'
+import React from 'react';
+import SignUpForm from './components/Auth/SignUpForm'
+import LoginForm from './components/LoginForm';
 
 
 function App() {
   return(
     <div>
-    <LoginSignup />
+    {/* <SignUpForm/> */}
+    <LoginForm/>
     </div>
   )
 }
