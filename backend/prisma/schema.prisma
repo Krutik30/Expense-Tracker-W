@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+
+// Define the User model
+model User {
+  UserID        Int       @id @default(autoincrement())
+  Username      String
+  Password      String
+  RoleId        Int
+  EmployeeId    Int
+  Role          Role?     @relation("Role_User", fields: [RoleId], references: [RoleID])
+  Employee      Employee? @relation(fields: [EmployeeId], references: [EmployeeID])
+}
+
+// Define the Employee model
+model Employee {
+  EmployeeID           Int       @id @default(autoincrement())
+  FirstName            String
+  LastName             String
+  Email                String
+  ContactNumber        String
+  EmploymentStartDate  DateTime
+  DepartmentID         Int
+  ManagerID            Int?
+  Department           Department @relation(fields: [DepartmentID], references: [DepartmentID])
+  Manager              Employee?  @relation("Manager_Employee", fields: [ManagerID], references: [EmployeeID])
+  Salary               Salary?    @relation("Employee_Salary")
+  Subordinates         Employee[] @relation("Manager_Employee")
+  Advance              Advance[]  @relation("Employee_Advance")
+  Expense              Expense[]  @relation("Employee_Expense")
+  users                User[]     // Bidirectional relation
+}
+
+// Define the Role model
+model Role {
+  RoleID   Int      @id @default(autoincrement())
+  RoleName String
+  users    User[]   @relation("Role_User")
+}
+
+// Define the Department model
+model Department {
+  DepartmentID   Int      @id @default(autoincrement())
+  DepartmentName String
+  Description    String
+  Employee       Employee[]
+}
+
+// Define the Salary model
+model Salary {
+  SalaryID         Int      @id @default(autoincrement())
+  EmployeeID       Int      @unique
+  BasicSalary      Float
+  Bonuses          Float
+  Allowances       Float
+  Deductions       Float
+  PaymentFrequency String
+  PaymentStatus    String
+  Employee         Employee @relation("Employee_Salary",fields: [EmployeeID], references: [EmployeeID])
+}
+
+// Define the Advance model
+model Advance {
+  AdvanceID   Int      @id @default(autoincrement())
+  EmployeeID  Int
+  AdvanceAmount Float
+  DateIssued  DateTime
+  Reason      String
+  Status      String
+  Employee    Employee @relation("Employee_Advance",fields: [EmployeeID], references: [EmployeeID])
+}
+
+// Define the Expense model
+model Expense {
+  ExpenseID      Int      @id @default(autoincrement())
+  EmployeeID     Int
+  Date           DateTime
+  Amount         Float
+  CategoryID     Int
+  Purpose        String
+  ApprovalStatus String
+  Employee       Employee @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
+  Category       ExpenseCategory @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
+}
+
+// Define the ExpenseCategory model
+model ExpenseCategory {
+  CategoryID   Int      @id @default(autoincrement())
+  CategoryName String
+  Description  String
+  Expense      Expense[] @relation("Expense_Catagory")
+}
