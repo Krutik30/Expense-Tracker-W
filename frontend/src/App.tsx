@@ -1,13 +1,17 @@
-
-import LoginForm from './components/LoginForm';
-
+import { BrowserRouter, } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import Header from "./components/Header"
+import Router from "./Router"
 
 function App() {
   return(
-    <div>
-    {/* <SignUpForm/> */}
-    <LoginForm/>
-    </div>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Header />
+        <Router />
+      </BrowserRouter>
+    </>
   )
 }
 
