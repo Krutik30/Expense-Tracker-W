@@ -1,18 +1,18 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Page } from './components/Page';
-import { Dashboard } from './Pages/Dashboard';
-import LoginForm from './Pages/Auth/LoginForm';
-import SignUpForm from './Pages/Auth/SignUpForm';
-import AddEmployee from './Pages/AddEmployee.tsx';
-import SalaryIssued from './Pages/SalaryIssued.tsx';
-import IssuedAdvance from './Pages/IssuedAdvance';
-import ListOfEmployee from './Pages/ListOfEmployee';
-import AddExpense from './Pages/AddExpense';
-import RequestSalary from './Pages/RequestSalary';
-import ListOfExpense from './Pages/ListOfExpense';
-import Wallet from './Pages/Wallet';
-import HistoryComponent from './Pages/History';
-import Profile from './Pages/Profile';
+import { Dashboard } from './pages/Dashboard.tsx';
+import LoginForm from './pages/Auth/LoginForm.tsx';
+import SignUpForm from './pages/Auth/SignUpForm.tsx';
+import AddEmployee from './pages/AddEmployee.tsx';
+import SalaryIssued from './pages/SalaryIssued.tsx';
+import IssuedAdvance from './pages/IssuedAdvance.tsx';
+import ListOfEmployee from './pages/ListOfEmployee.tsx';
+import AddExpense from './pages/AddExpense.tsx';
+import RequestSalary from './pages/RequestSalary.tsx';
+import ListOfExpense from './pages/ListOfExpense.tsx';
+import Wallet from './pages/Wallet.tsx';
+import HistoryComponent from './pages/History.tsx';
+import Profile from './pages/Profile.tsx';
 
 function Router() {
     return (

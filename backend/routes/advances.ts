@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { PrismaClient, advanceCreateInput } from '@prisma/client'; // Import advanceCreateInput for type checking
+import { PrismaClient } from '@prisma/client'; // Import advanceCreateInput for type checking
 
 const prisma = new PrismaClient();
 const router = Router();
 
 router.post('/advances', async (req, res) => {
     try {
-        const { EmployeeID, AdvanceAmount, DateIssued, Reason } = req.body;
+        const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID } = req.body;
 
         // Perform validation
         if (!EmployeeID || !AdvanceAmount || !DateIssued || !Reason) {
@@ -22,7 +22,8 @@ router.post('/advances', async (req, res) => {
                 AdvanceAmount,
                 DateIssued,
                 Reason,
-                Status: 'Pending' // Assuming 'Status' defaults to 'Pending' upon creation
+                Status: 'Pending',
+                GivenByAdminID
             }
         });
 
