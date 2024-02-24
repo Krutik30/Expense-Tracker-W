@@ -10,21 +10,16 @@ import EmployeeForm from "./components/EmployeeForm"
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
 import ExpenseCategoryForm from "./components/ExpenseCategory"
-import { AdminHeader, EmployeeHeader } from "./components/Header"
+import Header from "./components/Header"
 
 function App() {
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-
-  const isAuthenticated = user.auth;
-  const userRole = user.role;
 
   return(
     <>
       <ToastContainer />
       <BrowserRouter>
-        {isAuthenticated && userRole === 'ADMIN' && <AdminHeader />}
-        {isAuthenticated && userRole === 'EMPLOYEE' && <EmployeeHeader />}
+        <Header />
         <Router />
       </BrowserRouter>
          
