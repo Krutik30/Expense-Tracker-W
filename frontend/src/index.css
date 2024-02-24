@@ -11,3 +11,7 @@
 code{
   font-family: monospace ;
 } */
+
+::-webkit-scrollbar{
+  display: none;
+}

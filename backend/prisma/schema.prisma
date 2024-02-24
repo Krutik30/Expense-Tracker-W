@@ -32,7 +32,7 @@ model employee {
   EmployeeID          Int       @id @default(autoincrement())
   FirstName           String
   LastName            String
-  Email               String
+  Email               String    @unique
   ContactNumber       String
   EmploymentStartDate DateTime
   Salary              salary?   @relation("Employee_Salary")
