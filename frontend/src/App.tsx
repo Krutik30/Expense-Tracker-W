@@ -9,7 +9,6 @@ import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
 
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
-import LoginForm from "./pages/Auth/LoginForm"
 
 function App() {
   return(
@@ -20,7 +19,6 @@ function App() {
         <Router />
       </BrowserRouter>
          
-    <LoginForm/>
     <EmployeeForm/>
     <SalaryForm employeeId={0}/>
     
