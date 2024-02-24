@@ -7,7 +7,6 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = () => {
-  const token : any = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         Username: '',
         Password: '',       

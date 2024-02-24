@@ -12,6 +12,7 @@ async function createUser(Username: string, Password: string, RoleId: number, Em
             Username,
             Password: hashedPassword,
             RoleId,
+            Email,
             EmployeeId,
             Email
         },
