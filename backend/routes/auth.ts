@@ -35,8 +35,8 @@ router.post('/signup', async (req, res) => {
                 Username,
                 Email,
                 Password,
-                RoleId,
-                EmployeeId,
+                RoleId: parseInt(RoleId),
+                EmployeeId : parseInt(EmployeeId),
             },
         });
 
@@ -51,13 +51,13 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => 
 {
     console.log(req.body)
-    const { Username, Password } = req.body;
+    const { Email, Password } = req.body;
 
     try {
         // Check if the user exists
         const user = await prisma.user.findFirst({
             where: {
-                Email: Username,
+                Email: Email,
             },
             include:{
                 Role: true

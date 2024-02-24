@@ -7,8 +7,9 @@ import Header from "./components/Header"
 import Router from "./Router"
 import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
-import LoginForm from "./Pages/Auth/LoginForm"
+
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
+import LoginForm from "./pages/Auth/LoginForm"
 
 function App() {
   return(
