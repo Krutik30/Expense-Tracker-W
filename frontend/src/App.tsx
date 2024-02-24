@@ -3,7 +3,6 @@
 
 import { BrowserRouter, } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
-import Header from "./components/Header"
 import Router from "./Router"
 import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
@@ -11,13 +10,21 @@ import EmployeeForm from "./components/EmployeeForm"
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
 import ExpenseCategoryForm from "./components/ExpenseCategory"
+import { AdminHeader, EmployeeHeader } from "./components/Header"
 
 function App() {
+
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  const isAuthenticated = user.auth;
+  const userRole = user.role;
+
   return(
     <>
       <ToastContainer />
       <BrowserRouter>
-        <Header />
+        {isAuthenticated && userRole === 'ADMIN' && <AdminHeader />}
+        {isAuthenticated && userRole === 'EMPLOYEE' && <EmployeeHeader />}
         <Router />
       </BrowserRouter>
          
