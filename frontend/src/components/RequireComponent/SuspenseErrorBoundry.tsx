@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const SuspenseAndErrorBoundary = ({ children }: any) => {
+const SuspenseErrorBoundary = ({ children }: any) => {
 
     return (
         <ErrorBoundary fallbackRender = { () => <div>Error occurred!</div >} >
@@ -13,4 +12,4 @@ const SuspenseAndErrorBoundary = ({ children }: any) => {
     )
 }
 
-export default SuspenseAndErrorBoundary;
+export default SuspenseErrorBoundary;
