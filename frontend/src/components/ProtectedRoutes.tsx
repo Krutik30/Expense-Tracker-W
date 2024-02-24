@@ -15,11 +15,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     const { pathname } = useLocation();
     const openRoutes = ['/auth/login', '/auth/register'];
     const userLogged = {
-        auth: false,
+        auth: true,
         role: Role.admin 
     };
-
-    console.log(pathname);
 
     return userLogged.auth || openRoutes.includes(pathname)
         ? (pathname === '/auth/login') && userLogged.auth
