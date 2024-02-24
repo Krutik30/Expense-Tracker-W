@@ -45,22 +45,46 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>
-          Username:
-          <input type="text" name="Username" value={formData.Username} onChange={handleChange} required />
-        </label>
+   
+    <div className="bg-blue-800 min-h-screen flex items-center justify-center">
+      <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
+        <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label className="block text-2xl font-semibold text-gray-700">Username:</label>
+            <input
+              type="text"
+              name="Username"
+              value={formData.Username}
+              onChange={handleChange}
+              className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-2xl font-semibold text-gray-700">Password:</label>
+            <input
+              type="password"
+              name="Password"
+              value={formData.Password}
+              onChange={handleChange}
+              className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
+              required
+            />
+          </div>
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <div className="flex items-center justify-between flex-col gap-5">
+          <button className="text-gray-700 text-lg">
+              Don't have an account? <span className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
+            </button>
+            <button type="submit" className="bg-blue-500 text-white mt px-8 py-3 rounded-full font-semibold">
+              Login
+            </button>
+            
+          </div>
+        </form>
       </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" name="Password" value={formData.Password} onChange={handleChange} required />
-        </label>
-      </div>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button type="submit">Login</button>
-    </form>
+    </div>
   );
 };
 

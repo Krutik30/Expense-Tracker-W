@@ -1,7 +1,14 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+
 import { BrowserRouter, } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import Header from "./components/Header"
 import Router from "./Router"
+import SalaryForm from "./components/SalaryForm"
+import EmployeeForm from "./components/EmployeeForm"
+import LoginForm from "./Pages/Auth/LoginForm"
+import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 
 function App() {
   return(
@@ -11,6 +18,15 @@ function App() {
         <Header />
         <Router />
       </BrowserRouter>
+         
+    <LoginForm/>
+    <EmployeeForm/>
+    <SalaryForm employeeId={0}/>
+    
+    <AdvanceForm onSubmit={function (formData: AdvanceFormData): void {
+        throw new Error(`Function not implemented. ${formData}`)
+      } }/>
+    
     </>
   )
 }
