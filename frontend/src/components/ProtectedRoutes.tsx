@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Page404 } from '../pages/Page404';
 import { Role } from '../../config';
+import { Page404 } from '../Pages/Page404';
 
 interface ProtectedRouteProps {
     children: React.ReactElement;
@@ -24,8 +24,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         userLogged = JSON.parse(userLoggedString);
         // Proceed with further processing using userLogged
     } 
-
-    console.log(pathname);
 
     return userLogged.auth || openRoutes.includes(pathname)
         ? (pathname === '/auth/login') && userLogged.auth
