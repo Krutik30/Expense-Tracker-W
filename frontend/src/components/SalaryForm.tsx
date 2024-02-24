@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import LabelInput from './LabelInput';
 
 interface SalaryFormProps {
   employeeId: number;
@@ -43,7 +44,7 @@ const SalaryForm: React.FC<SalaryFormProps> = ({ employeeId }) => {
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
-        <div className="mb-4 w-full">
+        {/* <div className="mb-4 w-full">
           
             <label className="block mt-2 w-full text-2xl font-semibold p-3 text-gray-700">
           <p className=''>    Basic Salary:</p>
@@ -55,9 +56,17 @@ const SalaryForm: React.FC<SalaryFormProps> = ({ employeeId }) => {
               onChange={handleChange}
               className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
             />
-          
+          </div> */}
+          <LabelInput 
+            label={"Basic Salary:"}
+            name="BasicSalary" 
+            value={salaryData.BasicSalary}
+             onChange={handleChange}
+              type="number" 
+          />
 
           
+          <div className="mb-4 w-full">
             <label className="block mt-2 w-full text-2xl font-semibold p-3  text-gray-700 text-left">
             Bonuses:
             </label>
