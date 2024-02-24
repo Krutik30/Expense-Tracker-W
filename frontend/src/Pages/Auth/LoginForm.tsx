@@ -1,10 +1,13 @@
+
 import React, { useState } from 'react';
+import { requestMe } from '../../utils/requestMe';
 
 interface LoginFormProps {
   onLogin?: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = () => {
+  const token : any = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         Username: '',
         Password: '',       
@@ -29,11 +32,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
     }
 
     try {
-    //   const response = await axios.post('/api/login', formData);
-    //   console.log(response.data);
-      
-      // Call onLogin if login is successful
-    //   onLogin();
+      const res = await requestMe('/auth/login',{
+          method : "post",
+          body : JSON.stringify(formData)
+        }
+      )
+      localStorage.setItem('user',JSON.stringify(res));
+     
     } catch (error) {
       console.error('Error logging in:', error);
       setError('Invalid username or password');
