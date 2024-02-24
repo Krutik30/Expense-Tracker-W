@@ -19,12 +19,12 @@ function App() {
         <Router />
       </BrowserRouter>
          
-    {/* <LoginForm/> */}
+    <LoginForm/>
     <EmployeeForm/>
     <SalaryForm employeeId={0}/>
     
     <AdvanceForm onSubmit={function (formData: AdvanceFormData): void {
-        throw new Error("Function not implemented.")
+        throw new Error(`Function not implemented. ${formData}`)
       } }/>
     
     </>
