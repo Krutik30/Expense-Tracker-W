@@ -1,11 +1,13 @@
 import { HOST_URL } from '../../config'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const requestMe = async(route: string, option: any) => {
 
     option = {
         ...option,
-        'Content-Type': 'application/json',
+        headers : {
+            ...option.headers,
+            'Content-Type': 'application/json',
+        }
     }
 
     return await fetch(HOST_URL+ route, option)
