@@ -48,40 +48,45 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Username:
-          <input type="text" name="Username" value={formData.Username} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" name="Password" value={formData.Password} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Confirm Password:
-          <input type="password" name="ConfirmPassword" value={formData.ConfirmPassword} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          RoleId:
-          <input type="text" name="RoleId" value={formData.RoleId} onChange={handleChange} />
-        </label>
-      </div>
-      <div>
-        <label>
-          EmployeeId:
-          <input type="text" name="EmployeeId" value={formData.EmployeeId} onChange={handleChange} />
-        </label>
-      </div>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button type="submit">Sign Up</button>
-    </form>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto my-8 p-6 bg-white rounded shadow-md">
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Username:
+        <input type="text" name="Username" value={formData.Username} onChange={handleChange} className="form-input mt-1 w-full" required />
+      </label>
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Password:
+        <input type="password" name="Password" value={formData.Password} onChange={handleChange} className="form-input mt-1 w-full" required />
+      </label>
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Confirm Password:
+        <input type="password" name="ConfirmPassword" value={formData.ConfirmPassword} onChange={handleChange} className="form-input mt-1 w-full" required />
+      </label>
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        RoleId:
+        <input type="text" name="RoleId" value={formData.RoleId} onChange={handleChange} className="form-input mt-1 w-full" />
+      </label>
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        EmployeeId:
+        <input type="text" name="EmployeeId" value={formData.EmployeeId} onChange={handleChange} className="form-input mt-1 w-full" />
+      </label>
+    </div>
+    {error && <div className="text-red-500 mb-4">{error}</div>}
+    <button type="submit" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold">
+      Sign Up
+    </button>
+    <p className="mt-4 text-sm text-gray-700">
+      Already registered? <Link to="/login" className="text-blue-500">Log in</Link>
+    </p>
+  </form>
   );
 };
 
