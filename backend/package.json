@@ -8,7 +8,8 @@
     "start": "npx ts-node index.ts",
     "seed": "npx ts-node prisma/seed/defaultEntries.ts",
     "db:bana": "npx prisma migrate dev --name db && npx prisma generate && rm -rf prisma/migrations",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc index.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,9 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "path": "^0.12.7",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

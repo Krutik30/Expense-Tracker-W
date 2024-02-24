@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-async function createUser(Username: string, Password: string, RoleId: number, EmployeeId: number): Promise<user> {
+async function createUser(Username: string, Password: string, RoleId: number, EmployeeId: number,Email:string): Promise<user> {
     const saltRounds = 10; 
     const hashedPassword = await bcrypt.hash(Password, saltRounds); 
 
@@ -12,7 +12,9 @@ async function createUser(Username: string, Password: string, RoleId: number, Em
             Username,
             Password: hashedPassword,
             RoleId,
+            Email,
             EmployeeId,
+            Email
         },
     });
 }

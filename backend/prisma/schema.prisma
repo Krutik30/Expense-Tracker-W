@@ -6,45 +6,53 @@
 
 generator client {
   provider = "prisma-client-js"
+  engineType = "binary"
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
-
 
 // Define the User model
 model user {
-  UserID        Int       @id @default(autoincrement())
-  Username      String
-  Password      String
-  RoleId        Int
-  EmployeeId    Int
-  Role          role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
-  Employee      employee? @relation(fields: [EmployeeId], references: [EmployeeID])
+  UserID     Int       @id @default(autoincrement())
+  Username   String
+  Password   String
+  Email      String    @unique
+  RoleId     Int
+  EmployeeId Int
+  Role       role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
+  Employee   employee? @relation(fields: [EmployeeId], references: [EmployeeID])
 }
 
 // Define the Employee model
 model employee {
-  EmployeeID           Int       @id @default(autoincrement())
-  FirstName            String
-  LastName             String
-  Email                String
-  ContactNumber        String
-  EmploymentStartDate  DateTime
-  Salary               salary?    @relation("Employee_Salary")
-  Advance              advance[]  @relation("Employee_Advance")
-  Expense              expense[]  @relation("Employee_Expense")
-  users                user[]     // Bidirectional relation
+  EmployeeID          Int       @id @default(autoincrement())
+  FirstName           String
+  LastName            String
+  Email               String    @unique
+  ContactNumber       String
+  EmploymentStartDate DateTime
+  Salary              salary?   @relation("Employee_Salary")
+  Advance             advance[] @relation("Employee_Advance")
+  Expense             expense[] @relation("Employee_Expense")
+  users               user[] // Bidirectional relation
+}
+
+model admin {
+  AdminID  Int    @id @default(autoincrement())
+  Username String
+  approvedExpenses expense[] @relation("ApprovedByAdmin")
+  givenAdvances advance[] @relation("GivenByAdmin")
 }
 
 // Define the Role model
 model role_et {
-  RoleID   Int      @id @default(autoincrement())
+  RoleID   Int    @id @default(autoincrement())
   RoleName String
-  users    user[]   @relation("Role_User")
+  users    user[] @relation("Role_User")
 }
 
 // Define the Salary model
@@ -57,36 +65,40 @@ model salary {
   Deductions       Float
   PaymentFrequency String
   PaymentStatus    String
-  Employee         employee @relation("Employee_Salary",fields: [EmployeeID], references: [EmployeeID])
+  Employee         employee @relation("Employee_Salary", fields: [EmployeeID], references: [EmployeeID])
 }
 
 // Define the Advance model
 model advance {
-  AdvanceID   Int      @id @default(autoincrement())
-  EmployeeID  Int
-  AdvanceAmount Float
-  DateIssued  DateTime
-  Reason      String
-  Status      String
-  Employee    employee @relation("Employee_Advance",fields: [EmployeeID], references: [EmployeeID])
+  AdvanceID      Int      @id @default(autoincrement())
+  EmployeeID     Int
+  AdvanceAmount  Float
+  DateIssued     DateTime
+  Reason         String
+  Status         String
+  GivenByAdminID Int
+  GivenByAdmin   admin?   @relation("GivenByAdmin", fields: [GivenByAdminID], references: [AdminID])
+  Employee       employee @relation("Employee_Advance", fields: [EmployeeID], references: [EmployeeID])
 }
 
 // Define the Expense model
 model expense {
-  ExpenseID      Int      @id @default(autoincrement())
-  EmployeeID     Int
-  Date           DateTime
-  Amount         Float
-  CategoryID     Int
-  Purpose        String
-  ApprovalStatus String
-  Employee       employee @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
-  Category       expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
+  ExpenseID         Int              @id @default(autoincrement())
+  EmployeeID        Int
+  Date              DateTime
+  Amount            Float
+  CategoryID        Int
+  Purpose           String
+  ApprovalStatus    String
+  ApprovedByAdminID Int
+  ApprovedByAdmin   admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
+  Employee          employee         @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
+  Category          expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
 }
 
 // Define the ExpenseCategory model
 model expense_category {
-  CategoryID   Int      @id @default(autoincrement())
+  CategoryID   Int       @id @default(autoincrement())
   CategoryName String
   Description  String
   Expense      expense[] @relation("Expense_Catagory")
