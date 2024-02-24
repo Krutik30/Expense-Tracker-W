@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { requestMe } from '../../utils/requestMe';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface SignUpFormProps {
@@ -8,6 +9,7 @@ interface SignUpFormProps {
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
     Username: '',
+    Email : "",
     Password: '',
     ConfirmPassword: '',
     RoleId: '',
@@ -33,20 +35,27 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       setError('Passwords do not match');
       return;
     }
-
+    // eslint-disable-next-line no-unused-vars
+    const { ConfirmPassword, ...formDataWithoutConfirmPassword } = formData;
     try {
       // Perform signup logic here
       // For example, make an API call to register the user
       // const response = await axios.post('/api/signup', formData);
       // console.log(response.data);
       
-      localStorage.setItem('user', JSON.stringify({
-        auth: true,
-        role: 'ADMIN',
-        token: 'token bhi hai'
-      }))
-      navigate('/')
-
+      // localStorage.setItem('user', JSON.stringify({
+      //   auth: true,
+      //   role: 'ADMIN',
+      //   token: 'token bhi hai'
+      // }))
+      console.log("yes");
+      const res = await requestMe('/auth/signup',{
+        method : "post",
+        body : JSON.stringify(formDataWithoutConfirmPassword)
+      })
+      
+      localStorage.setItem('user',JSON.stringify(res))
+         navigate('/')
 
       // If signup is successful, call onSuccess callback if provided
       if (onSuccess) {

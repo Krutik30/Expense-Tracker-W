@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { requestMe } from '../../utils/requestMe';
+import {  useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   onLogin?: () => void;
@@ -8,10 +9,10 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = () => {
     const [formData, setFormData] = useState({
-        Username: '',
+        Email: '',
         Password: '',       
       });
-    
+      const navigate = useNavigate();
       const [error, setError] = useState<string | null>(null);
     
       const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
         console.log(formData);
-    if (!formData.Username || !formData.Password) {
+    if (!formData.Email || !formData.Password) {
       setError('Please enter username and password');
       return;
     }
@@ -36,7 +37,10 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           body : JSON.stringify(formData)
         }
       )
+
       localStorage.setItem('user',JSON.stringify(res));
+        navigate('/auth/signup')
+
      
     } catch (error) {
       console.error('Error logging in:', error);
@@ -53,9 +57,9 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           <div>
             <label className="block text-2xl font-semibold text-gray-700">Username:</label>
             <input
-              type="text"
-              name="Username"
-              value={formData.Username}
+              type="email"
+              name="Email"
+              value={formData.Email}
               onChange={handleChange}
               className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
               required

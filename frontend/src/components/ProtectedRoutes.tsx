@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Role } from '../../config';
-import { Page404 } from '../Pages/Page404';
+import { Page404 } from '../pages/Page404';
 
 interface ProtectedRouteProps {
     children: React.ReactElement;
