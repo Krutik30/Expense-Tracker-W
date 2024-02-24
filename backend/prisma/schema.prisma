@@ -41,13 +41,10 @@ model employee {
   users               user[] // Bidirectional relation
 }
 
-model Admin {
+model admin {
   AdminID  Int    @id @default(autoincrement())
   Username String
-  // Add other fields as needed
-
   approvedExpenses expense[] @relation("ApprovedByAdmin")
-
   givenAdvances advance[] @relation("GivenByAdmin")
 }
 
@@ -80,7 +77,7 @@ model advance {
   Reason         String
   Status         String
   GivenByAdminID Int
-  GivenByAdmin   Admin?   @relation("GivenByAdmin", fields: [GivenByAdminID], references: [AdminID])
+  GivenByAdmin   admin?   @relation("GivenByAdmin", fields: [GivenByAdminID], references: [AdminID])
   Employee       employee @relation("Employee_Advance", fields: [EmployeeID], references: [EmployeeID])
 }
 
@@ -94,7 +91,7 @@ model expense {
   Purpose           String
   ApprovalStatus    String
   ApprovedByAdminID Int
-  ApprovedByAdmin   Admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
+  ApprovedByAdmin   admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
   Employee          employee         @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
   Category          expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
 }
