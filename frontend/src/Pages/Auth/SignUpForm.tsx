@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import { requestMe } from '../../utils/requestMe';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -8,6 +9,7 @@ interface SignUpFormProps {
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
     Username: '',
+    Email : "",
     Password: '',
     ConfirmPassword: '',
     RoleId: '',
@@ -33,20 +35,26 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       setError('Passwords do not match');
       return;
     }
-
+    const { ConfirmPassword, ...formDataWithoutConfirmPassword } = formData;
     try {
       // Perform signup logic here
       // For example, make an API call to register the user
       // const response = await axios.post('/api/signup', formData);
       // console.log(response.data);
       
-      localStorage.setItem('user', JSON.stringify({
-        auth: true,
-        role: 'ADMIN',
-        token: 'token bhi hai'
-      }))
-      navigate('/')
-
+      // localStorage.setItem('user', JSON.stringify({
+      //   auth: true,
+      //   role: 'ADMIN',
+      //   token: 'token bhi hai'
+      // }))
+      console.log("yes");
+      const res = await requestMe('/auth/signup',{
+        method : "post",
+        body : JSON.stringify(formDataWithoutConfirmPassword)
+      })
+      
+      localStorage.setItem('user',JSON.stringify(res))
+         navigate('/')
 
       // If signup is successful, call onSuccess callback if provided
       if (onSuccess) {
@@ -68,6 +76,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       </div>
       <div>
         <label>
+          Email:
+          <input type="email" name="Email" value={formData.Email} onChange={handleChange} required />
+        </label>
+      </div>
+      <div>
+        <label>
           Password:
           <input type="password" name="Password" value={formData.Password} onChange={handleChange} required />
         </label>
@@ -81,13 +95,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       <div>
         <label>
           RoleId:
-          <input type="text" name="RoleId" value={formData.RoleId} onChange={handleChange} />
+          <input type="number" name="RoleId" value={formData.RoleId} onChange={handleChange} />
         </label>
       </div>
       <div>
         <label>
           EmployeeId:
-          <input type="text" name="EmployeeId" value={formData.EmployeeId} onChange={handleChange} />
+          <input type="number" name="EmployeeId" value={formData.EmployeeId} onChange={handleChange} />
         </label>
       </div>
       {error && <div style={{ color: 'red' }}>{error}</div>}
