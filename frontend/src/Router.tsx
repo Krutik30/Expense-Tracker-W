@@ -1,18 +1,18 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Page } from './components/Page';
-import { Dashboard } from './pages/Dashboard.tsx';
-import LoginForm from './pages/Auth/LoginForm.tsx';
-import SignUpForm from './pages/Auth/SignUpForm.tsx';
+import { Dashboard } from './pages/Dashboard';
+import LoginForm from './pages/Auth/LoginForm';
+import SignUpForm from './pages/Auth/SignUpForm';
 import AddEmployee from './pages/AddEmployee.tsx';
 import SalaryIssued from './pages/SalaryIssued.tsx';
-import IssuedAdvance from './pages/IssuedAdvance.tsx';
-import ListOfEmployee from './pages/ListOfEmployee.tsx';
-import AddExpense from './pages/AddExpense.tsx';
-import RequestSalary from './pages/RequestSalary.tsx';
-import ListOfExpense from './pages/ListOfExpense.tsx';
-import Wallet from './pages/Wallet.tsx';
-import HistoryComponent from './pages/History.tsx';
-import Profile from './pages/Profile.tsx';
+import IssuedAdvance from './pages/IssuedAdvance';
+import ListOfEmployee from './pages/ListOfEmployee';
+import AddExpense from './pages/AddExpense';
+import RequestSalary from './pages/RequestSalary';
+import ListOfExpense from './pages/ListOfExpense';
+import Wallet from './pages/Wallet';
+import HistoryComponent from './pages/History';
+import Profile from './pages/Profile';
 
 function Router() {
     return (
