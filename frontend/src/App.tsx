@@ -9,8 +9,8 @@ import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
 
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
-import ExpenseCategoryForm from "./components/ExpenseCategory"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
+import ExpenseCategoryForm from "./components/ExpenseCategory"
 
 function App() {
   return(
