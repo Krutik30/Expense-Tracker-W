@@ -57,9 +57,9 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           <div>
             <label className="block text-2xl font-semibold text-gray-700">Username:</label>
             <input
-              type="text"
-              name="Username"
-              value={formData.Username}
+              type="email"
+              name="Email"
+              value={formData.Email}
               onChange={handleChange}
               className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
               required
