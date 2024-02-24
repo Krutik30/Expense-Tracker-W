@@ -9,7 +9,7 @@ export default function LabelInput({label, name, value, onChange, type, id }: an
         id={id}
         value={value}
         onChange={onChange}
-        className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
+        className="form-input w-full mb-1 mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
       />
     </div>
   );

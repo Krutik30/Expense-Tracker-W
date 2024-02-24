@@ -1,6 +1,7 @@
 // src/ExpenseForm.tsx
 import React, { useState } from 'react';
 import LabelInput from './LabelInput';
+import SingleFileUploader from './UploadFile';
 
 interface ExpenseFormProps {
   // eslint-disable-next-line no-unused-vars
@@ -122,10 +123,11 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
              onChange={handleInputChange}
               type="number" 
           />
+         <SingleFileUploader/> 
 
       <button
         type="submit"
-        className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+        className="bg-blue-500  text-white font-bold mt-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
       >
         Submit
       </button>
