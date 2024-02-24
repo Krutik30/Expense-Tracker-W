@@ -1,13 +1,12 @@
-'use strict';
 
-import dotenv from 'dotenv';
+const HOST_URL = 'http://localhost:3000';
 
-dotenv.config();
-
-const {
-    HOST_URL,
-} = import.meta.env;
+const Role = {
+    admin: 'ADMIN',
+    emp: 'EMPLOYEE'
+}
 
 export {
-    HOST_URL
+    HOST_URL,
+    Role
 }
