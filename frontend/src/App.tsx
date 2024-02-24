@@ -3,7 +3,6 @@
 
 import { BrowserRouter, } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
-import Header from "./components/Header"
 import Router from "./Router"
 import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
@@ -12,8 +11,11 @@ import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
 import ExpenseCategoryForm from "./components/ExpenseCategory"
 import SingleFileUploader from "./components/UploadFile"
+import Header from "./components/Header"
 
 function App() {
+
+
   return(
     <>
       <ToastContainer />
