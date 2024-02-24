@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './LoginSignup.css'
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   onLogin?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ }) => {
+const LoginForm: React.FC<LoginFormProps> = () => {
     const [formData, setFormData] = useState({
         Username: '',
         Password: '',       
       });
+
+      const navigate = useNavigate()
     
       const [error, setError] = useState<string | null>(null);
     
@@ -33,6 +34,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ }) => {
     try {
     //   const response = await axios.post('/api/login', formData);
     //   console.log(response.data);
+
+      // put this in then
+      localStorage.setItem('user', JSON.stringify({
+        auth: true,
+        role: 'ADMIN',
+        token: 'token bhi hai'
+      }))
+      navigate('/')
       
       // Call onLogin if login is successful
     //   onLogin();
