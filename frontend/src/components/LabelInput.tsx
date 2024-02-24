@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function LabelInput({label, name, value, onChange, type, id }: any) {
   return (

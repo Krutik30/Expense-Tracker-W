@@ -39,13 +39,13 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const { name, value } = event.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
