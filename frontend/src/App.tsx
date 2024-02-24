@@ -21,7 +21,7 @@ function App() {
         <Router />
       </BrowserRouter>
          
-    {/* <LoginForm/> */}
+    <LoginForm/>
     <EmployeeForm/>
     <SalaryForm employeeId={0}/>
     
