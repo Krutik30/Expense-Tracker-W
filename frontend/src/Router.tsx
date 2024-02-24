@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Page } from './components/Page';
-import { Dashboard } from './Pages/Dashboard';
-import LoginForm from './Pages/Auth/LoginForm';
-import SignUpForm from './Pages/Auth/SignUpForm';
+import { Dashboard } from './pages/Dashboard';
+import LoginForm from './pages/Auth/LoginForm';
+import SignUpForm from './pages/Auth/SignUpForm';
 
 function Router() {
     return (

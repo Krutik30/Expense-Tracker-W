@@ -1,17 +1,17 @@
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { requestMe } from '../../utils/requestMe';
 
 interface LoginFormProps {
   onLogin?: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = () => {
+  const token : any = localStorage.getItem("token");
     const [formData, setFormData] = useState({
         Username: '',
         Password: '',       
       });
-
-      const navigate = useNavigate()
     
       const [error, setError] = useState<string | null>(null);
     
@@ -32,19 +32,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
     }
 
     try {
-    //   const response = await axios.post('/api/login', formData);
-    //   console.log(response.data);
-
-      // put this in then
-      localStorage.setItem('user', JSON.stringify({
-        auth: true,
-        role: 'ADMIN',
-        token: 'token bhi hai'
-      }))
-      navigate('/')
-      
-      // Call onLogin if login is successful
-    //   onLogin();
+      const res = await requestMe('/auth/login',{
+          method : "post",
+          body : JSON.stringify(formData)
+        }
+      )
+      localStorage.setItem('user',JSON.stringify(res));
+     
     } catch (error) {
       console.error('Error logging in:', error);
       setError('Invalid username or password');
@@ -52,30 +46,22 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   };
 
   return (
-    <div className="container">
-      <div className="text1">Login</div>
-    <form onSubmit={handleLogin}  >
-
-      <div className='text'>
-        <label >
-        Username :
-          
-          <input type="text" name="Username" value={formData.Username} onChange={handleChange} className='box'required />
-          </label>
+    <form onSubmit={handleLogin}>
+      <div>
+        <label>
+          Username:
+          <input type="text" name="Username" value={formData.Username} onChange={handleChange} required />
+        </label>
       </div>
-      <div className='text'>
-        <label >
-        Password :
-        
-          <input type="password" name="Password" value={formData.Password} onChange={handleChange} className='box' required />
-          </label>
+      <div>
+        <label>
+          Password:
+          <input type="password" name="Password" value={formData.Password} onChange={handleChange} required />
+        </label>
       </div>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      <div className="submit-container">
-      <button type="submit" className='submit'>Login</button>
-      </div>
+      <button type="submit">Login</button>
     </form>
-    </div>
   );
 };
 

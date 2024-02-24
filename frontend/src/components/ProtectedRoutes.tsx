@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Page404 } from '../Pages/Page404';
+import { Page404 } from '../pages/Page404';
 import { Role } from '../../config';
 
 interface ProtectedRouteProps {
@@ -14,10 +14,16 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 }) => {
     const { pathname } = useLocation();
     const openRoutes = ['/auth/login', '/auth/register'];
-    const userLogged = {
+    let userLogged = {
         auth: false,
-        role: Role.admin 
+        role: Role.emp 
     };
+    const userLoggedString = localStorage.getItem('user');
+
+    if (userLoggedString !== null) {
+        userLogged = JSON.parse(userLoggedString);
+        // Proceed with further processing using userLogged
+    } 
 
     console.log(pathname);
 
