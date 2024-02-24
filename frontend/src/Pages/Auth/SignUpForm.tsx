@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -12,6 +13,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
     RoleId: '',
     EmployeeId: '',
   });
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -37,6 +40,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       // const response = await axios.post('/api/signup', formData);
       // console.log(response.data);
       
+      localStorage.setItem('user', JSON.stringify({
+        auth: true,
+        role: 'ADMIN',
+        token: 'token bhi hai'
+      }))
+      navigate('/')
+
+
       // If signup is successful, call onSuccess callback if provided
       if (onSuccess) {
         onSuccess();
