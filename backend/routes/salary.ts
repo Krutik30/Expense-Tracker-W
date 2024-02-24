@@ -7,6 +7,7 @@ const router = Router();
 
 // Route to create a new Salary entry
 router.post('/createSalaries', async (req, res) => {
+    console.log(req.body)
     const { EmployeeID, BasicSalary, Bonuses, Allowances, Deductions, PaymentFrequency, PaymentStatus } = req.body;
             // Validate the incoming request data
             if (!EmployeeID ||  !BasicSalary || !Bonuses ||  !Allowances || !Deductions ||!PaymentFrequency || ! PaymentStatus) {
@@ -17,7 +18,7 @@ router.post('/createSalaries', async (req, res) => {
         // Create a new salary entry
         const newSalary = await prisma.salary.create({
             data: {
-                Employee: { connect: { EmployeeID } }, // Connect to an existing employee
+                Employee: { connect: { EmployeeID : parseInt(EmployeeID) } }, // Connect to an existing employee
                 BasicSalary,
                 Bonuses,
                 Allowances,

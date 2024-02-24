@@ -11,6 +11,7 @@ import EmployeeForm from "./components/EmployeeForm"
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
 import ExpenseCategoryForm from "./components/ExpenseCategory"
+import AddEmployee from "./pages/AddEmployee"
 
 function App() {
   return(
@@ -20,8 +21,8 @@ function App() {
         <Header />
         <Router />
       </BrowserRouter>
-         
-    <EmployeeForm/>
+         <AddEmployee />
+    
     <SalaryForm employeeId={0}/>
     
     <AdvanceForm onSubmit={function (formData: AdvanceFormData): void {

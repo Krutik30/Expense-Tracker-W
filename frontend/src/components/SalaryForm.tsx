@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import LabelInput from './LabelInput';
+import { requestMe } from '../utils/requestMe';
 
 interface SalaryFormProps {
   employeeId: number;
@@ -8,6 +9,7 @@ interface SalaryFormProps {
 
 const SalaryForm: React.FC<SalaryFormProps> = ({ employeeId }) => {
   const [salaryData, setSalaryData] = useState({
+    EmployeeID : '',
     BasicSalary: 0,
     Bonuses: 0,
     Allowances: 0,
@@ -18,21 +20,32 @@ const SalaryForm: React.FC<SalaryFormProps> = ({ employeeId }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let parsedValue: string | number;
+  
+    switch (e.target.type) {
+      case 'number':
+        parsedValue = parseFloat(value);
+        break;
+      default:
+        parsedValue = value;
+        break;
+    }
+  
     setSalaryData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       // Replace 'your-api-endpoint' with your actual API endpoint
-      const response = await axios.post('your-api-endpoint', {
-        ...salaryData,
-        EmployeeID: employeeId,
-        PaymentStatus: 'Completed',
+      const response = await requestMe('/salary/createSalaries', {
+        method : "post",
+        body : JSON.stringify(salaryData),
       });
 
       console.log('Salary data submitted:', response.data);
@@ -57,6 +70,19 @@ const SalaryForm: React.FC<SalaryFormProps> = ({ employeeId }) => {
               className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
             />
           </div> */}
+           <div className="mb-4 w-full">
+            <label className="block mt-2 w-full text-2xl font-semibold p-3  text-gray-700 text-left">
+            Employee ID:
+            </label>
+            <input
+              type="number"
+              name="EmployeeID"
+              value={salaryData.EmployeeID}
+              onChange={handleChange}
+              className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
+            />
+         
+        </div>
           <LabelInput 
             label={"Basic Salary:"}
             name="BasicSalary" 

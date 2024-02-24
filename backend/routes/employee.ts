@@ -6,6 +6,7 @@ const router = Router();
 
 router.post('/createEmployees', async (req, res) => {
     try {
+        console.log(req.body);
         const { FirstName, LastName, Email, ContactNumber, EmploymentStartDate } = req.body;
 
         // Check if all required fields are present
