@@ -9,6 +9,8 @@ import SalaryForm from "./components/SalaryForm"
 import EmployeeForm from "./components/EmployeeForm"
 
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
+import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
+import ExpenseCategoryForm from "./components/ExpenseCategory"
 
 function App() {
   return(
@@ -23,9 +25,19 @@ function App() {
     <SalaryForm employeeId={0}/>
     
     <AdvanceForm onSubmit={function (formData: AdvanceFormData): void {
-        throw new Error(`Function not implemented. ${formData}`)
+        console.log('Submitted data:', formData);
       } }/>
+      <ExpenseForm onSubmit={function (formData: ExpenseFormData): void {
+        console.log('Submitted data:', formData);
+      } }/>
+      
     
+      <ExpenseCategoryForm
+  onSubmit={(formData) => {
+    // Handle the submitted form data (e.g., send it to the server)
+    console.log('Submitted data:', formData);
+  }}
+/>
     </>
   )
 }
