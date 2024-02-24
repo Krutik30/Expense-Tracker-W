@@ -11,6 +11,10 @@
 code{
   font-family: monospace ;
 } */
+
+::-webkit-scrollbar{
+  display: none;
+}
 .loader {
 	margin: 50px auto;
 	border: 3px solid blue;

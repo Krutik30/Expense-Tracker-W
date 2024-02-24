@@ -3,11 +3,13 @@ import { HOST_URL } from '../../config'
 export const requestMe = async(route: string, option: any) => {
 
     option.headers = {
-        ...option.headers,
+        ...option?.headers,
         'Content-Type': 'application/json',
     };
 
-    return await fetch(HOST_URL+ route, option)
+    console.log(option);
+
+    return await fetch(HOST_URL + route, option)
         .then(async (res)=>{
             console.log(res)
             if (!res || !res.ok || res.status >= 400) {
