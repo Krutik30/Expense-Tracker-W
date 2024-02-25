@@ -31,12 +31,12 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    console.log(value);
     setFormData({
       ...formData,
       [name]: value,
     });
   };
-
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -47,15 +47,15 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
     <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
 
-<LabelInput 
-            label={"Date:"}
-            name="date"
-            id="date"
-            value={formData.date}
-             onChange={handleInputChange}
-              type="date" 
-          />
-      
+        <LabelInput
+          label={"Date:"}
+          name="date"
+          id="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          type="date"
+        />
+
 
 <LabelInput 
             label={"Amount:"}
