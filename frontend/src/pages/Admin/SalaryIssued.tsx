@@ -8,7 +8,7 @@ interface SalaryFormProps {
   employeeId: number;
 }
 
-interface Employee {
+export interface Employee {
   EmployeeID: number;
   FirstName: string;
   LastName: string;
@@ -133,15 +133,16 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
           type="number"
         />
 
-        <TextField
-          id="outlined-basic"
-          label="Payment Status"
-          variant="outlined"
-          className="w-full mb-4"
-          name="PaymentStatus"
-          value={salaryData.PaymentStatus}
-          onChange={handleChange}
-          type="text"
+        <Autocomplete
+          renderInput={(params) => <TextField {...params} label="Status" />}
+          options={['Pending', 'Paid', 'Part']}
+          onChange={(newValue: any)=>{
+            setSalaryData({
+              ...salaryData,
+              PaymentStatus: newValue.target.value
+            })
+          }}
+          className=" w-full" 
         />
 
         <TextField
