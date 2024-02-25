@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 
 async function deleteAllRows() {
     try {
-        await prisma.user.deleteMany({});
         await prisma.role_et.deleteMany({});
         await prisma.employee.deleteMany({});
+        await prisma.user.deleteMany({});
         await prisma.salary.deleteMany({});
         await prisma.advance.deleteMany({});
         await prisma.expense.deleteMany({});
