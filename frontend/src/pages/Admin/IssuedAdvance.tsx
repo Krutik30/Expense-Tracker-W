@@ -37,7 +37,7 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
     event.preventDefault();
     onSubmit(formData);
   };
-
+ 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
      <form
