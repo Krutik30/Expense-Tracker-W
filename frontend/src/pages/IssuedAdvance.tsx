@@ -49,9 +49,9 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
           Advance ID:
           <input
             type="number"
-            id="advanceAmount"
-            name="advanceAmount"
-            value={formData.advanceAmount}
+            id="advanceID"
+            name="advanceID"
+            value={formData.advanceID}
             onChange={handleInputChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
           />
@@ -64,7 +64,7 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="employeeID">
           Employee ID:
           <input
-            type="text"
+            type="number"
             id="employeeID"
             name="employeeID"
             value={formData.employeeID}
@@ -92,9 +92,9 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
           Date Issued:
           <input
-            type="number"
-            id="advanceAmount"
-            name="advanceAmount"
+            type="date"
+            id="dateIssued"
+            name="dateIssued"
             value={formData.dateIssued}
             onChange={handleInputChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
@@ -106,9 +106,9 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
         Reason:
           <input
-            type="number"
-            id="advanceAmount"
-            name="advanceAmount"
+            type="text"
+            id="reason"
+            name="reason"
             value={formData.reason}
             onChange={handleInputChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
@@ -120,9 +120,9 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
         Status:
           <input
-            type="number"
-            id="advanceAmount"
-            name="advanceAmount"
+            type="text"
+            id="status"
+            name="status"
             value={formData.status}
             onChange={handleInputChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
@@ -135,8 +135,8 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
           Given by AdminID:
           <input
             type="number"
-            id="advanceAmount"
-            name="advanceAmount"
+            id="givenByAdminID"
+            name="givenByAdminID"
             value={formData.givenByAdminID}
             onChange={handleInputChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"

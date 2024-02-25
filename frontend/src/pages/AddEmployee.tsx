@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { TextField } from '@mui/material';
 
 
 const AddEmployee = () => {
@@ -39,8 +39,8 @@ const AddEmployee = () => {
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className=" w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
 
-        
-        <label className="block text-2xl font-semibold text-gray-700 mb-4">
+      
+        {/* <label className="block text-2xl font-semibold text-gray-700 mb-4">
           First Name:
           <input
             type="text"
@@ -49,8 +49,10 @@ const AddEmployee = () => {
             onChange={handleChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
           />
-        </label>
-        
+        </label> */}
+        <TextField id="outlined-basic" label="First Name" variant="outlined" className='w-full'  name="FirstName"
+            value={employeeData.FirstName}
+            onChange={handleChange}/>
         <label className="block text-2xl font-semibold text-gray-700 mb-4">
           Last Name:
           <input

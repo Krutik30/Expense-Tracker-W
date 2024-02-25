@@ -7,7 +7,7 @@
     "dev": "npx nodemon index.ts",
     "start": "npx ts-node index.ts",
     "seed": "npx ts-node prisma/seed/defaultEntries.ts",
-    "db:bana": "npx prisma migrate dev --name db && npx prisma generate && rm -rf prisma/migrations",
+    "db:bana": "npx prisma migrate dev --name db; && npx prisma generate && rm -rf prisma/migrations",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc index.ts"
   },
