@@ -77,7 +77,7 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4"
+        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center"
       >
         <Autocomplete
           renderInput={(params) => <TextField {...params} label="Employee" />}
@@ -88,7 +88,7 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
             JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
           }
           onChange={handleEmployeeChange}
-        />
+         className=" w-full"/>
         {/* <LabelInput
           label={"Basic Salary:"}
           name="BasicSalary"
