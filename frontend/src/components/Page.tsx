@@ -22,16 +22,17 @@ export const Page = forwardRef(({ Component, roleRequired, ...props }: any, ref)
 
             {/* eslint-disable-next-line   */}
             {/* @ts-ignore */}
+            
             <MainStyle>
                 <ProtectedRoute roleRequire={roleRequired}>
-                    <SuspenseErrorBoundary>
-                        <Box ref={ref} sx={{ minHeight: '100vh' }}>
-                            {/* eslint-disable-next-line   */}
-                            {/* @ts-ignore */}
-                            <Component {...props} />
-                            {/* eslint-disable-next-line   */}
-                        </Box>
-                    </SuspenseErrorBoundary>
+                    <Box ref={ref} sx={{ minHeight: '100vh' }}>
+                        <SuspenseErrorBoundary>
+                                {/* eslint-disable-next-line   */}
+                                {/* @ts-ignore */}
+                                <Component {...props} />
+                                {/* eslint-disable-next-line   */}
+                        </SuspenseErrorBoundary>
+                    </Box>
                 </ProtectedRoute>
             </MainStyle>
         </Fragment>

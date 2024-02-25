@@ -19,19 +19,19 @@ function Router() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/dashboard" />} />
-            <Route path="/auth" element={<Navigate to="/auth/login" />} >
-                <Route path="login" element={<Page Component={LoginForm} roleRequired={[false]} />} />
-                <Route path="signup" element={<Page Component={SignUpForm} roleRequired={[false]} />} />
+            <Route path="/auth">
+                <Route path="login" element={<Page Component={LoginForm} roleRequired={false} />} />
+                <Route path="signup" element={<Page Component={SignUpForm} roleRequired={false} />} />
             </Route>
-            <Route path="/dashboard" element={<Page Component={Dashboard} roleRequired={[Role.admin, Role.emp]} />} />
-            <Route path="/add" element={<Navigate to="/add/employee" />}>
+            <Route path="/add">
                 <Route path="employee" element={<Page Component={AddEmployee} roleRequired={[Role.admin]} />} />
                 <Route path="expense" element={<Page Component={AddExpense} roleRequired={[Role.emp]} />} />
             </Route>
-            <Route path='/list' element={<Navigate to="/list/employee" />}>
+            <Route path='/list'>
                 <Route path="employee" element={<Page Component={ListOfEmployee} roleRequired={[Role.admin]} />} />
                 <Route path="expense" element={<Page Component={ListOfExpense} roleRequired={[Role.emp]} />} />
             </Route>
+            <Route path="/dashboard" element={<Page Component={Dashboard} roleRequired={[Role.admin, Role.emp]} />} />
             <Route path="/salary/issue" element={<Page Component={SalaryIssued} roleRequired={[Role.admin]} />} />
             <Route path="/issued/advance" element={<Page Component={IssuedAdvance} roleRequired={[Role.admin]} />} />
             <Route path="/request/salary" element={<Page Component={RequestSalary} roleRequired={[Role.emp]} />} />
