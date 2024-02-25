@@ -6,9 +6,10 @@ const router = Router();
 
 router.post('/createEmployees', async (req, res) => {
     try {
-        console.log(req.body);
+        
         const { FirstName, LastName, Email, ContactNumber, EmploymentStartDate } = req.body;
-
+        console.log(req.body);
+        
         // Check if all required fields are present
         if (!FirstName || !LastName || !Email || !ContactNumber || !EmploymentStartDate) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -22,7 +23,7 @@ router.post('/createEmployees', async (req, res) => {
                 LastName,
                 Email,
                 ContactNumber,
-                EmploymentStartDate
+                EmploymentStartDate : new Date(EmploymentStartDate)
             }
         });
 
@@ -36,7 +37,13 @@ router.post('/createEmployees', async (req, res) => {
 router.get('/getEmployees', async (req, res) => {
     try {
         console.log('object');
-        const employees = await prisma.employee.findMany();
+        const employees = await prisma.employee.findMany({
+            include:{
+                Advance: true,
+                Expense: true,
+                Salary: true
+            }
+        });
         res.json({ message: 'All Employee Data', status: 200, payload: employees })
     } catch (error) {
         console.error('Error retrieving employees:', error);

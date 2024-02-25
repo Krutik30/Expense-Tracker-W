@@ -35,7 +35,7 @@ model employee {
   LastName            String
   Email               String    @unique
   ContactNumber       String
-  EmploymentStartDate DateTime
+  EmploymentStartDate String
   Salary              salary[]   @relation("Employee_Salary")
   Advance             advance[] @relation("Employee_Advance")
   Expense             expense[] @relation("Employee_Expense")
@@ -76,7 +76,7 @@ model advance {
   AdvanceID      Int      @id @default(autoincrement())
   EmployeeID     Int
   AdvanceAmount  Float
-  DateIssued     DateTime
+  DateIssued     String
   Reason         String
   Status         String
   GivenByAdminID Int
@@ -88,7 +88,7 @@ model advance {
 model expense {
   ExpenseID         Int              @id @default(autoincrement())
   EmployeeID        Int
-  Date              DateTime
+  Date              String
   Amount            Float
   CategoryID        Int
   Purpose           String
