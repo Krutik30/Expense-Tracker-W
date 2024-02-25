@@ -5,26 +5,27 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
   engineType = "binary"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // directUrl = env("DIRECT_URL")
 }
 
 // Define the User model
 model user {
-  UserID     Int       @id @default(autoincrement())
-  Username   String
-  Password   String
-  Email      String    @unique
-  RoleId     Int
-  EmployeeId Int
-  Role       role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
-  Employee   employee? @relation(fields: [EmployeeId], references: [EmployeeID])
+  UserID   Int       @id @default(autoincrement())
+  Username String
+  Password String
+  Email    String    @unique
+  RoleId   Int
+  StaffId  Int
+  Role     role_et?  @relation("Role_User", fields: [RoleId], references: [RoleID])
+  admin    admin?    @relation("Admin_User", fields: [StaffId], references: [AdminID], map: "user_admin")
+  Employee employee? @relation("Employee_User", fields: [StaffId], references: [EmployeeID], map: "user_employee")
 }
 
 // Define the Employee model
@@ -35,31 +36,32 @@ model employee {
   Email               String    @unique
   ContactNumber       String
   EmploymentStartDate DateTime
-  Salary              salary?   @relation("Employee_Salary")
+  Salary              salary[]   @relation("Employee_Salary")
   Advance             advance[] @relation("Employee_Advance")
   Expense             expense[] @relation("Employee_Expense")
-  users               user[] 
+  user                user[]    @relation("Employee_User")
 }
 
 model admin {
-  AdminID  Int    @id @default(autoincrement())
-  Username String
-  Email     String
+  AdminID          Int       @id @default(autoincrement())
+  Username         String
+  Email            String    @unique
+  user             user[]    @relation("Admin_User")
   approvedExpenses expense[] @relation("ApprovedByAdmin")
-  givenAdvances advance[] @relation("GivenByAdmin")
+  givenAdvances    advance[] @relation("GivenByAdmin")
 }
 
 // Define the Role model
 model role_et {
   RoleID   Int    @id @default(autoincrement())
-  RoleName String
+  RoleName String @unique
   users    user[] @relation("Role_User")
 }
 
 // Define the Salary model
 model salary {
   SalaryID         Int      @id @default(autoincrement())
-  EmployeeID       Int      @unique
+  EmployeeID       Int
   BasicSalary      Float
   Bonuses          Float
   Allowances       Float

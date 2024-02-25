@@ -7,6 +7,7 @@ const router = Router();
 
 // Route to create a new Salary entry
 router.post('/createSalaries', async (req, res) => {
+    console.log(req.body)
     const { EmployeeID, BasicSalary, Bonuses, Allowances, Deductions, PaymentFrequency, PaymentStatus } = req.body;
             // Validate the incoming request data
             if (!EmployeeID ||  !BasicSalary || !Bonuses ||  !Allowances || !Deductions ||!PaymentFrequency || ! PaymentStatus) {
@@ -17,7 +18,7 @@ router.post('/createSalaries', async (req, res) => {
         // Create a new salary entry
         const newSalary = await prisma.salary.create({
             data: {
-                Employee: { connect: { EmployeeID } }, // Connect to an existing employee
+                Employee: { connect: { EmployeeID : EmployeeID } }, 
                 BasicSalary,
                 Bonuses,
                 Allowances,
@@ -35,7 +36,7 @@ router.post('/createSalaries', async (req, res) => {
             }
         });
 
-        res.status(201).json({ message: 'Salary created successfully', data: newSalary });
+        res.status(201).json({ message: 'Salary created successfully', status: 200, payload: newSalary });
     } catch (error) {
         console.error('Error creating salary:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -48,7 +49,7 @@ router.get('/getSalary/:employeeId', async (req, res) => {
 
     try {
         // Retrieve salary information for the specified employee
-        const salary = await prisma.salary.findUnique({
+        const salary = await prisma.salary.findMany({
             where: { EmployeeID: parseInt(employeeId) }
         });
 
@@ -56,7 +57,7 @@ router.get('/getSalary/:employeeId', async (req, res) => {
             return res.status(404).json({ error: 'Salary entry not found' });
         }
 
-        res.status(200).json({ message: 'Salary retrieved successfully', data: salary });
+        res.status(200).json({ message: 'Salary retrieved successfully', status: 200, payload: salary });
     } catch (error) {
         console.error('Error retrieving salary:', error);
         res.status(500).json({ error: 'Internal server error' });

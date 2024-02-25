@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 
 async function deleteAllRows() {
     try {
-        await prisma.user.deleteMany({});
         await prisma.role_et.deleteMany({});
         await prisma.employee.deleteMany({});
+        await prisma.user.deleteMany({});
         await prisma.salary.deleteMany({});
         await prisma.advance.deleteMany({});
         await prisma.expense.deleteMany({});
@@ -87,42 +87,42 @@ async function seed() {
                     Username: 'Krutik',
                     Password: await bcrypt.hash("Krutik@30", 10),
                     RoleId: 1,
-                    EmployeeId: 1,
+                    StaffId: 1,
                     Email: 'agherakrutik99@gmail.com'
                 },
                 {
                     Username: 'Neha',
                     Password: await bcrypt.hash("Neha@08", 10),
                     RoleId: 1,
-                    EmployeeId: 2,
+                    StaffId: 2,
                     Email: 'neha69@gmail.com'
                 },
                 {
                     Username: 'Sandip',
                     Password: await bcrypt.hash("Sandip@12", 10),
                     RoleId: 1,                    
-                    EmployeeId: 3,
+                    StaffId: 3,
                     Email: 'jadiyo@gmail.com',
                 },
                 {
                     Username: 'Dharmen',
                     Password: await bcrypt.hash("Dhamo@25", 10),
                     RoleId: 2,
-                    EmployeeId: 1,
+                    StaffId: 1,
                     Email: 'dharmen143@gmail.com'
                 },
                 {
                     Username: 'Esha',
                     Password: await bcrypt.hash("Esha@21", 10),
                     RoleId: 2,
-                    EmployeeId: 2,
+                    StaffId: 2,
                     Email: 'esha6i@gmail.com'
                 },
                 {
                     Username: 'Diti',
                     Password: await bcrypt.hash("Dito@05", 10),
                     RoleId: 2,
-                    EmployeeId: 3,
+                    StaffId: 3,
                     Email: 'kutti@gmail.com'
                 }
             ]
