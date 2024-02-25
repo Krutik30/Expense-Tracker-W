@@ -10,6 +10,7 @@ import EmployeeForm from "./components/EmployeeForm"
 import AdvanceForm, { AdvanceFormData } from "./components/AdvanceForm"
 import ExpenseForm, { ExpenseFormData } from "./components/ExpenseForm"
 import ExpenseCategoryForm from "./components/ExpenseCategory"
+import SingleFileUploader from "./components/UploadFile"
 import Header from "./components/Header"
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
     console.log('Submitted data:', formData);
   }}
 />
+<SingleFileUploader/>
     </>
   )
 }
