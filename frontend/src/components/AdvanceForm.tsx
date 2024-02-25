@@ -43,7 +43,7 @@ const AdvanceAmountForm: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
+    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md my-12">
 
 <div className="mb-4 w-full">
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
