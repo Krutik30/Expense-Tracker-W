@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { requestMe } from '../../utils/requestMe';
 import { useNavigate } from 'react-router-dom';
+import { Role } from '../../../config';
 
 interface LoginFormProps {
   onLogin?: () => void;
@@ -38,8 +39,14 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         }
       )
 
+      console.log(res);
+
+      if(res.role === Role.admin){
+        const allEmployee = await requestMe('/employees/getEmployees')
+        localStorage.setItem('employees', JSON.stringify(allEmployee))
+      }
       localStorage.setItem('user',JSON.stringify(res));
-        navigate('/auth/signup')
+      navigate('/')
 
      
     } catch (error) {

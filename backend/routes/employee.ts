@@ -33,4 +33,15 @@ router.post('/createEmployees', async (req, res) => {
     }
 });
 
+router.get('/getEmployees', async (req, res) => {
+    try {
+        console.log('object');
+        const employees = await prisma.employee.findMany();
+        res.json({ message: 'All Employee Data', status: 200, payload: employees })
+    } catch (error) {
+        console.error('Error retrieving employees:', error);
+        throw error;
+    }
+})
+
 export default router;
