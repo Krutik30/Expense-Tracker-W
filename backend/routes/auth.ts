@@ -61,7 +61,6 @@ router.post('/login', async (req, res) =>
             },
             include:{
                 Role: true,
-                Employee: true,
                 admin: true
             }
         });

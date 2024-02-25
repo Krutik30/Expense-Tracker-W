@@ -6,9 +6,7 @@ interface AdvanceAmountFormProps {
 }
 
 export interface AdvanceFormData {
-    advanceID : string;
   employeeID: string;
-
   advanceAmount: number;
   dateIssued: string;
   reason: string;
@@ -18,13 +16,12 @@ export interface AdvanceFormData {
 
 const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<AdvanceFormData>({
-    advanceID : '',
     employeeID: '',
     advanceAmount: 0,
     dateIssued: '',
     reason: '',
     status: '',
-    givenByAdminID: '',
+    givenByAdminID: JSON.parse(localStorage.getItem('user') || '{}').staff.admin.AdminID,
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,22 +40,6 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
     <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
-
-<div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Advance ID:
-          <input
-            type="number"
-            id="advanceID"
-            name="advanceID"
-            value={formData.advanceID}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-
 
       <div className="mb-4 w-full">
         <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="employeeID">
@@ -129,21 +110,6 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
           />
         </label>
       </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Given by AdminID:
-          <input
-            type="number"
-            id="givenByAdminID"
-            name="givenByAdminID"
-            value={formData.givenByAdminID}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
 
       
       <button
