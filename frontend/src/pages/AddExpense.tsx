@@ -3,14 +3,12 @@
 import React, { useState } from 'react';
 import LabelInput from '../components/LabelInput';
 
-
 interface ExpenseFormProps {
   // eslint-disable-next-line no-unused-vars
   onSubmit: (formData: ExpenseFormData) => void;
 }
 
 export interface ExpenseFormData {
-    expenseID:string;
   employeeID: string;
   date: string;
   amount: number;
@@ -22,8 +20,7 @@ export interface ExpenseFormData {
 
 const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<ExpenseFormData>({
-    expenseID:'',
-    employeeID: '',
+    employeeID: JSON.parse(localStorage.getItem('user') || '{}').StaffId,
     date: '',
     amount: 0,
     categoryID: '',
@@ -40,14 +37,6 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  // const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -57,17 +46,7 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
     <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
-     
-      <LabelInput 
-            label={"Employee ID:"}
-            name="employeeID"
-            id="employeeID"
-            value={formData.employeeID}
-             onChange={handleInputChange}
-              type="date" 
-          />
 
-      
 <LabelInput 
             label={"Date:"}
             name="date"

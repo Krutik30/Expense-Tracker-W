@@ -40,17 +40,6 @@ const AddEmployee = () => {
         onSubmit={handleSubmit}
         className=" w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-3"
       >
-        {/* <label className="block text-2xl font-semibold text-gray-700 mb-4">
-          First Name:
-          <input
-            type="text"
-            name="FirstName"
-            value={employeeData.FirstName}
-            onChange={handleChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label> */}
-      
 
         <TextField
           id="outlined-basic"
@@ -103,50 +92,6 @@ const AddEmployee = () => {
           value={employeeData.EmploymentStartDate}
           onChange={handleChange}
         />
-   
-        {/* <label className="block text-2xl font-semibold text-gray-700 mb-4">
-          Last Name:
-          <input
-            type="text"
-            name="LastName"
-            value={employeeData.LastName}
-            onChange={handleChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label> */}
-
-        {/* <label className="block text-2xl font-semibold text-gray-700 mb-4">
-          Email:
-          <input
-            type="text"
-            name="Email"
-            value={employeeData.Email}
-            onChange={handleChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-
-        <label className="block text-2xl font-semibold text-gray-700 mb-4">
-          Contact Number:
-          <input
-            type="text"
-            name="ContactNumber"
-            value={employeeData.ContactNumber}
-            onChange={handleChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-
-        <label className="block  text-2xl font-semibold text-gray-700 mb-4">
-          Employment Start Date:
-          <input
-            type="date"
-            name="EmploymentStartDate"
-            value={employeeData.EmploymentStartDate}
-            onChange={handleChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label> */}
 
         <button
           type="submit"
