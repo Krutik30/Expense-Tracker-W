@@ -1,8 +1,10 @@
 
 function ListOfExpense() {
   return (
-    <div>ListOfExpense</div>
+    <div>
+      
+    </div>
   )
 }
 
-export default ListOfExpense
+export default ListOfExpense;

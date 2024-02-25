@@ -93,8 +93,8 @@ model expense {
   CategoryID        Int
   Purpose           String
   ApprovalStatus    String
-  ApprovedByAdminID Int
-  imagesSlip        String[]
+  ApprovedByAdminID Int?
+  ImagesSlip        String[]
   ApprovedByAdmin   admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
   Employee          employee         @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
   Category          expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])

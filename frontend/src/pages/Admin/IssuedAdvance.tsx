@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
+import { Autocomplete, TextField } from "@mui/material";
+import { Employee } from './SalaryIssued';
+import { requestMe } from '../../utils/requestMe';
+
 
 interface AdvanceAmountFormProps {
   // eslint-disable-next-line no-unused-vars
@@ -7,25 +10,22 @@ interface AdvanceAmountFormProps {
 }
 
 export interface AdvanceFormData {
-    advanceID : string;
-  employeeID: string;
-
-  advanceAmount: number;
-  dateIssued: string;
-  reason: string;
-  status: string;
-  givenByAdminID: string;
+  EmployeeID: number;
+  AdvanceAmount: number;
+  DateIssued: string;
+  Reason: string;
+  Status: string;
+  GivenByAdminID: string;
 }
 
-const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
+const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
   const [formData, setFormData] = useState<AdvanceFormData>({
-    advanceID : '',
-    employeeID: '',
-    advanceAmount: 0,
-    dateIssued: '',
-    reason: '',
-    status: '',
-    givenByAdminID: '',
+    EmployeeID: 0,
+    AdvanceAmount: 0,
+    DateIssued: '',
+    Reason: '',
+    Status: '',
+    GivenByAdminID: JSON.parse(localStorage.getItem('user') || '{}').staff.admin.AdminID,
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,203 +36,94 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = ({ onSubmit }) => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+
+  const handleEmployeeChange = (
+    event: React.ChangeEvent<{}>,
+    value: Employee | null
+  ) => {
     event.preventDefault();
-    onSubmit(formData);
+    setFormData({
+      ...formData,
+      EmployeeID: value?.EmployeeID || 1 ,
+    });
   };
 
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try{
+      const res = await requestMe('/advance/addAdvance', {
+        method: 'post',
+        body: JSON.stringify(formData),
+      })
+      console.log(res);
+    }catch(err){
+      console.log(err);
+    }
+  };
+ 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-    {/* <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
-
-<div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Advance ID:
-          <input
-            type="number"
-            id="advanceID"
-            name="advanceID"
-            value={formData.advanceID}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="employeeID">
-          Employee ID:
-          <input
-            type="number"
-            id="employeeID"
-            name="employeeID"
-            value={formData.employeeID}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Advance Amount:
-          <input
-            type="number"
-            id="advanceAmount"
-            name="advanceAmount"
-            value={formData.advanceAmount}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Date Issued:
-          <input
-            type="date"
-            id="dateIssued"
-            name="dateIssued"
-            value={formData.dateIssued}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-        Reason:
-          <input
-            type="text"
-            id="reason"
-            name="reason"
-            value={formData.reason}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-        Status:
-          <input
-            type="text"
-            id="status"
-            name="status"
-            value={formData.status}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-      <div className="mb-4 w-full">
-        <label className="block mt-2 w-full text-2xl font-semibold p- text-gray-700" htmlFor="advanceAmount">
-          Given by AdminID:
-          <input
-            type="number"
-            id="givenByAdminID"
-            name="givenByAdminID"
-            value={formData.givenByAdminID}
-            onChange={handleInputChange}
-            className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-          />
-        </label>
-      </div>
-
-
-      
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
-      >
-        Submit
-      </button>
-    </form> */}
      <form
         onSubmit={handleSubmit}
         className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4"
       >
-        <TextField
-          id="advanceID"
-          label="Advance ID"
-          variant="outlined"
-          className="w-full mb-4"
-          type="number"
-          name="advanceID"
-          value={formData.advanceID}
-          onChange={handleInputChange}
+
+        <Autocomplete
+          renderInput={(params) => <TextField {...params} label="Employee" />}
+          getOptionLabel={(option: Employee | null) => {
+            return option ? `${option.FirstName} ${option.LastName}` : "";
+          }}
+          options={
+            JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
+          }
+          onChange={handleEmployeeChange}
+          className=" w-full"
         />
 
         <TextField
-          id="employeeID"
-          label="Employee ID"
-          variant="outlined"
-          className="w-full mb-4"
-          type="number"
-          name="employeeID"
-          value={formData.employeeID}
-          onChange={handleInputChange}
-        />
-
-        <TextField
-          id="advanceAmount"
+          id="AdvanceAmount"
           label="Advance Amount"
           variant="outlined"
           className="w-full mb-4"
           type="number"
-          name="advanceAmount"
-          value={formData.advanceAmount}
+          name="AdvanceAmount"
+          value={formData.AdvanceAmount}
           onChange={handleInputChange}
         />
 
         <TextField
-          id="dateIssued"
+          id="DateIssued"
           label="Date Issued"
           variant="outlined"
           className="w-full mb-4"
           type="date"
-          name="dateIssued"
-          value={formData.dateIssued}
+          name="DateIssued"
+          value={formData.DateIssued}
           onChange={handleInputChange}
         />
 
         <TextField
-          id="reason"
+          id="Reason"
           label="Reason"
           variant="outlined"
           className="w-full mb-4"
           type="text"
-          name="reason"
-          value={formData.reason}
+          name="Reason"
+          value={formData.Reason}
           onChange={handleInputChange}
         />
 
-        <TextField
-          id="status"
-          label="Status"
-          variant="outlined"
-          className="w-full mb-4"
-          type="text"
-          name="status"
-          value={formData.status}
-          onChange={handleInputChange}
-        />
-
-        <TextField
-          id="givenByAdminID"
-          label="Given by AdminID"
-          variant="outlined"
-          className="w-full mb-4"
-          type="number"
-          name="givenByAdminID"
-          value={formData.givenByAdminID}
-          onChange={handleInputChange}
+        <Autocomplete
+          renderInput={(params) => <TextField {...params} label="Status" />}
+          options={['Pending', 'Paid', 'Part']}
+          onChange={(newValue: any) => {
+            setFormData({
+              ...formData,
+              Status: newValue.target.value
+            })
+          }}
+          className=" w-full"
         />
 
         <button
