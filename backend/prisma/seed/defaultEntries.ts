@@ -1,6 +1,7 @@
 // seed.ts
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
+import { fyyyymmdd } from '../../utils/formateTime';
 
 const prisma = new PrismaClient();
 
@@ -60,7 +61,7 @@ async function seed() {
                     LastName: 'Aghera',
                     Email: 'agherakrutik99@gmail.com',
                     ContactNumber: '7990451310',
-                    EmploymentStartDate: new Date(),
+                    EmploymentStartDate: fyyyymmdd(),
                 },
                 {
                     EmployeeID: 2,
@@ -68,7 +69,7 @@ async function seed() {
                     LastName: 'Kanki',
                     Email: 'neha69@gmail.com',
                     ContactNumber: '9900992211',
-                    EmploymentStartDate: new Date(),
+                    EmploymentStartDate: fyyyymmdd(),
                 },
                 {
                     EmployeeID: 3,
@@ -76,7 +77,7 @@ async function seed() {
                     LastName: 'Majithiya',
                     Email: 'jadiyo@gmail.com',
                     ContactNumber: '9900992222',
-                    EmploymentStartDate: new Date(),
+                    EmploymentStartDate: fyyyymmdd(),
                 }
             ],
         });

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { DateField } from '@mui/x-date-pickers';
+import {  DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { requestMe } from "../../utils/requestMe";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -9,36 +11,35 @@ const AddEmployee = () => {
     LastName: "",
     Email: "",
     ContactNumber: "",
-    EmploymentStartDate: "",
+    EmploymentStartDate: new Date(), // Initialize with a Date object
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setEmployeeData((prevData) => ({
       ...prevData,
       [name]: name === "EmploymentStartDate" ? new Date(value) : value,
     }));
   };
-  
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
-      await requestMe('/employee/createEmployees', {
+      await requestMe("/employees/createEmployees", {
         method: "post",
-        body: JSON.stringify(employeeData)
+        body: JSON.stringify(employeeData),
       });
     } catch (error) {
       console.error("Error submitting employee data:", error);
     }
   };
-
   return (
+   
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-3"
+        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-3 flex flex-col items-center"
       >
         <TextField
           id="outlined-basic"
@@ -88,15 +89,18 @@ const AddEmployee = () => {
           value={employeeData.EmploymentStartDate}
           onChange={handleChange}
         /> */}
-        <DateField
-          id="outlined-basic"
-          className="w-full mb-4"
-          name="EmploymentStartDate"
-          label="Employment Start Date"
-          value={employeeData.EmploymentStartDate}
-          onChange={(newValue) => handleChange({ target: { name: "EmploymentStartDate", value: newValue } })}
-        />  
-
+       {/* <DateField
+            label="Employment Start Date"
+            value={employeeData.EmploymentStartDate}
+            onChange={(newValue) =>
+              handleChange({
+                target: { name: "EmploymentStartDate", value: newValue },
+              })
+            }
+          /> */}
+           <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker label="Employment Start Date" className=" w-full"/>
+          </LocalizationProvider>
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -105,6 +109,7 @@ const AddEmployee = () => {
         </button>
       </form>
     </div>
+   
   );
 };
 

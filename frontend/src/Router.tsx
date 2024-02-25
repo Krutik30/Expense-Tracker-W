@@ -13,6 +13,7 @@ import ListOfExpense from './pages/employee/ListOfExpense.tsx';
 import Wallet from './pages/employee/Wallet.tsx';
 import HistoryComponent from './pages/History.tsx';
 import Profile from './pages/Profile';
+import { Role } from '../config.ts';
 
 function Router() {
     return (
@@ -22,17 +23,21 @@ function Router() {
                 <Route path="login" element={<Page Component={LoginForm} roleRequired={false} />} />
                 <Route path="signup" element={<Page Component={SignUpForm} roleRequired={false} />} />
             </Route>
-            <Route path="/dashboard" element={<Page Component={Dashboard} roleRequired="ADMIN" />} />
-            <Route path="/add/employee" element={<Page Component={AddEmployee} roleRequired="ADMIN" />} />
-            <Route path="/salary/issue" element={<Page Component={SalaryIssued} roleRequired="ADMIN" />} />
-            <Route path="/issued/advance" element={<Page Component={IssuedAdvance} roleRequired="ADMIN" />} />
-            <Route path="/list/employee" element={<Page Component={ListOfEmployee} roleRequired="ADMIN" />} />
-            <Route path="/add/expense" element={<Page Component={AddExpense} roleRequired="EMPLOYEE" />} />
-            <Route path="/request/salary" element={<Page Component={RequestSalary} roleRequired="EMPLOYEE" />} />
-            <Route path="/list/expense" element={<Page Component={ListOfExpense} roleRequired="EMPLOYEE" />} />
-            <Route path="/wallet" element={<Page Component={Wallet} roleRequired="EMPLOYEE" />} />
-            <Route path="/history" element={<Page Component={HistoryComponent} roleRequired="EMPLOYEE" />} />
-            <Route path="/profile" element={<Page Component={Profile} roleRequired={['ADMIN', 'EMPLOYEE']} />} />
+            <Route path="/add">
+                <Route path="employee" element={<Page Component={AddEmployee} roleRequired={[Role.admin]} />} />
+                <Route path="expense" element={<Page Component={AddExpense} roleRequired={[Role.emp]} />} />
+            </Route>
+            <Route path='/list'>
+                <Route path="employee" element={<Page Component={ListOfEmployee} roleRequired={[Role.admin]} />} />
+                <Route path="expense" element={<Page Component={ListOfExpense} roleRequired={[Role.emp]} />} />
+            </Route>
+            <Route path="/dashboard" element={<Page Component={Dashboard} roleRequired={[Role.admin, Role.emp]} />} />
+            <Route path="/salary/issue" element={<Page Component={SalaryIssued} roleRequired={[Role.admin]} />} />
+            <Route path="/issued/advance" element={<Page Component={IssuedAdvance} roleRequired={[Role.admin]} />} />
+            <Route path="/request/salary" element={<Page Component={RequestSalary} roleRequired={[Role.emp]} />} />
+            <Route path="/wallet" element={<Page Component={Wallet} roleRequired={[Role.emp]} />} />
+            <Route path="/history" element={<Page Component={HistoryComponent} roleRequired={[Role.emp]} />} />
+            <Route path="/profile" element={<Page Component={Profile} roleRequired={[Role.admin, Role.emp]} />} />
         </Routes>
     );
 }
