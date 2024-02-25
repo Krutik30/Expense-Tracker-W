@@ -51,11 +51,11 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       });
       console.log(res);
 
-      if(res.role === Role.admin){
+      if (res.role === Role.admin) {
         const allEmployee = await requestMe('/employees/getEmployees')
         localStorage.setItem('employees', JSON.stringify(allEmployee))
       }
-      localStorage.setItem('user',JSON.stringify(res));
+      localStorage.setItem('user', JSON.stringify(res));
       navigate('/')
 
       localStorage.setItem('user', JSON.stringify(res));
@@ -111,12 +111,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           </div>
           {error && <div className="text-red-500 mb-4">{error}</div>}
           <div className="flex items-center justify-between flex-col gap-5">
-            <button className="text-gray-700 text-lg">
-              Don't have an account? <span className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
-            </button>
+            <div className="text-gray-700 text-lg">
+              Don't have an account? <span onClick={()=>{navigate('/auth/signup')}} className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
+            </div>
             <button type="submit" className="bg-blue-500 text-white mt px-8 py-3 rounded-full font-semibold">
               Login
             </button>
+
           </div>
         </form>
       </div>  
