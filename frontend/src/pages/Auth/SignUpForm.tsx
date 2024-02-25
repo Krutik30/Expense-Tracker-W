@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { requestMe } from '../../utils/requestMe';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -109,9 +109,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
     <button type="submit" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold">
       Sign Up
     </button>
-    <div className="text-gray-700 text-lg">
-      Already registered? <span onClick={() => { navigate('/auth/login') }} className="text-blue-500 cursor-pointer">Log in &#8594;</span>
-    </div>
+    <p className="mt-4 text-sm text-gray-700">
+      Already registered? <Link to="/login" className="text-blue-500">Log in</Link>
+    </p>
   </form>
   );
 };

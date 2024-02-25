@@ -5,7 +5,7 @@ import { Page404 } from '../pages/Page404';
 
 interface ProtectedRouteProps {
     children: React.ReactElement;
-    roleRequire: ('ADMIN' | 'EMPLOYEE' | false)[];
+    roleRequire: 'ADMIN' | 'EMPLOYEE' | false;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
@@ -13,8 +13,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     roleRequire
 }) => {
     const { pathname } = useLocation();
-    const openRoutes = ['/auth/login', '/auth/signup'];
-    let userLogged: any = {
+    const openRoutes = ['/auth/login', '/auth/register'];
+    let userLogged = {
         auth: false,
         role: Role.emp 
     };
@@ -22,14 +22,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
     if (userLoggedString !== null) {
         userLogged = JSON.parse(userLoggedString);
+        // Proceed with further processing using userLogged
     } 
-
-    console.log(pathname);
 
     return userLogged.auth || openRoutes.includes(pathname)
         ? (pathname === '/auth/login') && userLogged.auth
             ? <Navigate to='/dashboard' replace />
-            : (roleRequire.includes(false) || roleRequire.includes(userLogged?.role))
+            : (roleRequire === false || roleRequire === userLogged?.role)
                 ? children
                 : <Page404 />
         : <Navigate to='/auth/login' replace />;

@@ -9,46 +9,46 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = () => {
-  const [formData, setFormData] = useState({
-    Email: '',
-    Password: '',
-  });
-  const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    const [formData, setFormData] = useState({
+        Email: '',
+        Password: '',       
+      });
+      const navigate = useNavigate();
+      const [error, setError] = useState<string | null>(null);
+    
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+        console.log(formData);
     if (!formData.Email || !formData.Password) {
       setError('Please enter username and password');
       return;
     }
 
     try {
-      const res = await requestMe('/auth/login', {
-        method: "post",
-        body: JSON.stringify(formData)
-      }
+      const res = await requestMe('/auth/login',{
+          method : "post",
+          body : JSON.stringify(formData)
+        }
       )
 
       console.log(res);
 
-      if (res.role === Role.admin) {
+      if(res.role === Role.admin){
         const allEmployee = await requestMe('/employees/getEmployees')
         localStorage.setItem('employees', JSON.stringify(allEmployee))
       }
-      localStorage.setItem('user', JSON.stringify(res));
+      localStorage.setItem('user',JSON.stringify(res));
       navigate('/')
 
-
+     
     } catch (error) {
       console.error('Error logging in:', error);
       setError('Invalid username or password');
@@ -56,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   };
 
   return (
-
+   
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
       <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
         <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
@@ -85,13 +85,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           </div>
           {error && <div className="text-red-500 mb-4">{error}</div>}
           <div className="flex items-center justify-between flex-col gap-5">
-            <div className="text-gray-700 text-lg">
-              Don't have an account? <span onClick={()=>{navigate('/auth/signup')}} className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
-            </div>
+          <button className="text-gray-700 text-lg">
+              Don't have an account? <span className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
+            </button>
             <button type="submit" className="bg-blue-500 text-white mt px-8 py-3 rounded-full font-semibold">
               Login
             </button>
-
+            
           </div>
         </form>
       </div>
