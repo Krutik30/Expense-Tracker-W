@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
+import { requestMe } from "../../utils/requestMe";
 
-import { requestMe } from '../utils/requestMe';
-import LabelInput from '../components/LabelInput';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField } from "@mui/material";
 
 interface SalaryFormProps {
   employeeId: number;
@@ -18,7 +17,6 @@ export interface Employee {
   EmploymentStartDate: string;
 }
 
-
 const SalaryIssued: React.FC<SalaryFormProps> = () => {
   const [salaryData, setSalaryData] = useState({
     EmployeeID: 0,
@@ -26,8 +24,8 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
     Bonuses: 0,
     Allowances: 0,
     Deductions: 0,
-    PaymentFrequency: '',
-    PaymentStatus: 'Pending',
+    PaymentFrequency: "",
+    PaymentStatus: "Pending",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +33,7 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
     let parsedValue: string | number;
 
     switch (e.target.type) {
-      case 'number':
+      case "number":
         parsedValue = parseFloat(value);
         break;
       default:
@@ -49,7 +47,10 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
     }));
   };
 
-  const handleEmployeeChange = (event: React.ChangeEvent<{}>, value: Employee | null) => {
+  const handleEmployeeChange = (
+    event: React.ChangeEvent<{}>,
+    value: Employee | null
+  ) => {
     event.preventDefault();
     setSalaryData((prevData) => ({
       ...prevData,
@@ -61,30 +62,34 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
     e.preventDefault();
 
     try {
-
-      const response = await requestMe('/salary/createSalaries', {
+      const response = await requestMe("/salary/createSalaries", {
         method: "post",
         body: JSON.stringify(salaryData),
       });
 
-      console.log('Salary data submitted:', response);
+      console.log("Salary data submitted:", response);
     } catch (error) {
-      console.error('Error submitting salary data:', error);
+      console.error("Error submitting salary data:", error);
     }
   };
 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center"
+      >
         <Autocomplete
           renderInput={(params) => <TextField {...params} label="Employee" />}
           getOptionLabel={(option: Employee | null) => {
-            return option ? `${option.FirstName} ${option.LastName}` : '';
+            return option ? `${option.FirstName} ${option.LastName}` : "";
           }}
-          options={JSON.parse(localStorage.getItem('employees') || '[]') as Employee[]}
+          options={
+            JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
+          }
           onChange={handleEmployeeChange}
-        />
-        <LabelInput
+         className=" w-full"/>
+        {/* <LabelInput
           label={"Basic Salary:"}
           name="BasicSalary"
           value={salaryData.BasicSalary}
@@ -159,9 +164,77 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
             onChange={handleChange}
             className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
           />
-        </div>
+        </div> */}
+        <TextField
+          id="outlined-basic"
+          label="Basic Salary"
+          variant="outlined"
+          className="w-full mb-4"
+          name="BasicSalary"
+          value={salaryData.BasicSalary}
+          onChange={handleChange}
+          type="number"
+        />
 
-        <button type="submit" className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold">
+        <TextField
+          id="outlined-basic"
+          label="Bonuses"
+          variant="outlined"
+          className="w-full mb-4"
+          name="Bonuses"
+          value={salaryData.Bonuses}
+          onChange={handleChange}
+          type="number"
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Allowances"
+          variant="outlined"
+          className="w-full mb-4"
+          name="Allowances"
+          value={salaryData.Allowances}
+          onChange={handleChange}
+          type="number"
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Deductions"
+          variant="outlined"
+          className="w-full mb-4"
+          name="Deductions"
+          value={salaryData.Deductions}
+          onChange={handleChange}
+          type="number"
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Payment Status"
+          variant="outlined"
+          className="w-full mb-4"
+          name="PaymentStatus"
+          value={salaryData.PaymentStatus}
+          onChange={handleChange}
+          type="text"
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Payment Frequency"
+          variant="outlined"
+          className="w-full mb-4"
+          name="PaymentFrequency"
+          value={salaryData.PaymentFrequency}
+          onChange={handleChange}
+          type="text"
+        />
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
+        >
           Submit
         </button>
       </form>

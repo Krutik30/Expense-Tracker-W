@@ -6,9 +6,10 @@ const router = Router();
 
 router.post('/createEmployees', async (req, res) => {
     try {
-        console.log(req.body);
+        
         const { FirstName, LastName, Email, ContactNumber, EmploymentStartDate } = req.body;
-
+        console.log(req.body);
+        
         // Check if all required fields are present
         if (!FirstName || !LastName || !Email || !ContactNumber || !EmploymentStartDate) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -22,7 +23,7 @@ router.post('/createEmployees', async (req, res) => {
                 LastName,
                 Email,
                 ContactNumber,
-                EmploymentStartDate
+                EmploymentStartDate : new Date(EmploymentStartDate)
             }
         });
 

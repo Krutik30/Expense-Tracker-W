@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const router = Router();
 
 router.post('/addAdvance', async (req, res) => {
-    console.log("yes");
+   
     try {
         
         const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID } = req.body;
@@ -28,6 +28,7 @@ router.post('/addAdvance', async (req, res) => {
                 GivenByAdminID
             }
         });
+        console.log(newAdvance);
 
         res.status(201).json({ message: 'Advance created successfully', data: newAdvance });
     } catch (error) {

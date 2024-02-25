@@ -15,6 +15,7 @@ const SingleFileUploader = () => {
       // We will fill this out later
     };
   
+    console.log('object');
     return (
         <>
       <div className="mb-4">

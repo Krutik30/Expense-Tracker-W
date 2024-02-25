@@ -9,6 +9,9 @@ interface ExpenseRequestBody {
     Amount: number;
     CategoryID: number;
     Purpose: string;
+    ApprovalStatus : string;
+    ApproveByAdminID : number;
+
 }
 
 const prisma = new PrismaClient();
@@ -17,7 +20,7 @@ const router = Router();
 // Route to create a new expense entry
 router.post('/expenses', async (req: Request<{}, {}, ExpenseRequestBody>, res: Response) => {
     try {
-        const { EmployeeID, Date, Amount, CategoryID, Purpose } = req.body;
+        const { EmployeeID, Date, Amount, CategoryID, Purpose,ApprovalStatus,ApproveByAdminID  } = req.body;
 
         // Validate the incoming request data
         if (!EmployeeID || !Date || !Amount || !CategoryID || !Purpose) {
@@ -32,7 +35,8 @@ router.post('/expenses', async (req: Request<{}, {}, ExpenseRequestBody>, res: R
                 Amount,
                 CategoryID,
                 Purpose,
-                ApprovalStatus: 'Pending' // Assuming 'ApprovalStatus' defaults to 'Pending' upon creation
+                ApprovalStatus: 'Pending',
+                // Assuming 'ApprovalStatus' defaults to 'Pending' upon creation
             }
         });
 
