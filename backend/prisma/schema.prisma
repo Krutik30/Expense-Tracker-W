@@ -38,12 +38,13 @@ model employee {
   Salary              salary?   @relation("Employee_Salary")
   Advance             advance[] @relation("Employee_Advance")
   Expense             expense[] @relation("Employee_Expense")
-  users               user[] // Bidirectional relation
+  users               user[] 
 }
 
 model admin {
   AdminID  Int    @id @default(autoincrement())
   Username String
+  Email     String
   approvedExpenses expense[] @relation("ApprovedByAdmin")
   givenAdvances advance[] @relation("GivenByAdmin")
 }
@@ -91,6 +92,7 @@ model expense {
   Purpose           String
   ApprovalStatus    String
   ApprovedByAdminID Int
+  imagesSlip        String[]
   ApprovedByAdmin   admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
   Employee          employee         @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
   Category          expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
