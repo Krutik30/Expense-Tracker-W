@@ -5,20 +5,6 @@ interface AdvanceAmountFormProps {
   // eslint-disable-next-line no-unused-vars
   onSubmit: (formData: AdvanceFormData) => void;
 }
-const storedData = localStorage.getItem('user');
-
-// Check if data exists in local storage
-if (storedData) {
-    // Data exists, parse it if necessary
-    const parsedData = JSON.parse(storedData);
-    console.log(parsedData);
-    const adminID = parsedData.staff.admin.AdminID;
-   
-     
-    // console.log(AdminId) // Use the data as needed
-} else {
-    console.log('No data found in local storage');
-}
 
 export interface AdvanceFormData {
     advanceID : string;
