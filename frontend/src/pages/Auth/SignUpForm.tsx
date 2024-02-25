@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { requestMe } from '../../utils/requestMe';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -49,12 +49,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       //   token: 'token bhi hai'
       // }))
       console.log("yes");
-      const res = await requestMe('/auth/signup',{
+       await requestMe('/auth/signup',{
         method : "post",
         body : JSON.stringify(formDataWithoutConfirmPassword)
       })
       
-      localStorage.setItem('user',JSON.stringify(res))
+    //  localStorage.setItem('user',JSON.stringify(res))
          navigate('/')
 
       // If signup is successful, call onSuccess callback if provided
@@ -73,6 +73,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
       <label className="block text-sm font-medium text-gray-700">
         Username:
         <input type="text" name="Username" value={formData.Username} onChange={handleChange} className="form-input mt-1 w-full" required />
+      </label>
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Email:
+        <input type="email" name="Email" value={formData.Email} onChange={handleChange} className="form-input mt-1 w-full" required />
       </label>
     </div>
     <div className="mb-4">
@@ -103,9 +109,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
     <button type="submit" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold">
       Sign Up
     </button>
-    <p className="mt-4 text-sm text-gray-700">
-      Already registered? <Link to="/login" className="text-blue-500">Log in</Link>
-    </p>
+    <div className="text-gray-700 text-lg">
+      Already registered? <span onClick={() => { navigate('/auth/login') }} className="text-blue-500 cursor-pointer">Log in &#8594;</span>
+    </div>
   </form>
   );
 };
