@@ -51,16 +51,18 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => 
 {
     console.log(req.body)
-    const { Email, Password } = req.body;
+    const { Email, Password, userRole } = req.body;
 
     try {
         // Check if the user exists
-        const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
             where: {
                 Email: Email,
             },
             include:{
-                Role: true
+                Role: true,
+                Employee: true,
+                admin: true
             }
         });
         console.log(user);
@@ -69,24 +71,23 @@ router.post('/login', async (req, res) =>
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Compare the passwords
-        console.log(Password, user.Password)
         const passwordMatch = await bcrypt.compare(Password, user.Password);
 
+        console.log(passwordMatch);
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         if(user)
-        {
-           
+        {  
              jwt.sign({ userId: user.UserID }, JWT_SECRET, { expiresIn: '1h' },(error :any,token:any)=>{
                 if(error){
                     return res.send({result : "somthig went wrong"})
                 }
                 else{
-                    res.status(200).json({ message: 'Login successful', payload: {
+                    res.json({ message: 'Login successful', status: 200, payload: {
                         auth: true,
                         role: user.Role?.RoleName,
+                        staff: user,
                         token
                     } });
                 }
