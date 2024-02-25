@@ -25,14 +25,17 @@ const ExpenseCategoryForm: React.FC<ExpenseCategoryFormProps> = ({ onSubmit }) =
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateField = async (name: string, value: string) => {
-    try {
-      await Yup.reach(validationSchema, name).validate(value);
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-    } catch (error) {
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: errors.message }));
-    }
-  };
+const validateField = async (name: string, value: string) => {
+  try {
+    const schema: any = validationSchema as Yup.Schema<ExpenseCategoryFormData>;
+    await schema.fields[name].validate(value);
+    
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+  } catch (error: any) {
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
+  }
+};
+
   
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
