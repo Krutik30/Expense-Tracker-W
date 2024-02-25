@@ -4,8 +4,10 @@ import { PrismaClient } from '@prisma/client'; // Import advanceCreateInput for 
 const prisma = new PrismaClient();
 const router = Router();
 
-router.post('/advances', async (req, res) => {
+router.post('/addAdvance', async (req, res) => {
+    console.log("yes");
     try {
+        
         const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID } = req.body;
 
         // Perform validation

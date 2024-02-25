@@ -7,6 +7,7 @@ const validationSchema = yup.object().shape({
   Email: yup.string().email('Invalid email').required('Email is required'),
   Password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
 });
+import { Role } from '../../../config';
 
 interface LoginFormProps {
   onLogin?: () => void;
@@ -38,6 +39,14 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         method: "post",
         body: JSON.stringify(formData)
       });
+      console.log(res);
+
+      if(res.role === Role.admin){
+        const allEmployee = await requestMe('/employees/getEmployees')
+        localStorage.setItem('employees', JSON.stringify(allEmployee))
+      }
+      localStorage.setItem('user',JSON.stringify(res));
+      navigate('/')
 
       localStorage.setItem('user', JSON.stringify(res));
       navigate('/auth/signup');

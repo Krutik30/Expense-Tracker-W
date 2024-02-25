@@ -36,7 +36,7 @@ router.post('/signup', async (req, res) => {
                 Email,
                 Password,
                 RoleId: parseInt(RoleId),
-                EmployeeId : parseInt(EmployeeId),
+                StaffId : parseInt(EmployeeId),
             },
         });
 

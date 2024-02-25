@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.json());
 
-// Add the auth routes to the '/auth' endpoint
  app.use('/auth', authRoutes);
 app.use('/salary', salaryRoutes);
 app.use('/employees',employeeRoutes);

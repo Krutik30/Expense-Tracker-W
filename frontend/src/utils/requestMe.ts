@@ -1,11 +1,16 @@
 import { HOST_URL } from '../../config'
 
-export const requestMe = async(route: string, option: any) => {
+export const requestMe = async(route: string, option?: any) => {
 
-    option.headers = {
-        ...option?.headers,
-        'Content-Type': 'application/json',
+    option = {
+        ...option,
+        method: option?.method ?? 'get',
+        headers: {
+            ...option?.headers,
+            'Content-Type': 'application/json',
+        },
     };
+    console.log(option);
 
     console.log(option);
 
