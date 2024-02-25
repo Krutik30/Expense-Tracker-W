@@ -12,8 +12,6 @@ export const requestMe = async(route: string, option?: any) => {
     };
     console.log(option);
 
-    console.log(option);
-
     return await fetch(HOST_URL + route, option)
         .then(async (res)=>{
             console.log(res)
