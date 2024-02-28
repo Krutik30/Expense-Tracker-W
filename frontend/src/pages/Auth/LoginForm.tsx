@@ -59,13 +59,6 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       localStorage.setItem('user', JSON.stringify(res));
       navigate('/')
 
-    // Toast 
-      toast.success('Login successful', {
-        position: "top-center" 
-      });
-
-      localStorage.setItem('user', JSON.stringify(res));
-      navigate('/auth/signup');
     } catch (validationError) {
       // If validation fails, set the validation error message
       if (validationError instanceof yup.ValidationError) {
