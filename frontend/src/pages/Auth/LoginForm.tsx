@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import Login_Img from '../../assets/login_img.jpg';
+import { toast } from 'react-toastify';
 
 
 import * as yup from 'yup';
@@ -66,6 +67,10 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       } else {
         console.error('Error logging in:', validationError);
         setError('Invalid username or password');
+        // // toast error
+        // toast.error('Invalid username or password', {
+        //   position: "top-center" 
+        // });
       }
     }
   };
