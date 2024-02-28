@@ -23,7 +23,7 @@ router.post('/createEmployees', async (req, res) => {
                 LastName,
                 Email,
                 ContactNumber,
-                EmploymentStartDate : new Date(EmploymentStartDate)
+                EmploymentStartDate : EmploymentStartDate
             }
         });
 

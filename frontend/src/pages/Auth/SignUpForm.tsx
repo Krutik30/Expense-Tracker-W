@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
+import { toast } from 'react-toastify';
+
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -68,6 +70,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 
       //  localStorage.setItem('user',JSON.stringify(res))
       navigate("/");
+      toast.error('Failed to SignUp', {
+        position: 'top-center'
+      });
+      
+
 
       // If signup is successful, call onSuccess callback if provided
       if (onSuccess) {

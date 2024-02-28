@@ -9,13 +9,13 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <>
+    <div>
       <ToastContainer />
       <BrowserRouter>
         <Header />
         <Router />
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

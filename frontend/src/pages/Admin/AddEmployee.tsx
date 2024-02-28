@@ -1,8 +1,6 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import {  DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { requestMe } from "../../utils/requestMe";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 
 const AddEmployee = () => {
@@ -79,7 +77,7 @@ const AddEmployee = () => {
           value={employeeData.ContactNumber}
           onChange={handleChange}
         />
-        {/* <TextField
+        <TextField
           id="outlined-basic"
           label="Employment Start Date"
           variant="outlined"
@@ -88,19 +86,7 @@ const AddEmployee = () => {
           name="EmploymentStartDate"
           value={employeeData.EmploymentStartDate}
           onChange={handleChange}
-        /> */}
-       {/* <DateField
-            label="Employment Start Date"
-            value={employeeData.EmploymentStartDate}
-            onChange={(newValue) =>
-              handleChange({
-                target: { name: "EmploymentStartDate", value: newValue },
-              })
-            }
-          /> */}
-           <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="Employment Start Date" className=" w-full"/>
-          </LocalizationProvider>
+        />
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"

@@ -11,10 +11,7 @@ const SingleFileUploader = () => {
       }
     };
   
-    const handleUpload = async () => {
-      // We will fill this out later
-    };
-  
+    console.log('object');
     return (
         <>
       <div className="mb-4">
@@ -35,15 +32,6 @@ const SingleFileUploader = () => {
             <li>Size: {file.size} bytes</li>
           </ul>
         </section>
-      )}
-
-      {file && (
-        <button
-          onClick={handleUpload}
-          className="bg-blue-500 text-white font-bold mt-2 py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mb-11 transition duration-300 ease-in-out "
-        >
-          Upload a file
-        </button>
       )}
     </>
     );
