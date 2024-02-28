@@ -70,9 +70,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 
       //  localStorage.setItem('user',JSON.stringify(res))
       navigate("/");
-      toast.error('Failed to SignUp', {
-        position: 'top-center'
-      });
+      // toast.error('Failed to SignUp', {
+      //   position: 'top-center'
+      // });
       
 
 
