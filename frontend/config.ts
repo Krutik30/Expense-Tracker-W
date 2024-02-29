@@ -1,4 +1,4 @@
-const HOST_URL = 'https://expense-tracker-w.onrender.com';
+const HOST_URL = import.meta.env.VITE_HOST_URL || 'http://localhost:3000';
 
 const Role = {
     admin: 'ADMIN',
