@@ -1,8 +1,9 @@
+
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import config from './config';
-import authRoutes from './routes/auth'; // Import the auth routes
+import authRoutes from './routes/auth'; 
 import salaryRoutes from './routes/salary';
 import employeeRoutes from './routes/employee'
 import advanceRoute from './routes/advance';
@@ -10,8 +11,23 @@ import advanceRoute from './routes/advance';
 
 const app = express();
 
+var corsOptions = {
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'https://expence-tracker-hackdspring.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'authorization'],
+    credentials: true
+};
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://expence-tracker-hackdspring.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 // app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

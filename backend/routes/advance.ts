@@ -7,7 +7,7 @@ const router = Router();
 router.post('/addAdvance', async (req, res) => {
    
     try {
-        const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID } = req.body;
+        const { EmployeeID, AdvanceAmount, DateIssued, Reason, Status, GivenByAdminID } = req.body;
 
         
         if (!EmployeeID || !AdvanceAmount || !DateIssued || !Reason) {
@@ -20,7 +20,7 @@ router.post('/addAdvance', async (req, res) => {
                 AdvanceAmount: Number(AdvanceAmount),
                 DateIssued,
                 Reason,
-                Status: 'Pending',
+                Status,
                 GivenByAdminID
             }
         });
@@ -29,6 +29,41 @@ router.post('/addAdvance', async (req, res) => {
         res.json({ message: 'Advance created successfully',statu: 200, payload: newAdvance });
     } catch (error) {
         console.error('Error creating advance:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+router.get('/advancesByEmployee/:employeeId', async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+
+        const advances = await prisma.advance.findMany({
+            where: {
+                EmployeeID: parseInt(employeeId),
+            },
+        });
+
+        res.json({ message: 'Advances fetched successfully', status: 200, payload: advances });
+    } catch (error) {
+        console.error('Error fetching advances by EmployeeID:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/advancesByAdmin/:adminId', async (req, res) => {
+    try {
+        const { adminId } = req.params;
+
+        const advances = await prisma.advance.findMany({
+            where: {
+                GivenByAdminID: parseInt(adminId),
+            },
+        });
+
+        res.json({ message: 'Advances fetched successfully', status: 200, payload: advances });
+    } catch (error) {
+        console.error('Error fetching advances by AdminID:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

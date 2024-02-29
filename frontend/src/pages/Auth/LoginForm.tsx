@@ -66,6 +66,10 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       } else {
         console.error('Error logging in:', validationError);
         setError('Invalid username or password');
+        // // toast error
+        // toast.error('Invalid username or password', {
+        //   position: "top-center" 
+        // });
       }
     }
   };
