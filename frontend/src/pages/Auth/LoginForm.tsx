@@ -23,7 +23,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = () => {
   const [formData, setFormData] = useState({
     Email: '',
-    Password: '',       
+    Password: '',
   });
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
@@ -169,7 +169,7 @@ return (
             </div>
             <div >
                <label className="block text-2xl font-medium text-gray-700">Password:</label>
-              <div className="relative">
+              <div className="relative">+
                 <input
                   type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
                   name="Password"
