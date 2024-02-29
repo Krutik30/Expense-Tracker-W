@@ -3,7 +3,7 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import config from './config';
-import authRoutes from './routes/auth'; // Import the auth routes
+import authRoutes from './routes/auth'; 
 import salaryRoutes from './routes/salary';
 import employeeRoutes from './routes/employee'
 import advanceRoute from './routes/advance';

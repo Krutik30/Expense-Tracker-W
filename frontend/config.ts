@@ -1,4 +1,4 @@
-const HOST_URL = 'http://localhost:3000';
+const HOST_URL = 'https://expense-tracker-w.onrender.com' || 'http://localhost:3000';
 
 const Role = {
     admin: 'ADMIN',
