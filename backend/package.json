@@ -16,7 +16,7 @@
     "seed": "npx ts-node prisma/seed/defaultEntries.ts",
     "db:bana": "npx prisma migrate dev --name db && npx prisma generate && rm -rf prisma/migrations",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc index.ts"
+    "build": "npx tsc --esModuleInterop index.ts"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
