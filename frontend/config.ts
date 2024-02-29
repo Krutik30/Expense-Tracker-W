@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-const HOST_URL = import.meta.env.VITE_HOST_URL || 'http://localhost:3000';
+const HOST_URL = 'https://expense-tracker-w.onrender.com';
 
 const Role = {
     admin: 'ADMIN',

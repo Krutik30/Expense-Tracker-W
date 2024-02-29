@@ -60,6 +60,7 @@ export default function ListOfEmployee() {
       <MaterialReactTable
         columns={columns}
         data={employeeData}
+        enableGrouping
       />
     </div>
   )
