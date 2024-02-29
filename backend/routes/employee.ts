@@ -33,7 +33,7 @@ router.post('/createEmployees', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
+// all Employess are Listed
 router.get('/getEmployees', async (req, res) => {
     try {
         console.log('object');
@@ -50,5 +50,10 @@ router.get('/getEmployees', async (req, res) => {
         throw error;
     }
 })
+
+
+
+
+
 
 export default router;
