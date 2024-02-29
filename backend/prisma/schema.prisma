@@ -66,8 +66,8 @@ model salary {
   Bonuses          Float
   Allowances       Float
   Deductions       Float
-  PaymentFrequency String
-  PaymentStatus    String
+  PaymentFrequency SalaryFrequency
+  PaymentStatus    Status
   Employee         employee @relation("Employee_Salary", fields: [EmployeeID], references: [EmployeeID])
 }
 
@@ -78,7 +78,7 @@ model advance {
   AdvanceAmount  Float
   DateIssued     String
   Reason         String
-  Status         String
+  Status         Status
   GivenByAdminID Int
   GivenByAdmin   admin?   @relation("GivenByAdmin", fields: [GivenByAdminID], references: [AdminID])
   Employee       employee @relation("Employee_Advance", fields: [EmployeeID], references: [EmployeeID])
@@ -90,20 +90,39 @@ model expense {
   EmployeeID        Int
   Date              String
   Amount            Float
-  CategoryID        Int
+  Category          ExpenseCategoryName
   Purpose           String
-  ApprovalStatus    String
+  ApprovalStatus    Status
   ApprovedByAdminID Int?
   ImagesSlip        String[]
   ApprovedByAdmin   admin?           @relation("ApprovedByAdmin", fields: [ApprovedByAdminID], references: [AdminID])
   Employee          employee         @relation("Employee_Expense", fields: [EmployeeID], references: [EmployeeID])
-  Category          expense_category @relation("Expense_Catagory", fields: [CategoryID], references: [CategoryID])
 }
 
-// Define the ExpenseCategory model
-model expense_category {
-  CategoryID   Int       @id @default(autoincrement())
-  CategoryName String
-  Description  String
-  Expense      expense[] @relation("Expense_Catagory")
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ExpenseCategoryName {
+  OFFICE_SUPPLIES
+  TRANSPORTATION
+  MEALS_ENTERTAINMENT
+  MISCELLANEOUS
+  TRAVEL
+  PETROL
+  HOTELS
+  UTILITIES
+  EQUIPMENT
+  TRAINING
+  MARKETING
+  CONSULTING
+  INSURANCE
+}
+
+enum SalaryFrequency {
+  WEEKLY
+  MONTHLY
+  YEARLY
 }

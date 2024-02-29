@@ -3,8 +3,9 @@ import { requestMe } from '../../utils/requestMe';
 import { useNavigate } from 'react-router-dom';
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
-import Login_Img from '../../assets/login_img.jpg';
-import { toast } from 'react-toastify';
+// import Login_Img from '../../assets/login_img.jpg';
+// import { toast } from 'react-toastify';
+import Login_Img from '../../assets/Illustration-removebg-preview.png';
 
 
 import * as yup from 'yup';
@@ -72,13 +73,21 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         //   position: "top-center" 
         // });
       }
-    }
+    };
   };
 
   return (
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
       <div className='flex gap-4 mx-auto'>
         {/* form */}
+          {/* main form on left side */}
+
+      {/* login Image */}
+      <div className='w-full'>
+          <img src={Login_Img} alt="Login Image"
+   
+   />
+</div>
       <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
         <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
         <form onSubmit={handleLogin} className="space-y-6">
@@ -124,12 +133,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           </div>
         </form>
       </div>  
-      {/* main form on left side */}
-
-      {/* login Image */}
-      <div className="w-1/2">
-          <img src={Login_Img} alt="Login Image" className="w-full rounded-md shadow-lg"  style={{ maxWidth: "750px", marginTop: "30px", boxShadow: "0px 4px 10px rgba(255, 255, 255, 0.5)" }} />
-        </div>
+    
 
       </div>
     </div>
