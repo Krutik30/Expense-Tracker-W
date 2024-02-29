@@ -17,7 +17,7 @@ export interface ExpenseFormData {
   approvalStatus: string;
 }
 
-const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
+const AddExpense: React.FC<ExpenseFormProps> = () => {
   const [formData, setFormData] = useState<ExpenseFormData>({
     date: '',
     amount: 0,
@@ -25,6 +25,8 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
     purpose: '',
     approvalStatus: '',
   });
+
+  const [file, setFile] = useState<File | null>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -34,33 +36,43 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  // const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
+  const handleFileChange = (selectedFile: File) => {
+    setFile(selectedFile);
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(formData);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('date', formData.date);
+    formDataToSend.append('amount', formData.amount.toString());
+    formDataToSend.append('categoryID', formData.categoryID);
+    formDataToSend.append('purpose', formData.purpose);
+    formDataToSend.append('approvalStatus', formData.approvalStatus);
+    if (file) {
+      formDataToSend.append('file', file as Blob);
+    }
+
+
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
+
     try {
       await requestMe("/expenses/addExpense", {
         method: "post",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataToSend),
       });
     } catch (error) {
-      console.error("Error in creating Expense", error);
+      console.error("Error submitting employee data:", error);
     }
+
   };
 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center">
         <TextField
-          InputLabelProps={{ shrink: true }}
           id="date"
           label="Date"
           variant="outlined"
@@ -114,7 +126,7 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
           value={formData.approvalStatus}
           onChange={handleInputChange}
         />
-        <SingleFileUploader />
+        <SingleFileUploader onFileChange={handleFileChange} />
         <button
           type="submit"
           className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"

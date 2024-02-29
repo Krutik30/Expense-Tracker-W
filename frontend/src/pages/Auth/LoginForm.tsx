@@ -73,7 +73,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         //   position: "top-center" 
         // });
       }
-    };
+    }
   };
 
   return (

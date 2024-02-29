@@ -7,6 +7,7 @@ import authRoutes from './routes/auth';
 import salaryRoutes from './routes/salary';
 import employeeRoutes from './routes/employee'
 import advanceRoute from './routes/advance';
+import multer from 'multer';
 import expensesRoute from './routes/expenses';
 
 
@@ -34,12 +35,30 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.json());
 
- app.use('/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/salary', salaryRoutes);
 app.use('/employees',employeeRoutes);
 app.use('/advance',advanceRoute);
 app.use("/expenses", expensesRoute);
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), function (req, res, next) {
+    if (!req.file) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+    res.send('File uploaded successfully.');
+});
 
 
 app.listen(config.port, () => {
