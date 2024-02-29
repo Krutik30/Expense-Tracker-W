@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { useState } from "react";
+interface SingleFileUploaderProps {
+  // eslint-disable-next-line no-unused-vars
+  onFileChange: (file: File) => void; 
+}
 
-const SingleFileUploader = () => {
-    const [file, setFile] = useState<File | null>(null);
-  
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files) {
-        setFile(e.target.files[0]);
-      }
-    };
-  
-    console.log('object');
-    return (
-        <>
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ onFileChange }) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      onFileChange(e.target.files[0]);
+    }
+  };
+
+  return (
+    <>
       <div className="mb-4">
         <label
           htmlFor="file"
@@ -23,18 +23,8 @@ const SingleFileUploader = () => {
         </label>
         <input id="file" type="file" onChange={handleFileChange} className="hidden" />
       </div>
-      {file && (
-        <section className="text-blue-500">
-          File details:
-          <ul>
-            <li>Name: {file.name}</li>
-            <li>Type: {file.type}</li>
-            <li>Size: {file.size} bytes</li>
-          </ul>
-        </section>
-      )}
     </>
-    );
-  };
-  
-  export default SingleFileUploader;
+  );
+};
+
+export default SingleFileUploader;
