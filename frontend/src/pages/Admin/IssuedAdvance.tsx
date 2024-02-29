@@ -93,6 +93,7 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
         />
 
         <TextField
+          InputLabelProps={{ shrink: true }}
           id="DateIssued"
           label="Date Issued"
           variant="outlined"

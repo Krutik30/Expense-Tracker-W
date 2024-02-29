@@ -1,11 +1,8 @@
-
 // src/ExpenseForm.tsx
 import React, { useState } from 'react';
-
 import TextField from '@mui/material/TextField';
 import SingleFileUploader from '../../components/UploadFile';
 import { requestMe } from '../../utils/requestMe';
-
 
 interface ExpenseFormProps {
   // eslint-disable-next-line no-unused-vars
@@ -13,26 +10,20 @@ interface ExpenseFormProps {
 }
 
 export interface ExpenseFormData {
-  expenseID: string;
-  employeeID: string;
   date: string;
   amount: number;
   categoryID: string;
   purpose: string;
   approvalStatus: string;
-  approvedByAdminID: string;
 }
 
 const AddExpense: React.FC<ExpenseFormProps> = () => {
   const [formData, setFormData] = useState<ExpenseFormData>({
-    expenseID: '',
-    employeeID: '',
     date: '',
     amount: 0,
     categoryID: '',
     purpose: '',
     approvalStatus: '',
-    approvedByAdminID: '',
   });
 
   const [file, setFile] = useState<File | null>(null);
@@ -58,7 +49,6 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
     formDataToSend.append('categoryID', formData.categoryID);
     formDataToSend.append('purpose', formData.purpose);
     formDataToSend.append('approvalStatus', formData.approvalStatus);
-    formDataToSend.append('approvedByAdminID', formData.approvedByAdminID);
     if (file) {
       formDataToSend.append('file', file as Blob);
     }
@@ -136,17 +126,6 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           value={formData.approvalStatus}
           onChange={handleInputChange}
         />
-
-        <TextField
-          id="approvedByAdminID"
-          label="Approved By Admin ID"
-          variant="outlined"
-          className="w-full mb-4"
-          type="number"
-          name="approvedByAdminID"
-          value={formData.approvedByAdminID}
-          onChange={handleInputChange}
-        />
         <SingleFileUploader onFileChange={handleFileChange} />
         <button
           type="submit"
@@ -154,9 +133,7 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
         >
           Submit
         </button>
-
       </form>
-
     </div>
   );
 };
