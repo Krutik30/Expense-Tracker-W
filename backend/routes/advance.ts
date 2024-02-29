@@ -7,7 +7,7 @@ const router = Router();
 router.post('/addAdvance', async (req, res) => {
    
     try {
-        const { EmployeeID, AdvanceAmount, DateIssued, Reason, Status, GivenByAdminID } = req.body;
+        const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID, Status } = req.body;
 
         
         if (!EmployeeID || !AdvanceAmount || !DateIssued || !Reason) {
