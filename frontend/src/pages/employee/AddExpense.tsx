@@ -45,7 +45,7 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // onSubmit(formData);
+    onSubmit(formData);
     try {
       await requestMe("/expenses/addExpense", {
         method: "post",
