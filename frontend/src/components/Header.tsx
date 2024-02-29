@@ -71,7 +71,7 @@ const Header: React.FC = () => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography className=' cursor-pointer' variant="h6" component={Link} sx={{ flexGrow: 1 }} to="/dashboard">
                     Expense Tracker
                 </Typography>
                 {user.auth && user.role === 'ADMIN' && <AdminHeader />}
