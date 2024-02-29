@@ -1,0 +1,13 @@
+.header-button {
+    margin-left: 10px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.header-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.header-button:last-child {
+    margin-right: 10px;
+}
