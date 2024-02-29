@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../assets/logo.png'
 
 const AdminHeader: React.FC = () => {
     return (
@@ -33,6 +34,7 @@ const EmployeeHeader: React.FC = () => {
 
     return (
         <>
+        
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 (Employee)
             </Typography>
@@ -69,8 +71,10 @@ const Header: React.FC = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{bgcolor:'black'}}>
+           
             <Toolbar>
+            <img src={Logo} alt="Logo" style={{ height: '60px', marginRight: '10px' }} />
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Expense Tracker
                 </Typography>

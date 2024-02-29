@@ -3,7 +3,7 @@ import { requestMe } from '../../utils/requestMe';
 import { useNavigate } from 'react-router-dom';
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
-import Login_Img from '../../assets/login_img.jpg';
+import Login_Img from '../../assets/logIn.jpg';
 
 
 import * as yup from 'yup';

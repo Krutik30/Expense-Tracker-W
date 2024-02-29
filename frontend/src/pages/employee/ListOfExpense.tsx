@@ -37,7 +37,7 @@ function ExpenseCard({ expense }: any) {
 
 function ListOfExpenses() {
   return (
-    <div className='p-24'>
+    <div className='p-24 bg-gradient-to-r from-orange-700 via-orange-500 to-orange-400 h-screen'>
       <Grid container spacing={2}>
         {expenses.map((expense, index) => (
           <ExpenseCard key={index} expense={expense} />
