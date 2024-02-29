@@ -5,25 +5,24 @@ import { PrismaClient } from '@prisma/client';
 // Define interface for request body
 interface ExpenseRequestBody {
     EmployeeID: number;
-    Date: Date;
+    Date: String;
     Amount: number;
     CategoryID: number;
     Purpose: string;
     ApprovalStatus : string;
     ApproveByAdminID : number;
-
 }
 
 const prisma = new PrismaClient();
 const router = Router();
 
 // Route to create a new expense entry
-router.post('/expenses', async (req: Request<{}, {}, ExpenseRequestBody>, res: Response) => {
+router.post('/addExpense', async (req: Request<{}, {}, ExpenseRequestBody>, res: Response) => {
     try {
-        const { EmployeeID, Date, Amount, CategoryID, Purpose,ApprovalStatus,ApproveByAdminID  } = req.body;
+        const { EmployeeID, Date, Amount, Category, Purpose,ApprovalStatus,ApproveByAdminID  }:any = req.body;
 
         // Validate the incoming request data
-        if (!EmployeeID || !Date || !Amount || !CategoryID || !Purpose) {
+        if (!EmployeeID || !Date || !Amount || !Category || !Purpose) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -33,10 +32,9 @@ router.post('/expenses', async (req: Request<{}, {}, ExpenseRequestBody>, res: R
                 EmployeeID,
                 Date,
                 Amount,
-                CategoryID,
+                Category,
                 Purpose,
-                ApprovalStatus: 'Pending',
-                // Assuming 'ApprovalStatus' defaults to 'Pending' upon creation
+                ApprovalStatus
             }
         });
 

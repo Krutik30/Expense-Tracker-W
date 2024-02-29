@@ -1,10 +1,8 @@
-
 // src/ExpenseForm.tsx
 import React, { useState } from 'react';
-
 import TextField from '@mui/material/TextField';
 import SingleFileUploader from '../../components/UploadFile';
-
+import { requestMe } from '../../utils/requestMe';
 
 interface ExpenseFormProps {
   // eslint-disable-next-line no-unused-vars
@@ -12,26 +10,20 @@ interface ExpenseFormProps {
 }
 
 export interface ExpenseFormData {
-  expenseID: string;
-  employeeID: string;
   date: string;
   amount: number;
   categoryID: string;
   purpose: string;
   approvalStatus: string;
-  approvedByAdminID: string;
 }
 
 const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<ExpenseFormData>({
-    expenseID: '',
-    employeeID: '',
     date: '',
     amount: 0,
     categoryID: '',
     purpose: '',
     approvalStatus: '',
-    approvedByAdminID: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,23 +43,22 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
   //   });
   // };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // onSubmit(formData);
     try {
-      
+      await requestMe("/expenses/addExpense", {
+        method: "post",
+        body: JSON.stringify(formData),
+      });
     } catch (error) {
-      
+      console.error("Error in creating Expense", error);
     }
-    onSubmit(formData);
   };
 
   return (
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center">
-
-
-
-
         <TextField
           InputLabelProps={{ shrink: true }}
           id="date"
@@ -123,17 +114,6 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
           value={formData.approvalStatus}
           onChange={handleInputChange}
         />
-
-        <TextField
-          id="approvedByAdminID"
-          label="Approved By Admin ID"
-          variant="outlined"
-          className="w-full mb-4"
-          type="number"
-          name="approvedByAdminID"
-          value={formData.approvedByAdminID}
-          onChange={handleInputChange}
-        />
         <SingleFileUploader />
         <button
           type="submit"
@@ -141,9 +121,7 @@ const AddExpense: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
         >
           Submit
         </button>
-
       </form>
-
     </div>
   );
 };

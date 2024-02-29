@@ -69,7 +69,7 @@ const Header: React.FC = () => {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
                 <Typography className=' cursor-pointer' variant="h6" component={Link} sx={{ flexGrow: 1 }} to="/dashboard">
                     Expense Tracker
