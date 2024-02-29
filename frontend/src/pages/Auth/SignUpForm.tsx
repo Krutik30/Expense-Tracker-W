@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 
 interface SignUpFormProps {
