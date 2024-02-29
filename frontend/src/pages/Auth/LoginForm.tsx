@@ -22,7 +22,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = () => {
   const [formData, setFormData] = useState({
     Email: '',
-    Password: '',       
+    Password: '',
   });
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
@@ -77,58 +77,57 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
   return (
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
-      <div className='flex gap-4 mx-auto'>
+      <div className='flex justify-end mx-auto'>
         {/* form */}
-      <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
-        <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label className="block text-2xl font-semibold text-gray-700">Username:</label>
-            <input
-              type="email"
-              name="Email"
-              value={formData.Email}
-              onChange={handleChange}
-              className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
-              required
-            />
-          </div>
-          <div>
-             <label className="block text-2xl font-semibold text-gray-700">Password:</label>
-            <div className="relative">
+        <div className="bg-white p-8 rounded-l-md shadow-lg w-full max-w-lg">
+          <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
+          <form onSubmit={handleLogin} className="space-y-5">
+            <div>
+              <label className="block text-2xl font-semibold text-gray-700">Username:</label>
               <input
-                type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
-                name="Password"
-                value={formData.Password}
+                type="email"
+                name="Email"
+                value={formData.Email}
                 onChange={handleChange}
                 className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
                 required
               />
-              <div
-                className="absolute top-4 right-3 cursor-pointer "
-                onClick={handleTogglePasswordVisibility}
-              >
-                {showPassword ? <IoEye className="text-blue-500 flex " size={24} /> : <IoEyeOff className="text-blue-500 flex " size={24}/>}
+            </div>
+            <div>
+              <label className="block text-2xl font-semibold text-gray-700">Password:</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+                  name="Password"
+                  value={formData.Password}
+                  onChange={handleChange}
+                  className="form-input w-full mt-2 px-4 py-2 rounded-md border border-blue-400 focus:outline-none focus:border-blue-500"
+                  required
+                />
+                <div
+                  className="absolute top-4 right-3 cursor-pointer "
+                  onClick={handleTogglePasswordVisibility}
+                >
+                  {showPassword ? <IoEye className="text-blue-500 flex " size={24} /> : <IoEyeOff className="text-blue-500 flex " size={24} />}
+                </div>
               </div>
             </div>
-          </div>
-          {error && <div className="text-red-500 mb-4">{error}</div>}
-          <div className="flex items-center justify-between flex-col gap-5">
-            <div className="text-gray-700 text-lg">
-              Don't have an account? <span onClick={()=>{navigate('/auth/signup')}} className="text-blue-500 cursor-pointer">Sign Up &#8594;</span>
+            {error && <div className="text-red-500 mb-4">{error}</div>}
+            <div className="flex items-center justify-between flex-col gap-2">
+              <button type="submit" className="bg-blue-500 text-white mt px-8 py-3 rounded-md font-bold hover:bg-blue-700 w-full">
+                Login
+              </button>
+              <div className="text-gray-700 text-lg">
+                Don't have an account? <span onClick={() => { navigate('/auth/signup') }} className="text-blue-500 cursor-pointer hover:text-blue-700">Sign Up &#8594;</span>
+              </div>
             </div>
-            <button type="submit" className="bg-blue-500 text-white mt px-8 py-3 rounded-full font-semibold">
-              Login
-            </button>
+          </form>
+        </div>
+        {/* main form on left side */}
 
-          </div>
-        </form>
-      </div>  
-      {/* main form on left side */}
-
-      {/* login Image */}
-      <div className="w-1/2">
-          <img src={Login_Img} alt="Login Image" className="w-full rounded-md shadow-lg"  style={{ maxWidth: "750px", marginTop: "30px", boxShadow: "0px 4px 10px rgba(255, 255, 255, 0.5)" }} />
+        {/* login Image */}
+        <div className="w-1/2 shadow-lg">
+          <img src={Login_Img} alt="Login Image" className="w-full rounded-r-md h-full" style={{ maxWidth: "750px" }} />
         </div>
 
       </div>
