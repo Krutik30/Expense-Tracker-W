@@ -276,7 +276,7 @@ import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box, Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/et-transperent.png'
+import Logo from '../assets/logo_main.svg'
 import './Header.css'; // Import CSS file for additional styling
 
 const AdminHeader: React.FC = () => {
@@ -353,10 +353,10 @@ const Header: React.FC = () => {
         <AppBar position="static" sx={{bgcolor:'black'}}>
            
             <Toolbar>
-            <img src={Logo} alt="Logo" style={{ height: '60px', marginRight: '10px' }} />
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
+                {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Expense Tracker
-                </Typography>
+                </Typography> */}
                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                     <IconButton
                         color="inherit"
