@@ -33,11 +33,10 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    console.log({name, value});
+    const { name, value, type } = event.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === 'number' ? Number(value) : value,
     });
   };
 
@@ -65,6 +64,8 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
         method: "post",
         body: JSON.stringify(formData),
       });
+      const expenses = JSON.parse(localStorage.getItem('expense') || '[]')
+      localStorage.setItem('expense', JSON.stringify([...expenses, formData]))
     } catch (error) {
       console.error("Error submitting employee data:", error);
     }

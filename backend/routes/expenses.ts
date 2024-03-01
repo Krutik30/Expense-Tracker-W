@@ -7,8 +7,7 @@ const router = Router();
 // Route to create a new expense entry
 router.post('/addExpense', async (req: Request, res: Response) => {
     try {
-        console.log('some thing happends');
-        const { EmployeeID, Date, Amount, Category, Purpose, ApprovalStatus  }:any = req.body;
+        const { EmployeeID, Date, Amount, Category, Purpose, ApprovalStatus, ImagesSlip  }:any = req.body;
 
         if (!EmployeeID || !Date || !Amount || !Category || !Purpose) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -23,6 +22,7 @@ router.post('/addExpense', async (req: Request, res: Response) => {
                 Category,
                 Purpose,
                 ApprovalStatus,
+                ImagesSlip
             }
         });
 
@@ -32,5 +32,21 @@ router.post('/addExpense', async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+router.get('/getExpenses/:EmployeeID', async (req, res) => {
+    try {
+        
+        const { EmployeeID } = req.params
+        const expenses = await prisma.expense.findMany({
+            where: {
+                EmployeeID: Number(EmployeeID)
+            }
+        });
+        res.json({ message: 'All Expense Data', status: 200, payload: expenses })
+    } catch (error) {
+        console.error('Error retrieving employees:', error);
+        throw error;
+    }
+})
 
 export default router;
