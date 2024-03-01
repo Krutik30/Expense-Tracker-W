@@ -77,18 +77,18 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   };
 
   return (
-    <div className="bg-blue-800 min-h-screen flex items-center justify-center">
-      <div className='flex justify-end mx-auto'>
+    <div className="bg-teal-300 min-h-screen flex items-center justify-center">
+      <div className='flex justify-end mx-auto shadow-lg'>
         {/* form */}
         {/* main form on left side */}
 
         {/* login Image */}
-        <div className='w-full'>
+        <div className='w-full bg-slate-100 rounded-l-lg'>
           <img src={Login_Img} alt="Login Image"
 
           />
         </div>
-        <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
+        <div className="bg-teal-400 p-12 w-full max-w-xl rounded-r-lg">
           <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
