@@ -169,12 +169,12 @@ export function Dashboard() {
     }, []);
 
     return (
-        <div className='bg-gradient-to-r from-orange-700 via-orange-500 to-orange-400'>
+        
 
         <div style={{ width: '100%', height: '100%'}}>
             <div id='chart'></div>
             <div id='chart2'></div>
         </div>
-        </div>
+       
     );
 }
