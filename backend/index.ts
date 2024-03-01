@@ -7,8 +7,8 @@ import authRoutes from './routes/auth';
 import salaryRoutes from './routes/salary';
 import employeeRoutes from './routes/employee'
 import advanceRoute from './routes/advance';
-import multer from 'multer';
 import expensesRoute from './routes/expenses';
+import mainRoute from './routes/profile';
 import morgan from 'morgan';
 
 
@@ -31,6 +31,7 @@ app.use(bodyParser.json())
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.use('/', mainRoute)
 app.use('/auth', authRoutes);
 app.use('/salary', salaryRoutes);
 app.use('/employees',employeeRoutes);
