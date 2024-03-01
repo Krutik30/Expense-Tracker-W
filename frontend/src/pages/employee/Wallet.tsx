@@ -1,7 +1,7 @@
 
 function Wallet() {
   return (
-    <div>Wallet</div>
+    <div className="min-h-screen bg-sky_et"></div>
   )
 }
 

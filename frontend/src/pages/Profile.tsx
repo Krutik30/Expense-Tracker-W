@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Profile() {
   const profileData = JSON.parse(localStorage.getItem('profile') || '{}');
   const { EmployeeID, FirstName, LastName, Email, ContactNumber, EmploymentStartDate, Expense } = profileData;

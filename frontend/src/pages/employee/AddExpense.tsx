@@ -1,6 +1,7 @@
 // src/ExpenseForm.tsx
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
+import {TextField,Button }from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import SingleFileUploader from '../../components/UploadFile';
 import { requestMe } from '../../utils/requestMe';
 import { ExpenseCategoryName, Status } from '../../../config';
@@ -73,9 +74,11 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
   };
 
   return (
-    <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center">
-
+    <div className=" bg-sky_et min-h-screen flex items-center justify-center">
+      <div className="bg-aqua_et rounded-lg shadow-md p-8 space-y-4 w-2/5">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Add Expense</h2>
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+        <div>
         <TextField
           InputLabelProps={{ shrink: true }}
           id="date"
@@ -87,7 +90,8 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           value={formData.Date}
           onChange={handleInputChange}
         />
-
+        </div>
+        <div>
         <TextField
           id="amount"
           label="Amount"
@@ -98,6 +102,8 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           value={formData.Amount}
           onChange={handleInputChange}
         />
+        </div>
+        <div>
         <CustomAutocompleteField 
           id="category"
           options={ExpenseCategoryName}
@@ -106,7 +112,8 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           name="Category"
           onChange={handleAutoCompleteChange}
         />
-
+        </div>
+        <div>
         <TextField
           id="purpose"
           label="Purpose"
@@ -116,7 +123,9 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           name="Purpose"
           value={formData.Purpose}
           onChange={handleInputChange}
-        />  
+        /> 
+        </div>
+        <div> 
         <CustomAutocompleteField
           id="approvalStatus"
           options={Status}
@@ -125,15 +134,20 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
           name="ApprovalStatus"
           onChange={handleAutoCompleteChange}
         />
-
+        </div>
+       <div className='col-span-2 flex flex-col justify-center'>
+        <div className='flex flex-row gap-3 mt-5'>
         <SingleFileUploader onFileChange={handleFileChange} />
-        <button
-          type="submit"
-          className="bg-blue_et text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
-        >
-          Submit
-        </button>
+        <DeleteIcon sx={{ color: "#303C6C",transition: 'background-color 0.3s', '&:hover': { color: '#FF7165 ' } }}></DeleteIcon>
+        </div>
+        <div>
+        <Button type="submit" variant="contained" color="primary" size="large" sx={{width:"100%", backgroundColor: "#303C6C", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#FF7165 ' } }}>
+              Add
+        </Button>
+        </div>
+       </div>
       </form>
+    </div>
     </div>
   );
 };
