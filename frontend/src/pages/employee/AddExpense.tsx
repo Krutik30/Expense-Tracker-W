@@ -129,7 +129,7 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
         <SingleFileUploader onFileChange={handleFileChange} />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
+          className="bg-blue_et text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
         >
           Submit
         </button>
