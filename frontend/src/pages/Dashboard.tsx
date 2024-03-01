@@ -169,12 +169,9 @@ export function Dashboard() {
     }, []);
 
     return (
-        
-
-        <div style={{ width: '100%', height: '100%'}}>
+        <div style={{ width: '100%', height: '100%' }}>
             <div id='chart'></div>
             <div id='chart2'></div>
         </div>
-       
     );
 }
