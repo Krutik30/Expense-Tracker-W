@@ -34,7 +34,7 @@ const AddEmployee = () => {
   };
   return (
    
-    <div className="bg-gradient-to-r from-orange-700 via-orange-500 to-orange-400 min-h-screen flex items-center justify-center">
+    <div className="bg-blue-800 min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-3 flex flex-col items-center"
