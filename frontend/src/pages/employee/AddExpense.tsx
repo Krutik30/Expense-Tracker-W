@@ -73,6 +73,7 @@ const AddExpense: React.FC<ExpenseFormProps> = () => {
     <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center">
         <TextField
+          InputLabelProps={{shrink:true}}
           id="date"
           label="Date"
           variant="outlined"
