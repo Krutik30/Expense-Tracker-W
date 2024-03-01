@@ -1,21 +1,21 @@
 import { Card, CardMedia, CardContent, CardActionArea, Grid, Typography} from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { blue, grey} from '@mui/material/colors';
+import {grey} from '@mui/material/colors';
 
 function ExpenseCard({ expense }: any) {
   return (
-    <Grid item xs={12} md={6} lg={4}>
+      <Grid item xs={12} md={6} lg={4} className=''>
       <Card sx={{ m: 3, borderRadius: 2, boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
-        <CardActionArea>
+        <CardActionArea sx={{}}>
           <CardMedia
             component="img"
             className='h-36'
             src={expense.ImagesSlip[0]}
             alt={expense.Purpose}
-            sx={{ borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
+            sx={{borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
           />
-          <CardContent sx={{ p: 3 }}>
+          <CardContent  sx={{backgroundColor: '#D2FDFF', p: 3 }}>
             <Typography sx={{fontSize:'26px'}} variant="h6" gutterBottom>
               {expense.Purpose}
             </Typography>
@@ -37,8 +37,8 @@ function ExpenseCard({ expense }: any) {
               display: 'flex', flexDirection: 'row', gap:'8px',
               color: grey[600],
             }}>
-              <DownloadIcon sx={{":hover" :{ color: blue[500]}}}></DownloadIcon>
-              <BookmarkIcon sx={{":hover" :{ color: blue[500]}}}></BookmarkIcon>
+              <DownloadIcon sx={{ color: "#303C6C",transition: 'background-color 0.3s', '&:hover': { color: '#FF7165 ' } }}></DownloadIcon>
+              <BookmarkIcon sx={{ color: "#303C6C",transition: 'background-color 0.3s', '&:hover': { color: '#FF7165 ' } }}></BookmarkIcon>
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -53,8 +53,8 @@ function ListOfExpenses() {
 
   console.log(expenses);
   return (
-    <div className='p-24'>
-      <Grid container spacing={2}>
+    <div className='p-24 min-h-screen bg-sky_et'>
+      <Grid container spacing={2} className=''>
         {expenses.map((expense: any, index: number) => (
           <ExpenseCard key={index} expense={expense} />
         ))}

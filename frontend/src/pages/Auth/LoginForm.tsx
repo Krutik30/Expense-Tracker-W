@@ -253,7 +253,7 @@ return (
             <Typography variant="body1" className="text-lg">
               Don't have an account? <span onClick={()=>{navigate('/auth/signup')}} className="text-blue-800 font-bold cursor-pointer">Sign Up &#8594;</span>
             </Typography>
-            <Button type="submit" variant="contained" color="primary" size="large" sx={{ backgroundColor: "#FF7165", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#303C6C' } }}>
+            <Button type="submit" variant="contained" color="primary" size="large" sx={{ backgroundColor: "#303C6C", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#FF7165 ' } }}>
               Login
             </Button>
           </div>
