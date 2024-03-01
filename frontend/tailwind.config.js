@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import { grey} from '@mui/material/colors';
 export default {
   content: [
     "./index.html",
