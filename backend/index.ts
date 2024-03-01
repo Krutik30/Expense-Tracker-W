@@ -9,6 +9,7 @@ import employeeRoutes from './routes/employee'
 import advanceRoute from './routes/advance';
 import multer from 'multer';
 import expensesRoute from './routes/expenses';
+import morgan from 'morgan';
 
 
 const app = express();
@@ -20,46 +21,21 @@ var corsOptions = {
     credentials: true
 };
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://expence-tracker-hackdspring.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-});
 
 // app.use(express.json());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json())
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.use('/auth', authRoutes);
 app.use('/salary', salaryRoutes);
 app.use('/employees',employeeRoutes);
 app.use('/advance',advanceRoute);
-app.use("/expenses", expensesRoute);
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
-
-app.post('/upload', upload.single('file'), function (req, res, next) {
-    if (!req.file) {
-        return res.status(400).send('No files were uploaded.');
-    }
-
-    res.send('File uploaded successfully.');
-});
-
+app.use('/expenses', expensesRoute);
 
 app.listen(config.port, () => {
     console.log(`Server listening on ${config.port}`);
