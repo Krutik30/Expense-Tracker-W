@@ -1,19 +1,22 @@
-import { Card, CardMedia, CardContent, CardActionArea, Grid, Typography } from '@mui/material';
+import { Card, CardMedia, CardContent, CardActionArea, Grid, Typography} from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { blue, grey} from '@mui/material/colors';
 
 function ExpenseCard({ expense }: any) {
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Card sx={{ m: 2, borderRadius: 2, boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
+      <Card sx={{ m: 3, borderRadius: 2, boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
         <CardActionArea>
           <CardMedia
             component="img"
-            height="200"
-            image={expense.ImagesSlip[0]}
+            className='h-36'
+            src='https://www.shutterstock.com/image-vector/realistic-paper-shop-receipt-barcode-260nw-768909406.jpg'
             alt={expense.Purpose}
             sx={{ borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
           />
-          <CardContent sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
+          <CardContent sx={{ p: 3 }}>
+            <Typography sx={{fontSize:'26px'}} variant="h6" gutterBottom>
               {expense.Purpose}
             </Typography>
             <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -27,6 +30,15 @@ function ExpenseCard({ expense }: any) {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Employee ID: {expense.EmployeeID}
+            </Typography>
+            <Typography sx={{
+              padding: "5px",
+              position: "absolute", bottom: 140, left: 310,
+              display: 'flex', flexDirection: 'row', gap:'8px',
+              color: grey[600],
+            }}>
+              <DownloadIcon sx={{":hover" :{ color: blue[500]}}}></DownloadIcon>
+              <BookmarkIcon sx={{":hover" :{ color: blue[500]}}}></BookmarkIcon>
             </Typography>
           </CardContent>
         </CardActionArea>
