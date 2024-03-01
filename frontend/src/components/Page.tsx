@@ -8,6 +8,7 @@ const MainStyle = styled('main', {
     // eslint-disable-next-line 
 })(({  }: any) => ({
     flexGrow: 1,
+    paddingTop: 60
 }));
 
 

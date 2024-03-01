@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { requestMe } from "../../utils/requestMe";
+import { Button, TextField } from "@mui/material";
 
 
 const AddEmployee = () => {
@@ -34,20 +34,25 @@ const AddEmployee = () => {
   };
   return (
    
-    <div className="bg-blue-800 min-h-screen flex items-center justify-center">
+    <div className=" bg-sky_et min-h-screen flex items-center justify-center">
+      <div className="bg-aqua_et rounded-lg shadow-md p-8 space-y-4 w-2/5">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Add Employee</h2>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-3 flex flex-col items-center"
+        className="grid grid-cols-2 gap-4"
       >
+        <div>
         <TextField
           id="outlined-basic"
           label="First Name"
           variant="outlined"
-          className="w-full"
+          className="w-full rounded-3xl"
           name="FirstName"
           value={employeeData.FirstName}
           onChange={handleChange}
         />
+        </div>
+        <div>
         <TextField
           id="outlined-basic"
           label="Last Name"
@@ -57,6 +62,8 @@ const AddEmployee = () => {
           value={employeeData.LastName}
           onChange={handleChange}
         />
+        </div>
+        <div>
         <TextField
           id="outlined-basic"
           label="Email"
@@ -67,6 +74,8 @@ const AddEmployee = () => {
           value={employeeData.Email}
           onChange={handleChange}
         />
+        </div>
+        <div>
         <TextField
           id="outlined-basic"
           label="Contact Number"
@@ -77,6 +86,8 @@ const AddEmployee = () => {
           value={employeeData.ContactNumber}
           onChange={handleChange}
         />
+        </div>
+        <div>
         <TextField
           id="outlined-basic"
           label="Employment Start Date"
@@ -87,15 +98,15 @@ const AddEmployee = () => {
           value={employeeData.EmploymentStartDate}
           onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Submit
-        </button>
+        </div>
+        <div className="col-span-2 text-center">
+            <Button type="submit" variant="contained" color="primary" size="large" sx={{width:"100%", backgroundColor: "#303C6C", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#FF7165 ' } }}>
+              Add
+            </Button>
+          </div>
       </form>
     </div>
-   
+   </div>
   );
 };
 
