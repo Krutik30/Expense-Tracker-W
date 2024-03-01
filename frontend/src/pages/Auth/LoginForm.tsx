@@ -54,11 +54,15 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       });
       console.log(res);
 
+      localStorage.setItem('user', JSON.stringify(res));
       if (res.role === Role.admin) {
         const allEmployee = await requestMe('/employees/getEmployees')
         localStorage.setItem('employees', JSON.stringify(allEmployee))
       }
-      localStorage.setItem('user', JSON.stringify(res));
+      else {
+        const allExpense = await requestMe(`/expenses/getExpenses/${JSON.parse(localStorage.getItem('user') || "{}").staff.StaffId}`)
+        localStorage.setItem('expense', JSON.stringify(allExpense))
+      }
       navigate('/')
 
     } catch (validationError) {
@@ -74,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         //   position: "top-center" 
         // });
       }
-    };
+    }
   };
 
 //previous one

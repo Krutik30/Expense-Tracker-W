@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { supabase } from '../../config';
 
-import { useState } from "react";
+interface SingleFileUploaderProps {
+  // eslint-disable-next-line no-unused-vars
+  onFileChange: (base64String: string) => void;
+}
 
-const SingleFileUploader = () => {
-    const [file, setFile] = useState<File | null>(null);
-  
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files) {
-        setFile(e.target.files[0]);
-      }
-    };
-  
-    console.log('object');
-    return (
-        <>
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ onFileChange }) => {
+  const [fileDetails, setFileDetails] = useState<{ name: string; size: number | null; type: string | null } | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+
+      const image = `public/${Date.now()}-${selectedFile.name}.png`;
+      const { data, error } = await supabase
+        .storage
+        .from('images')
+        .upload(image, selectedFile, {
+          cacheControl: '3600',
+          upsert: false
+        })
+        console.log({data, error});
+
+      onFileChange(await supabase.storage.from('images').getPublicUrl(image).data.publicUrl);
+
+      setFileDetails({
+        name: selectedFile.name,
+        size: selectedFile.size,
+        type: selectedFile.type,
+      });
+    }
+  };
+
+  return (
+    <>
       <div className="mb-4">
         <label
           htmlFor="file"
@@ -23,18 +44,18 @@ const SingleFileUploader = () => {
         </label>
         <input id="file" type="file" onChange={handleFileChange} className="hidden" />
       </div>
-      {file && (
-        <section className="text-blue-500">
-          File details:
+      {fileDetails && (
+        <div className="text-blue-500">
+          <p>File details:</p>
           <ul>
-            <li>Name: {file.name}</li>
-            <li>Type: {file.type}</li>
-            <li>Size: {file.size} bytes</li>
+            <li>Name: {fileDetails.name}</li>
+            <li>Size: {fileDetails.size} bytes</li>
+            <li>Type: {fileDetails.type}</li>
           </ul>
-        </section>
+        </div>
       )}
     </>
-    );
-  };
-  
-  export default SingleFileUploader;
+  );
+};
+
+export default SingleFileUploader;
