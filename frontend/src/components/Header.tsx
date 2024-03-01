@@ -8,7 +8,7 @@ import './Header.css'; // Import CSS file for additional styling
 const AdminHeader: React.FC = () => {
     return (
         <>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", md: 'block' } }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", md: 'block' } }}>
                 (Admin)
             </Typography>
             <Button color="inherit" component={Link} to="/dashboard" className="header-button">
@@ -25,6 +25,9 @@ const AdminHeader: React.FC = () => {
             </Button>
             <Button color="inherit" component={Link} to="/list/employee" className="header-button">
                 List of Employees
+            </Button>
+            <Button color="inherit" component={Link} to="/profile" className="header-button">
+                Profile
             </Button>
         </>
     );
@@ -54,6 +57,9 @@ const EmployeeHeader: React.FC = () => {
                 </Button>
                 <Button color="inherit" component={Link} to="/history" className="header-button">
                     History
+                </Button>
+                <Button color="inherit" component={Link} to="/profile" className="header-button">
+                    Profile
                 </Button>
             </Box>
         </>
@@ -112,13 +118,13 @@ const Header: React.FC = () => {
                     {user.auth && user.role === 'ADMIN' && (
 
                         <>
-                                  <Typography variant="h6" component="div"   sx={{ 
-        flexGrow: 1,
-        backgroundColor: 'rgb(30, 64, 175)',
-        color: '#f0f0f0' 
-    }}>
-                (Employee)
-            </Typography>
+                            <Typography variant="h6" component="div" sx={{
+                                flexGrow: 1,
+                                backgroundColor: 'rgb(30, 64, 175)',
+                                color: '#f0f0f0'
+                            }}>
+                                (Employee)
+                            </Typography>
                             <ListItem button component={Link} to="/dashboard">
                                 <ListItemText primary="Dashboard" />
                             </ListItem>
@@ -134,18 +140,21 @@ const Header: React.FC = () => {
                             <ListItem button component={Link} to="/list/employee">
                                 <ListItemText primary="List of Employees" />
                             </ListItem>
+                            <ListItem button component={Link} to="/profile">
+                                <ListItemText primary="Profile of Admin" />
+                            </ListItem>
                         </>
                     )}
                     {user.auth && user.role === 'EMPLOYEE' && (
 
                         <>
-                         <Typography variant="h6" component="div"   sx={{ 
-        flexGrow: 1,
-        backgroundColor: 'rgb(30, 64, 175)',
-        color: '#f0f0f0' 
-    }}>
-                (Admin)
-            </Typography>
+                            <Typography variant="h6" component="div" sx={{
+                                flexGrow: 1,
+                                backgroundColor: 'rgb(30, 64, 175)',
+                                color: '#f0f0f0'
+                            }}>
+                                (Admin)
+                            </Typography>
                             <ListItem button component={Link} to="/dashboard">
                                 <ListItemText primary="Dashboard" />
                             </ListItem>
@@ -163,6 +172,9 @@ const Header: React.FC = () => {
                             </ListItem>
                             <ListItem button component={Link} to="/history">
                                 <ListItemText primary="History" />
+                            </ListItem>
+                            <ListItem button component={Link} to="/profile">
+                                <ListItemText primary="Profile of Employee" />
                             </ListItem>
                         </>
                     )}
