@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, Button, Box, Drawer, List, ListItem, ListI
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'; // Import CSS file for additional styling
+import Logo from '../assets/FINAL_LOGO.svg';
 
 const AdminHeader: React.FC = () => {
     return (
@@ -84,6 +85,7 @@ const Header: React.FC = () => {
     return (
         <AppBar position="fixed">
             <Toolbar>
+                <img src={Logo} width='150px' height='auto' />
                 <Typography className='cursor-pointer' variant="h6" component={Link} sx={{ flexGrow: 1 }} to="/dashboard">
                     Expense Tracker
                 </Typography>
