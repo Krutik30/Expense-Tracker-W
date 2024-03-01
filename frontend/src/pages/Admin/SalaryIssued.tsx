@@ -60,7 +60,7 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log(salaryData);
     try {
       const response = await requestMe("/salary/createSalaries", {
         method: "post",
@@ -88,7 +88,8 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
             JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
           }
           onChange={handleEmployeeChange}
-         className=" w-full"/>
+         className=" w-full"
+        />
         <TextField
           id="outlined-basic"
           label="Basic Salary"

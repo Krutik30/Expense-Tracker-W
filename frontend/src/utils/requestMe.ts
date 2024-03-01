@@ -6,8 +6,8 @@ export const requestMe = async(route: string, option?: any) => {
         ...option,
         method: option?.method ?? 'get',
         headers: {
-            ...option?.headers,
             'Content-Type': 'application/json',
+            ...option?.headers,
         },
     };
     console.log(option);
