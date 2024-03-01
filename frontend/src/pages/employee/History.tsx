@@ -1,7 +1,7 @@
 
 function HistoryComponent() {
   return (
-    <div>History</div>
+    <div className="min-h-screen bg-sky_et">History</div>
   )
 }
 

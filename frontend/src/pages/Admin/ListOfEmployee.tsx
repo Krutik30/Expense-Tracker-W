@@ -53,8 +53,8 @@ export default function ListOfEmployee() {
 
   console.log(employeeData);
   return (
-    <div className='p-10'>
-      <h1>
+    <div className='p-14 mt-4 flex flex-col bg-sky_et min-h-screen'>
+      <h1 className='font-bold p-8 text-center text-3xl'>
         Employee List
       </h1>
       <MaterialReactTable
@@ -63,5 +63,6 @@ export default function ListOfEmployee() {
         enableGrouping
       />
     </div>
+
   )
 }

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
 import { requestMe } from "../../utils/requestMe";
-
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Button } from "@mui/material";
 
 interface SalaryFormProps {
   employeeId: number;
@@ -74,97 +72,108 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
   };
 
   return (
-    <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center"
-      >
-        <Autocomplete
-          renderInput={(params) => <TextField {...params} label="Employee" />}
-          getOptionLabel={(option: Employee | null) => {
-            return option ? `${option.FirstName} ${option.LastName}` : "";
-          }}
-          options={
-            JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
-          }
-          onChange={handleEmployeeChange}
-         className=" w-full"
-        />
-        <TextField
-          id="outlined-basic"
-          label="Basic Salary"
-          variant="outlined"
-          className="w-full mb-4"
-          name="BasicSalary"
-          value={salaryData.BasicSalary}
-          onChange={handleChange}
-          type="number"
-        />
+    <div className=" bg-sky_et min-h-screen flex items-center justify-center">
+      <div className="bg-aqua_et rounded-lg shadow-md p-8 space-y-4 w-2/5">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Salary Issue</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <div>
+            <Autocomplete
+              renderInput={(params) => <TextField {...params} label="Employee" />}
+              getOptionLabel={(option: Employee | null) => {
+                return option ? `${option.FirstName} ${option.LastName}` : "";
+              }}
+              options={
+                JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
+              }
+              onChange={handleEmployeeChange}
+              className="w-full"
+            />
+          </div>
+          <div>
+            <TextField
+              id="basic-salary"
+              label="Basic Salary"
+              variant="outlined"
+              className="w-full"
+              name="BasicSalary"
+              value={salaryData.BasicSalary}
+              onChange={handleChange}
+              type="number"
+              sx={{}}
+            />
+          </div>
+          <div>
+            <TextField
+              id="bonuses"
+              label="Bonuses"
+              variant="outlined"
+              className="w-full"
+              name="Bonuses"
+              value={salaryData.Bonuses}
+              onChange={handleChange}
+              type="number"
+            />
+          </div>
+          <div>
+            <TextField
+              id="allowances"
+              label="Allowances"
+              variant="outlined"
+              className="w-full"
+              name="Allowances"
+              value={salaryData.Allowances}
+              onChange={handleChange}
+              type="number"
+            />
+          </div>
+          <div>
+            <TextField
+              id="deductions"
+              label="Deductions"
+              variant="outlined"
+              className="w-full"
+              name="Deductions"
+              value={salaryData.Deductions}
+              onChange={handleChange}
+              type="number"
+            />
+          </div>
+          <div>
+            <Autocomplete
+              renderInput={(params) => <TextField {...params} label="Status" />}
+              options={['Pending', 'Paid', 'Part']}
+              onChange={(newValue: any) => {
+                setSalaryData({
+                  ...salaryData,
+                  PaymentStatus: newValue.target.value
+                })
+              }}
+              className="w-full"
+            />
+          </div>
+          <div>
+            <TextField
+              id="payment-frequency"
+              label="Payment Frequency"
+              variant="outlined"
+              className="w-full"
+              name="PaymentFrequency"
+              value={salaryData.PaymentFrequency}
+              onChange={handleChange}
+              type="text"
+            />
+          </div>
 
-        <TextField
-          id="outlined-basic"
-          label="Bonuses"
-          variant="outlined"
-          className="w-full mb-4"
-          name="Bonuses"
-          value={salaryData.Bonuses}
-          onChange={handleChange}
-          type="number"
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Allowances"
-          variant="outlined"
-          className="w-full mb-4"
-          name="Allowances"
-          value={salaryData.Allowances}
-          onChange={handleChange}
-          type="number"
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Deductions"
-          variant="outlined"
-          className="w-full mb-4"
-          name="Deductions"
-          value={salaryData.Deductions}
-          onChange={handleChange}
-          type="number"
-        />
-
-        <Autocomplete
-          renderInput={(params) => <TextField {...params} label="Status" />}
-          options={['Pending', 'Paid', 'Part']}
-          onChange={(newValue: any)=>{
-            setSalaryData({
-              ...salaryData,
-              PaymentStatus: newValue.target.value
-            })
-          }}
-          className=" w-full" 
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Payment Frequency"
-          variant="outlined"
-          className="w-full mb-4"
-          name="PaymentFrequency"
-          value={salaryData.PaymentFrequency}
-          onChange={handleChange}
-          type="text"
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
-        >
-          Submit
-        </button>
-      </form>
+          <div className="col-span-2 text-center">
+            <Button type="submit" variant="contained" color="primary" size="large" sx={{width:"100%", backgroundColor: "#303C6C", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#FF7165 ' } }}>
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
+
+
   );
 };
 
