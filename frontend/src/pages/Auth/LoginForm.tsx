@@ -76,9 +76,9 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
   return (
     <div className="bg-blue-800 min-h-screen flex items-center justify-center">
-      <div className='flex gap-4 mx-auto'>
+      <div className='flex flex-col md:flex row gap-4 mx-auto'>
         {/* form */}
-      <div className="bg-white p-12 rounded-md shadow-lg w-full max-w-xl">
+      <div className="bg-white p-12 rounded-md shadow-lg w-full md:max-w-md max-w-xl md:mr-0">
         <div className="text-4xl font-bold mb-8 text-center text-gray-800">Login</div>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
@@ -126,8 +126,8 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       {/* main form on left side */}
 
       {/* login Image */}
-      <div className="w-1/2">
-          <img src={Login_Img} alt="Login Image" className="w-full rounded-md shadow-lg"  style={{ maxWidth: "750px", marginTop: "30px", boxShadow: "0px 4px 10px rgba(255, 255, 255, 0.5)" }} />
+      <div className="w-full md:w-1/2 mt-6 md:mt-0 align-middle">
+          <img src={Login_Img} alt="Login Image" className="w-full rounded-md shadow-lg "  style={{ maxWidth: "100%", marginTop: "30px", boxShadow: "0px 4px 10px rgba(255, 255, 255, 0.5)",height:"auto",maxHeight:"500px" }} />
         </div>
 
       </div>

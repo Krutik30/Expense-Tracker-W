@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/et-transperent.png'
 
 const AdminHeader: React.FC = () => {
     return (
