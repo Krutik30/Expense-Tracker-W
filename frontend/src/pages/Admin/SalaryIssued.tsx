@@ -74,7 +74,7 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-orange-700 via-orange-500 to-orange-400  mx-auto min-h-screen flex items-center justify-center">
+    <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4 flex flex-col items-center"
