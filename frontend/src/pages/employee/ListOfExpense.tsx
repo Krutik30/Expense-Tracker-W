@@ -11,7 +11,7 @@ function ExpenseCard({ expense }: any) {
           <CardMedia
             component="img"
             className='h-36'
-            src='https://www.shutterstock.com/image-vector/realistic-paper-shop-receipt-barcode-260nw-768909406.jpg'
+            src={expense.ImagesSlip[0]}
             alt={expense.Purpose}
             sx={{ borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
           />
