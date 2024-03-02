@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField,Button } from "@mui/material";
 import { Employee } from './SalaryIssued';
 import { requestMe } from '../../utils/requestMe';
 
@@ -44,31 +44,33 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
     event.preventDefault();
     setFormData({
       ...formData,
-      EmployeeID: value?.EmployeeID || 1 ,
+      EmployeeID: value?.EmployeeID || 1,
     });
   };
 
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try{
+    try {
       const res = await requestMe('/advance/addAdvance', {
         method: 'post',
         body: JSON.stringify(formData),
       })
       console.log(res);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
- 
-  return (
-    <div className="bg-blue-800  mx-auto min-h-screen flex items-center justify-center">
-     <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto p-8 bg-white rounded shadow-md space-y-4"
-      >
 
+  return (
+    <div className=" bg-sky_et min-h-screen flex items-center justify-center">
+      <div className="bg-aqua_et rounded-lg shadow-md p-8 space-y-4 w-2/5">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Advance Salary</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 gap-4"
+      >
+        <div>
         <Autocomplete
           renderInput={(params) => <TextField {...params} label="Employee" />}
           getOptionLabel={(option: Employee | null) => {
@@ -80,7 +82,8 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
           onChange={handleEmployeeChange}
           className=" w-full"
         />
-
+        </div>
+        <div>
         <TextField
           id="AdvanceAmount"
           label="Advance Amount"
@@ -91,7 +94,8 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
           value={formData.AdvanceAmount}
           onChange={handleInputChange}
         />
-
+        </div>
+        <div>
         <TextField
           InputLabelProps={{ shrink: true }}
           id="DateIssued"
@@ -103,7 +107,8 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
           value={formData.DateIssued}
           onChange={handleInputChange}
         />
-
+        </div>
+        <div>
         <TextField
           id="Reason"
           label="Reason"
@@ -114,7 +119,8 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
           value={formData.Reason}
           onChange={handleInputChange}
         />
-
+        </div>
+        <div>
         <Autocomplete
           renderInput={(params) => <TextField {...params} label="Status" />}
           options={['Pending', 'Paid', 'Part']}
@@ -126,14 +132,14 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
           }}
           className=" w-full"
         />
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-8 py-3 rounded-full flex items-center justify-between mt-10 flex-col gap-5 font-semibold"
-        >
+        </div>
+        <div className='col-span-2 text-center'>
+        <Button type="submit" variant="contained" color="primary" size="large" sx={{width:"100%", backgroundColor: "#303C6C", fontSize: 20, fontWeight: 'normal', transition: 'background-color 0.3s', '&:hover': { backgroundColor: '#FF7165 ' } }}>
           Submit
-        </button>
+        </Button>
+        </div>
       </form>
+    </div>
     </div>
   );
 };
