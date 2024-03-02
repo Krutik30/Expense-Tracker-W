@@ -231,12 +231,12 @@ import { AppBar, Toolbar, Typography, Button, Box, Drawer, List, ListItem, ListI
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'; // Import CSS file for additional styling
-import { IoMdPersonAdd } from "react-icons/io"; //add employee fill
-import { RiMoneyDollarCircleFill } from "react-icons/ri"; //salary 
-import { FaMoneyBillTrendUp } from "react-icons/fa6"; //advnce
-import { FaListAlt } from "react-icons/fa"; //list
-import { IoLogOutSharp } from "react-icons/io5"; //logout
-import { GiWallet } from "react-icons/gi"; //wallet
+// import { IoMdPersonAdd } from "react-icons/io"; //add employee fill
+// import { RiMoneyDollarCircleFill } from "react-icons/ri"; //salary 
+// import { FaMoneyBillTrendUp } from "react-icons/fa6"; //advnce
+// import { FaListAlt } from "react-icons/fa"; //list
+// import { IoLogOutSharp } from "react-icons/io5"; //logout
+// import { GiWallet } from "react-icons/gi"; //wallet
  import Logo from '../../src/assets/FINAL_LOGO.svg'
 
 
