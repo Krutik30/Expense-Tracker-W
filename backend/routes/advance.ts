@@ -10,18 +10,19 @@ router.post('/addAdvance', async (req, res) => {
         const { EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID, Status } = req.body;
 
         
+        console.log({ EmployeeID, AdvanceAmount, DateIssued, Reason, GivenByAdminID, Status });
         if (!EmployeeID || !AdvanceAmount || !DateIssued || !Reason) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
         const newAdvance = await prisma.advance.create({
             data: {
-                EmployeeID,
                 AdvanceAmount: Number(AdvanceAmount),
                 DateIssued,
                 Reason,
                 Status,
-                GivenByAdminID
+                GivenByAdmin: { connect: { AdminID: GivenByAdminID } }, 
+                Employee: { connect: { EmployeeID } },
             }
         });
         console.log(newAdvance);

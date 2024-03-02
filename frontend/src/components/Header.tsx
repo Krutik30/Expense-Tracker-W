@@ -47,9 +47,6 @@ const EmployeeHeader: React.FC = () => {
                 <Button color="inherit" component={Link} to="/add/expense" className="header-button">
                     Add Expense
                 </Button>
-                <Button color="inherit" component={Link} to="/request/salary" className="header-button">
-                    Request Salary
-                </Button>
                 <Button color="inherit" component={Link} to="/list/expense" className="header-button">
                     List of Expenses
                 </Button>
@@ -86,7 +83,6 @@ const Header: React.FC = () => {
         <AppBar position="fixed">
             <Toolbar>
                 <img src={Logo} width='150px' height='auto' />
-               
                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                     <IconButton
                         color="inherit"
@@ -160,9 +156,6 @@ const Header: React.FC = () => {
                             </ListItem>
                             <ListItem button component={Link} to="/add/expense">
                                 <ListItemText primary="Add Expense" />
-                            </ListItem>
-                            <ListItem button component={Link} to="/request/salary">
-                                <ListItemText primary="Request Salary" />
                             </ListItem>
                             <ListItem button component={Link} to="/list/expense">
                                 <ListItemText primary="List of Expenses" />

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { requestMe } from "../../utils/requestMe";
 import { Autocomplete, TextField, Button } from "@mui/material";
+import CustomAutocompleteField from "../../components/CustomAutoCompleteField";
+import { SalaryFrequency, Status } from "../../../config";
 
 interface SalaryFormProps {
   employeeId: number;
 }
 
-export interface Employee {
+export interface EmployeeType {
   EmployeeID: number;
   FirstName: string;
   LastName: string;
@@ -14,6 +16,8 @@ export interface Employee {
   ContactNumber: string;
   EmploymentStartDate: string;
 }
+
+const Employee:any = JSON.parse(localStorage.getItem("employees") || "[]") as EmployeeType[]
 
 const SalaryIssued: React.FC<SalaryFormProps> = () => {
   const [salaryData, setSalaryData] = useState({
@@ -47,14 +51,27 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
 
   const handleEmployeeChange = (
     event: React.ChangeEvent<{}>,
-    value: Employee | null
+    value: EmployeeType | null
   ) => {
     event.preventDefault();
     setSalaryData((prevData) => ({
       ...prevData,
       EmployeeID: value ? value.EmployeeID : 0,
     }));
+    setSalaryData((prevData) => ({
+      ...prevData,
+      PaymentFrequency: Employee.find((e: EmployeeType)=>e.EmployeeID===value?.EmployeeID)[0]?.Salary[0]?.PaymentFrequency || "YEARLY",
+    }));
   };
+
+
+  const handleAutoCompleteChange = (name: string, value: string | null) => {
+    setSalaryData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value || '',
+    }));
+  };
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,11 +96,11 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
           <div>
             <Autocomplete
               renderInput={(params) => <TextField {...params} label="Employee" />}
-              getOptionLabel={(option: Employee | null) => {
+              getOptionLabel={(option: EmployeeType | null) => {
                 return option ? `${option.FirstName} ${option.LastName}` : "";
               }}
               options={
-                JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
+                Employee
               }
               onChange={handleEmployeeChange}
               className="w-full"
@@ -139,29 +156,25 @@ const SalaryIssued: React.FC<SalaryFormProps> = () => {
             />
           </div>
           <div>
-            <Autocomplete
-              renderInput={(params) => <TextField {...params} label="Status" />}
-              options={['Pending', 'Paid', 'Part']}
-              onChange={(newValue: any) => {
-                setSalaryData({
-                  ...salaryData,
-                  PaymentStatus: newValue.target.value
-                })
-              }}
-              className="w-full"
+            <CustomAutocompleteField
+              id="payment-status"
+              options={Status}
+              label="Payment Status"
+              value={salaryData.PaymentStatus}
+              name="PaymentStatus"
+              onChange={handleAutoCompleteChange}
             />
           </div>
           <div>
-            <TextField
+            <CustomAutocompleteField
               id="payment-frequency"
+              options={SalaryFrequency}
               label="Payment Frequency"
-              variant="outlined"
-              className="w-full"
-              name="PaymentFrequency"
               value={salaryData.PaymentFrequency}
-              onChange={handleChange}
-              type="text"
+              name="PaymentFrequency"
+              onChange={handleAutoCompleteChange}
             />
+
           </div>
 
           <div className="col-span-2 text-center">
