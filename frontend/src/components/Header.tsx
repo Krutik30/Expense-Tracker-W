@@ -86,9 +86,7 @@ const Header: React.FC = () => {
         <AppBar position="fixed">
             <Toolbar>
                 <img src={Logo} width='150px' height='auto' />
-                <Typography className='cursor-pointer' variant="h6" component={Link} sx={{ flexGrow: 1 }} to="/dashboard">
-                    Expense Tracker
-                </Typography>
+               
                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                     <IconButton
                         color="inherit"
