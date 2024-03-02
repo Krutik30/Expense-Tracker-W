@@ -10,7 +10,8 @@ router.post('/createSalaries', async (req, res) => {
     console.log(req.body)
     const { EmployeeID, BasicSalary, Bonuses, Allowances, Deductions, PaymentFrequency, PaymentStatus } = req.body;
             // Validate the incoming request data
-            if (!EmployeeID ||  !BasicSalary || !Bonuses ||  !Allowances || !Deductions ||!PaymentFrequency || ! PaymentStatus) {
+    console.log({ EmployeeID, BasicSalary, Bonuses, Allowances, Deductions, PaymentFrequency, PaymentStatus });
+            if (!EmployeeID || !PaymentFrequency || ! PaymentStatus) {
                 return res.status(400).json({ error: 'Missing required fields' });
             }
 
