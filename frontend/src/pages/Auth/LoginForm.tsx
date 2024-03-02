@@ -59,11 +59,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       localStorage.setItem('user', JSON.stringify(res));
       if (res.role === Role.admin) {
         const allEmployee = await requestMe('/employees/getEmployees')
+        const allExpenses = await requestMe('/expenses/getExpenses')
         localStorage.setItem('employees', JSON.stringify(allEmployee))
+        localStorage.setItem('expenses', JSON.stringify(allExpenses))
       }
       else {
         const allExpense = await requestMe(`/expenses/getExpenses/${JSON.parse(localStorage.getItem('user') || "{}").staff.StaffId}`)
-        localStorage.setItem('expense', JSON.stringify(allExpense))
+        localStorage.setItem('expenses', JSON.stringify(allExpense))
       }
       localStorage.setItem('profile', JSON.stringify(profile))
       navigate('/')

@@ -151,6 +151,26 @@ var options2 = {
     }
 };
 
+console.log(JSON.parse(localStorage.getItem('expenses') || '[]'));
+var options3 = {
+    series: JSON.parse(localStorage.getItem('expenses') || '[]').map((e: any) => e._sum.Amount),
+    chart: {
+        width: 380,
+        type: 'pie',
+    },
+    labels: JSON.parse(localStorage.getItem('expenses') || '[]').map((e: any) => e.Category),
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: 200
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }]
+};
 
 
 export function Dashboard() {
@@ -161,16 +181,23 @@ export function Dashboard() {
         const chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
         chart2.render();
 
+
+        const chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
+        chart3.render();
         // Cleanup function
         return () => {
             chart.destroy();
             chart2.destroy();
+            chart3.destroy();
         };
     }, []);
 
     return (
         <div className='bg-sky_et' style={{ width: '100%', height: '100%', }}>
-            <div id='chart'></div>
+            <div>
+                <div id='chart'></div>
+                <div id='chart3'></div>
+            </div>
             <div id='chart2'></div>
         </div>
     );

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Autocomplete, TextField,Button } from "@mui/material";
-import { Employee } from './SalaryIssued';
+import { EmployeeType } from './SalaryIssued';
 import { requestMe } from '../../utils/requestMe';
+import CustomAutocompleteField from '../../components/CustomAutoCompleteField';
+import { Status } from '../../../config';
 
 
 interface AdvanceAmountFormProps {
@@ -18,14 +20,17 @@ export interface AdvanceFormData {
   GivenByAdminID: string;
 }
 
+const Admin = JSON.parse(localStorage.getItem('profile') || '{}');
+
 const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
+
   const [formData, setFormData] = useState<AdvanceFormData>({
     EmployeeID: 0,
     AdvanceAmount: 0,
     DateIssued: '',
     Reason: '',
     Status: '',
-    GivenByAdminID: JSON.parse(localStorage.getItem('user') || '{}').staff.admin.AdminID,
+    GivenByAdminID: Admin.AdminID,
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,13 +44,20 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
 
   const handleEmployeeChange = (
     event: React.ChangeEvent<{}>,
-    value: Employee | null
+    value: EmployeeType | null
   ) => {
     event.preventDefault();
     setFormData({
       ...formData,
       EmployeeID: value?.EmployeeID || 1,
     });
+  };
+
+  const handleAutoCompleteChange = (name: string, value: string | null) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value || '',
+    }));
   };
 
 
@@ -73,11 +85,11 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
         <div>
         <Autocomplete
           renderInput={(params) => <TextField {...params} label="Employee" />}
-          getOptionLabel={(option: Employee | null) => {
+          getOptionLabel={(option: EmployeeType | null) => {
             return option ? `${option.FirstName} ${option.LastName}` : "";
           }}
           options={
-            JSON.parse(localStorage.getItem("employees") || "[]") as Employee[]
+            JSON.parse(localStorage.getItem("employees") || "[]") as EmployeeType[]
           }
           onChange={handleEmployeeChange}
           className=" w-full"
@@ -121,16 +133,13 @@ const IssuedAdvance: React.FC<AdvanceAmountFormProps> = () => {
         />
         </div>
         <div>
-        <Autocomplete
-          renderInput={(params) => <TextField {...params} label="Status" />}
-          options={['Pending', 'Paid', 'Part']}
-          onChange={(newValue: any) => {
-            setFormData({
-              ...formData,
-              Status: newValue.target.value
-            })
-          }}
-          className=" w-full"
+        <CustomAutocompleteField
+          id="status"
+          options={Status}
+          label="Status"
+          value={formData.Status}
+          name="Status"
+          onChange={handleAutoCompleteChange}
         />
         </div>
         <div className='col-span-2 text-center'>

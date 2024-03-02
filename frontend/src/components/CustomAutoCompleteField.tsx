@@ -10,6 +10,7 @@ interface AutocompleteFieldProps {
     name: string;
     // eslint-disable-next-line no-unused-vars
     onChange: (name: string, value: string | null) => void;
+    getOptionLabel?: () => string
 }
 
 const CustomAutocompleteField: React.FC<AutocompleteFieldProps> = ({
@@ -19,6 +20,7 @@ const CustomAutocompleteField: React.FC<AutocompleteFieldProps> = ({
     value,
     name,
     onChange,
+    getOptionLabel
 }) => {
     const handleAutoCompleteChange = (
         _event: React.ChangeEvent<{}>,
@@ -29,7 +31,8 @@ const CustomAutocompleteField: React.FC<AutocompleteFieldProps> = ({
 
     return (
         <Autocomplete
-            className=" w-full mb-4"
+            getOptionLabel={getOptionLabel}
+            className=" w-full"
             id={id}
             options={options}
             value={value}

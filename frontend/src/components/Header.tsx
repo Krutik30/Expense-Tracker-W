@@ -290,10 +290,12 @@ const EmployeeHeader: React.FC = () => {
                 <Button color="inherit" component={Link} to="/add/expense" className="header-button" sx={{ fontFamily: 'Arial', fontSize: '16px',   }} >
                     Add Expense
                 </Button>
+
                 <Button color="inherit" component={Link} to="/request/salary" className="header-button" sx={{ fontFamily: 'Arial', fontSize: '16px',   }} >
                     Request Salary
                 </Button>
                 <Button color="inherit" component={Link} to="/list/expense" className="header-button" sx={{ fontFamily: 'Arial', fontSize: '16px',   }} >
+
                     List of Expenses
                 </Button>
                 <Button color="inherit" component={Link} to="/wallet" className="header-button" sx={{ fontFamily: 'Arial', fontSize: '16px',   }} > 
@@ -325,9 +327,9 @@ const Header: React.FC = () => {
     return (
         <AppBar position="fixed" sx={{ backgroundColor: '#303C6C' ,   height: '70px'  }}>
             <Toolbar>
-                <Typography className='cursor-pointer' variant="h6" component={Link} sx={{ flexGrow: 1, color:'#D2FDFF' }} to="/dashboard">
-                <img src={Logo} alt='Logo Image'className='w-[150px] h-auto' />
-                </Typography>
+
+                <img src={Logo} width='150px' height='auto' />
+
                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                     <IconButton
                         color="inherit"
@@ -399,9 +401,6 @@ const Header: React.FC = () => {
                             </ListItem>
                             <ListItem button component={Link} to="/add/expense">
                                 <ListItemText primary="Add Expense" />
-                            </ListItem>
-                            <ListItem button component={Link} to="/request/salary">
-                                <ListItemText primary="Request Salary" />
                             </ListItem>
                             <ListItem button component={Link} to="/list/expense">
                                 <ListItemText primary="List of Expenses" />
