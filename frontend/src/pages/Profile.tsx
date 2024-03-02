@@ -3,10 +3,10 @@ function Profile() {
   const { EmployeeID, FirstName, LastName, Email, ContactNumber, EmploymentStartDate, Expense } = profileData;
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: '#f9f9f9' }}>
-      <h2>Profile Details</h2>
-      <div style={{ marginBottom: '20px' }}>
-        <p><strong>Employee ID:</strong> {EmployeeID}</p>
+    <div style={{ maxWidth: '800px', margin: '100px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: '#f9f9f9' }}  className="max-w-screen-md mx-auto p-8 border border-gray-300 rounded bg-secondary">
+      <h2  className="text-3xl font-bold mb-6 text-primary text-center *:">Profile Details</h2>
+      <div style={{ marginBottom: '20px' }} className="mb-6 text-lg">
+        <p className='box-border box-content hover:box-content'><strong>Employee ID:</strong> {EmployeeID}</p>
         <p><strong>Name:</strong> {FirstName} {LastName}</p>
         <p><strong>Email:</strong> {Email}</p>
         <p><strong>Contact Number:</strong> {ContactNumber}</p>
@@ -16,7 +16,7 @@ function Profile() {
       {Expense && Expense.length > 0 && (
         <div style={{ marginTop: '20px' }}>
           <h3>Expenses</h3>
-          <ul style={{ listStyle: 'none', padding: '0' }}>
+          <ul style={{ listStyle: 'none', padding: '0'  }} className='text-lg'>
             {Expense.map((expense: any) => (
               <li key={expense.ExpenseID}>
                 <p><strong>Date:</strong> {expense.Date}</p>
@@ -25,11 +25,11 @@ function Profile() {
                 <p><strong>Purpose:</strong> {expense.Purpose}</p>
                 <p><strong>Approval Status:</strong> {expense.ApprovalStatus}</p>
                 {expense.ImagesSlip.length > 0 && (
-                  <div style={{ marginTop: '10px' }}>
-                    <p><strong>Expense Slip Images:</strong></p>
-                    <ul style={{ listStyle: 'none', padding: '0' }}>
+                  <div style={{ marginTop: '10px' }}  className="mt-4">
+                    <p className="text-primary"><strong>Expense Slip Images:</strong></p>
+                    <ul style={{ listStyle: 'none', padding: '0' }}  className="list-none p-0">
                       {expense.ImagesSlip.map((image: string, index: number) => (
-                        <li key={index}>
+                        <li key={index} className="inline-block mr-4 mb-4">
                           <img src={image} alt={`Expense Slip ${index + 1}`} style={{ maxWidth: '150px', marginRight: '10px', marginBottom: '10px', border: '1px solid #ddd', borderRadius: '5px' }} />
                         </li>
                       ))}
