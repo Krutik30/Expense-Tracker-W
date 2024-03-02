@@ -33,6 +33,22 @@ router.post('/addExpense', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/getExpenses', async (req, res) => {
+    try {
+        const groupedExpenses = await prisma.expense.groupBy({
+            by: ['Category'],
+            _sum: {
+                Amount: true,
+            },
+        });
+        res.json({ message: 'All Expense Data', status: 200, payload: groupedExpenses })
+    } catch (error) {
+        console.error('Error retrieving employees:', error);
+        throw error;
+    }
+})
+
+
 router.get('/getExpenses/:EmployeeID', async (req, res) => {
     try {
         
