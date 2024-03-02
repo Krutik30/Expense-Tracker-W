@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ApexCharts from "apexcharts";
+import { Button, Grid } from "@mui/material";
 
 const options = {
     series: [
@@ -233,7 +234,7 @@ export function Dashboard() {
                 },
             ],
             chart: {
-                height: 350,
+                height: 500,
                 type: "area",
             },
             dataLabels: {
@@ -264,18 +265,32 @@ export function Dashboard() {
     };
     return (
         <div
-            className="bg-sky_et flex-col"
+            className="bg-aqua_et flex-col"
             style={{ width: "100%", height: "100%" }}
         >
-            <div className="flex mx-auto items-center justify-cent  w-full">
-                <div id="chart" className="w-[60%]"></div>
-                <div id="chart3" className="w-[40%] "></div>
-            </div>
-            <div id="chart2"></div>
-            <div id="chart4"></div>
-            <button onClick={handleChartTypeChange}>
-                {chartType === "monthly" ? "Weekly" : "Monthly"}
-            </button>
+            <Grid container>
+                <Grid item xs={8}>
+                    <div id="chart"></div>
+                </Grid>
+                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div id="chart3"></div>
+                </Grid>
+            </Grid>
+            <Grid container>
+                <Grid item xs={6}>
+                    <div id="chart2"></div>
+                </Grid>
+                <Grid item xs={6}>
+                    <Button sx={{ 
+                        position: 'absolute',
+                        zIndex: 20,
+                        marginLeft: 10
+                     }} onClick={handleChartTypeChange}>
+                        {chartType === "monthly" ? "Weekly" : "Monthly"}
+                    </Button>
+                    <div id="chart4"></div>
+                </Grid>
+            </Grid>
         </div>
     );
 }
