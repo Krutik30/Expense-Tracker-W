@@ -55,7 +55,7 @@ function ListOfExpenses() {
   return (
     <div className='p-24 min-h-screen bg-sky_et'>
       <Grid container spacing={2} className=''>
-        {expenses.map((expense: any, index: number) => (
+        {expenses.length && expenses.map((expense: any, index: number) => (
           <ExpenseCard key={index} expense={expense} />
         ))}
       </Grid>
