@@ -3,7 +3,7 @@ import { Autocomplete, TextField,Button } from "@mui/material";
 import { EmployeeType } from './SalaryIssued';
 import { requestMe } from '../../utils/requestMe';
 import CustomAutocompleteField from '../../components/CustomAutoCompleteField';
-import { Status } from '../../../config';
+import { Status } from '../../config';
 
 
 interface AdvanceAmountFormProps {

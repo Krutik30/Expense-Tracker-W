@@ -13,7 +13,7 @@ import ListOfExpense from './pages/employee/ListOfExpense.tsx';
 import Wallet from './pages/employee/Wallet.tsx';
 import HistoryComponent from './pages/employee/History.tsx';
 import Profile from './pages/Profile';
-import { Role } from '../config.ts';
+import { Role } from './config.ts';
 
 function Router() {
     return (

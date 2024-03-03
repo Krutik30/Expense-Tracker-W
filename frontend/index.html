@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./public/FINAL_LOGO.svg" />
+    <link rel="icon" type="image/svg+xml" href="/FINAL_LOGO.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expense Tracker System</title>
    
@@ -11,5 +11,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="serviceWorker">
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.ts')
+              .then((registration) => {
+                console.log('ServiceWorker registration successful:', registration);
+              })
+              .catch((error) => {
+                console.log('ServiceWorker registration failed:', error);
+              });
+          });
+        }
+    </script>
   </body>
 </html>

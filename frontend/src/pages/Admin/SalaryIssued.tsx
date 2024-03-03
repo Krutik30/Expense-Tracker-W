@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { requestMe } from "../../utils/requestMe";
 import { Autocomplete, TextField, Button } from "@mui/material";
 import CustomAutocompleteField from "../../components/CustomAutoCompleteField";
-import { SalaryFrequency, Status } from "../../../config";
+import { SalaryFrequency, Status } from "../../config";
 
 interface SalaryFormProps {
   employeeId: number;

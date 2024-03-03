@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ApexCharts from "apexcharts";
 import { Button, Grid } from "@mui/material";
+import { Role } from "../config";
 
 const options = {
     series: [
@@ -157,7 +158,6 @@ var options2 = {
     },
 };
 
-console.log(JSON.parse(localStorage.getItem("expenses") || "[]"));
 var options3 = {
     series: JSON.parse(localStorage.getItem("expenses") || "[]").map(
         (e: any) => e._sum.Amount
@@ -200,6 +200,8 @@ const weeks = [
     "Week 7",
 ];
 
+const role = JSON.parse(localStorage.getItem('user') || "{}").role
+
 export function Dashboard() {
     const [chartType, setChartType] = useState("monthly");
 
@@ -211,13 +213,15 @@ export function Dashboard() {
         chart2.render();
 
         const chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
-        chart3.render();
+        if (role === Role.admin){
+            chart3.render();
+        }
 
         // Cleanup function
         return () => {
             chart.destroy();
             chart2.destroy();
-            chart3.destroy();
+            role === Role.admin ? chart3.destroy() : null;
         };
     }, []);
     useEffect(() => {
@@ -269,12 +273,12 @@ export function Dashboard() {
             style={{ width: "100%", height: "100%" }}
         >
             <Grid container>
-                <Grid item xs={8}>
+                <Grid item xs={role === Role.admin ? 8 : 12}>
                     <div id="chart"></div>
                 </Grid>
-                <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {role === Role.admin ? <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div id="chart3"></div>
-                </Grid>
+                </Grid> : <></>}
             </Grid>
             <Grid container>
                 <Grid item xs={6}>
