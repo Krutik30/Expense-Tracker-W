@@ -163,7 +163,7 @@ var options3 = {
         (e: any) => e._sum?.Amount
     ),
     chart: {
-        width: 380,
+        width: 500,
         type: "pie",
     },
     labels: JSON.parse(localStorage.getItem("expenses") || "[]").map(
@@ -213,15 +213,13 @@ export function Dashboard() {
         chart2.render();
 
         const chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
-        if (role === Role.admin){
-            chart3.render();
-        }
+        chart3.render();
 
         // Cleanup function
         return () => {
             chart.destroy();
             chart2.destroy();
-            role === Role.admin ? chart3.destroy() : null;
+            chart3.destroy();
         };
     }, []);
     useEffect(() => {
