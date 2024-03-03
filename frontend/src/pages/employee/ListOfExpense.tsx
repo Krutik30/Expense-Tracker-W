@@ -2,6 +2,7 @@ import { Card, CardMedia, CardContent, CardActionArea, Grid, Typography} from '@
 import DownloadIcon from '@mui/icons-material/Download';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {grey} from '@mui/material/colors';
+import SuspenseErrorBoundary from '../../components/RequireComponent/SuspenseErrorBoundry';
 
 function ExpenseCard({ expense }: any) {
   return (
@@ -49,15 +50,17 @@ function ExpenseCard({ expense }: any) {
 
 function ListOfExpenses() {
 
-  const expenses = JSON.parse(localStorage.getItem('expense') || '[]')
+  const expenses = JSON.parse(localStorage.getItem('expenses') || '[]')
 
   console.log(expenses);
   return (
     <div className='p-24 min-h-screen bg-sky_et'>
       <Grid container spacing={2} className=''>
-        {expenses.length && expenses.map((expense: any, index: number) => (
-          <ExpenseCard key={index} expense={expense} />
-        ))}
+        <SuspenseErrorBoundary>
+          {expenses.length && expenses.map((expense: any, index: number) => (
+            <ExpenseCard key={index} expense={expense} />
+          ))}
+        </SuspenseErrorBoundary>
       </Grid>
     </div>
   );

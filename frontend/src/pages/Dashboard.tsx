@@ -160,14 +160,14 @@ var options2 = {
 
 var options3 = {
     series: JSON.parse(localStorage.getItem("expenses") || "[]").map(
-        (e: any) => e._sum.Amount
+        (e: any) => e._sum?.Amount
     ),
     chart: {
         width: 380,
         type: "pie",
     },
     labels: JSON.parse(localStorage.getItem("expenses") || "[]").map(
-        (e: any) => e.Category
+        (e: any) => e?.Category
     ),
     responsive: [
         {
