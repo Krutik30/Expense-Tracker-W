@@ -200,10 +200,10 @@ const weeks = [
     "Week 7",
 ];
 
-const role = JSON.parse(localStorage.getItem('user') || "{}").role
 
 export function Dashboard() {
     const [chartType, setChartType] = useState("monthly");
+    const role = JSON.parse(localStorage.getItem('user') || "{}").role
 
     useEffect(() => {
         const chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -215,7 +215,6 @@ export function Dashboard() {
         const chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
         chart3.render();
 
-        // Cleanup function
         return () => {
             chart.destroy();
             chart2.destroy();
