@@ -245,9 +245,9 @@ import './Header.css'; // Import CSS file for additional styling
 const AdminHeader: React.FC = () => {
     return (
         <>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", md: 'block'} }}>
+          {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", md: 'block'} }}>
                 (Admin)
-            </Typography>
+            </Typography> */}
             <Button color="inherit" component={Link} to="/dashboard" className="header-button " sx={{ fontFamily: 'Arial', fontSize: '16px' ,  '&:hover': {
             borderBottom: '2px solid #FBE8A6'
         } }}>
@@ -281,9 +281,9 @@ const EmployeeHeader: React.FC = () => {
     return (
         <>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="h6" component="div" sx={{ display: { xs: 'none', md: 'block', color:'#D2FDFF' } }}>
+                {/* <Typography variant="h6" component="div" sx={{ display: { xs: 'none', md: 'block', color:'#D2FDFF' } }}>
                     (Employee)
-                </Typography>
+                </Typography> */}
                 <Button color="inherit" component={Link} to="/dashboard" className="header-button"  sx={{ fontFamily: 'Arial', fontSize: '16px',   }}  >
                     Dashboard
                 </Button>
