@@ -9,13 +9,13 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        "name": "Your App Name",
-        "short_name": "App",
+        "name": "Expense Tracker",
+        "short_name": "ET",
         "icons": [
           {
-            "src": "logo.png",
+            "src": "FINAL_LOGO.svg",
             "sizes": "64x64",
-            "type": "image/png"
+            "type": "image/svg"
           },
           {
             "src": "logo-splash.png",

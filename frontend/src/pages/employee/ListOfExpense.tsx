@@ -20,7 +20,7 @@ function ExpenseCard({ expense }: any) {
               {expense.Purpose}
             </Typography>
             <Typography variant="body2" color="text.secondary" gutterBottom>
-              Amount: ${Number(expense.Amount).toFixed(2)}
+              Amount: ${Number(expense?.Amount)?.toFixed(2)}
             </Typography>
             <Typography variant="body2" color="text.secondary" gutterBottom>
               Category: {expense.Category?.Name}
