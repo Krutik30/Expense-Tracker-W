@@ -4,7 +4,7 @@ import {TextField,Button }from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SingleFileUploader from '../../components/UploadFile';
 import { requestMe } from '../../utils/requestMe';
-import { ExpenseCategoryName, Status } from '../../../config';
+import { ExpenseCategoryName, Status } from '../../config';
 import CustomAutocompleteField from '../../components/CustomAutoCompleteField';
 
 interface ExpenseFormProps {

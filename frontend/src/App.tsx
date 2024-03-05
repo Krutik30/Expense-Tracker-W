@@ -6,15 +6,20 @@ import { ToastContainer } from "react-toastify";
 import Router from "./Router";
 
 import Header from "./components/Header";
+import SuspenseErrorBoundary from "./components/RequireComponent/SuspenseErrorBoundry";
 
 function App() {
   return (
     <div>
       <ToastContainer />
-      <BrowserRouter>
-        <Header />
-        <Router />
-      </BrowserRouter>
+      <SuspenseErrorBoundary>
+        <BrowserRouter>
+          <Header />
+          <SuspenseErrorBoundary>
+            <Router />
+          </SuspenseErrorBoundary>
+        </BrowserRouter>
+      </SuspenseErrorBoundary>
     </div>
   );
 }

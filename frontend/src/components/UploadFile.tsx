@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../../config';
+import { supabase } from '../config';
 
 interface SingleFileUploaderProps {
   // eslint-disable-next-line no-unused-vars

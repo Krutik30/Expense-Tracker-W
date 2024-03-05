@@ -2,7 +2,7 @@
 import { TextField,Button } from "@mui/material";
 import React, { useState } from "react";
 import CustomAutocompleteField from "../../components/CustomAutoCompleteField";
-import { Status } from "../../../config";
+import { Status } from "../../config";
 import { requestMe } from "../../utils/requestMe";
 
 export interface AdvanceFormData {

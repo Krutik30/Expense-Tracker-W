@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import ApexCharts from "apexcharts";
+import { Button, Grid } from "@mui/material";
+import { Role } from "../config";
 
 const options = {
     series: [
@@ -156,17 +158,16 @@ var options2 = {
     },
 };
 
-console.log(JSON.parse(localStorage.getItem("expenses") || "[]"));
 var options3 = {
     series: JSON.parse(localStorage.getItem("expenses") || "[]").map(
-        (e: any) => e._sum.Amount
+        (e: any) => e._sum?.Amount
     ),
     chart: {
-        width: 380,
+        width: 500,
         type: "pie",
     },
     labels: JSON.parse(localStorage.getItem("expenses") || "[]").map(
-        (e: any) => e.Category
+        (e: any) => e?.Category
     ),
     responsive: [
         {
@@ -199,8 +200,10 @@ const weeks = [
     "Week 7",
 ];
 
+
 export function Dashboard() {
     const [chartType, setChartType] = useState("monthly");
+    const role = JSON.parse(localStorage.getItem('user') || "{}").role
 
     useEffect(() => {
         const chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -212,7 +215,6 @@ export function Dashboard() {
         const chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
         chart3.render();
 
-        // Cleanup function
         return () => {
             chart.destroy();
             chart2.destroy();
@@ -233,7 +235,7 @@ export function Dashboard() {
                 },
             ],
             chart: {
-                height: 350,
+                height: 500,
                 type: "area",
             },
             dataLabels: {
@@ -264,18 +266,32 @@ export function Dashboard() {
     };
     return (
         <div
-            className="bg-sky_et flex-col"
+            className="bg-aqua_et flex-col"
             style={{ width: "100%", height: "100%" }}
         >
-            <div className="flex mx-auto items-center justify-cent  w-full">
-                <div id="chart" className="w-[60%]"></div>
-                <div id="chart3" className="w-[40%] "></div>
-            </div>
-            <div id="chart2"></div>
-            <div id="chart4"></div>
-            <button onClick={handleChartTypeChange}>
-                {chartType === "monthly" ? "Weekly" : "Monthly"}
-            </button>
+            <Grid container>
+                <Grid item xs={role === Role.admin ? 8 : 12}>
+                    <div id="chart"></div>
+                </Grid>
+                {role === Role.admin ? <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div id="chart3"></div>
+                </Grid> : <></>}
+            </Grid>
+            <Grid container>
+                <Grid item xs={6}>
+                    <div id="chart2"></div>
+                </Grid>
+                <Grid item xs={6}>
+                    <Button sx={{ 
+                        position: 'absolute',
+                        zIndex: 20,
+                        marginLeft: 10
+                     }} onClick={handleChartTypeChange}>
+                        {chartType === "monthly" ? "Weekly" : "Monthly"}
+                    </Button>
+                    <div id="chart4"></div>
+                </Grid>
+            </Grid>
         </div>
     );
 }
