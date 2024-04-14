@@ -15,7 +15,7 @@ function Profile() {
 
   return (
     <div className=" min-h-screen mx-auto p-6 bg-sky_et rounded-md shadow-md">
-      <h2 className="text-3xl font-semibold mb-4 text-center p-4 underline">Profile Details</h2>
+      <h2 className="text-3xl font-semibold mt-10 text-center p-8 underline">Profile Details</h2>
       <div className="mb-4 grid grid-cols-3 gap-2 bg-aqua_et p-6 rounded-lg">
         <div>
           <img className='w-36 rounded-lg' src={profileIcon} alt="" />

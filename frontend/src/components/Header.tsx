@@ -237,7 +237,7 @@ import './Header.css'; // Import CSS file for additional styling
 // import { FaListAlt } from "react-icons/fa"; //list
 // import { IoLogOutSharp } from "react-icons/io5"; //logout
 // import { GiWallet } from "react-icons/gi"; //wallet
- import Logo from '../../src/assets/FINAL_LOGO.svg'
+ import Logo from '../../src/assets/expenso.png';
 
 
 
@@ -328,7 +328,7 @@ const Header: React.FC = () => {
         <AppBar position="fixed" sx={{ backgroundColor: '#303C6C' ,   height: '70px'  }}>
             <Toolbar>
 
-                <img src={Logo} width='150px' height='auto' />
+                <img src={Logo} width='50px' height='auto' className='mx-6 my-4' />
 
                 <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                     <IconButton
@@ -358,7 +358,7 @@ const Header: React.FC = () => {
                 onClose={handleDrawerToggle}
                
             >
-                <List>
+                <List>  
                     {user.auth && user.role === 'ADMIN' && (
 
                         <>
